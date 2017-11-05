@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <attr name="asset_font_file_name">
+
+    </attr>
+    <declare-styleable name="asset_font_file_names">
+        <attr name="asset_font_file_name"></attr>
+        <attr name="showText" format="boolean" />
+        <attr name="labelPosition" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
+
+        <attr name="like_drawable">
+            <enum name="like_drawable" value="0"/>
+        </attr>
+        <attr name="unlike_drawable">
+            <enum name="unlike_drawable" value="0"/>
+        </attr>
+        <attr name="dots_primary_color">
+            <enum name="dots_primary_color" value="0"/>
+        </attr>
+        <attr name="dots_secondary_color">
+            <enum name="dots_secondary_color" value="0"/>
+        </attr>
+        <attr name="circle_start_color">
+            <enum name="circle_start_color" value="0"/>
+        </attr>
+        <attr name="circle_end_color">
+            <enum name="circle_end_color" value="0"/>
+        </attr>
+        <attr name="liked">
+            <enum name="liked" value="0"/>
+        </attr>
+        <attr name="is_enabled">
+            <enum name="is_enabled" value="0"/>
+        </attr>
+    </declare-styleable>
+</resources>

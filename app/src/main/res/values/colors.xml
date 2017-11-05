@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#212121</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#FFC107</color>
+    <color name="white">#fff</color>
+    <color name="black">#000</color>
+    <color name="divider">#d3d3d3</color>
+    <color name="gray_divider">#232323</color>
+    <color name="light_grey">#FAFAFA</color>
+    <color name="transperant">#00000000</color>
+    <color name="match_info_bg_color">#10181f</color>
+    <color name="match_team_a_bg_color">#20282f</color>
+    <color name="header_color">#a1a6aa</color>
+    <color name="title_more_color">#FFC107</color>
+    <color name="title_text_color">#333333</color>
+    <color name="main_title_color">#2c363f</color>
+    <color name="background_color">#eeeeee</color>
+    <color name="light_grey_20">#F5F5F5</color>
+    <color name="green_text">#FFC107</color>
+    <color name="orange_dark">#dc8d00</color>
+    <color name="blue">#3f51b5</color>
+    <color name="white_10_opacity">#fff</color>
+    <color name="red_text">#ff0000</color>
+    <color name="offwhite">#fff</color>
+    <color name="gray_text">#72797f</color>
+    <color name="dark_gray">#2a373f</color>
+    <color name="light_green_background_color">#FFCA28</color>
+    <color name="green_background_color">#FFA000</color>
+    <color name="dark_gray_50_opacity">#802a373f</color>
+    <color name="transparent">#00000000</color>
+    <color name="linebottom_light">#d3d3d3</color>
+</resources>

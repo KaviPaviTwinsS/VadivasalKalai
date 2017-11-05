@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res/android"
+    app:layout_width="match_parent"
+    app:layout_height="wrap_content"
+    app:background="@color/white"
+    app:paddingBottom="@dimen/dp_15">
+
+    <ImageView
+        app:id="@+id/ivDivider"
+        app:layout_width="match_parent"
+        app:layout_height="150dp"
+        app:src="@color/background_color"
+        app:visibility="gone" />
+
+    <RelativeLayout
+        app:id="@+id/rel_desc"
+        app:layout_width="match_parent"
+        app:layout_height="wrap_content"
+        app:layout_below="@+id/ivDivider"
+        app:layout_marginTop="@dimen/dp_15">
+
+        <pasu.vadivasal.view.TextView
+            app:id="@+id/tvTitle"
+            style="@style/DashboardTitle"
+            app:layout_width="match_parent"
+            app:layout_height="wrap_content"
+            app:layout_toLeftOf="@+id/btnMore"
+            app:paddingLeft="@dimen/activity_horizontal_margin"
+            app:paddingRight="@dimen/activity_horizontal_margin"
+            app:text="Title" />
+
+        <pasu.vadivasal.view.TextView
+            app:id="@+id/tvDescription"
+            app:layout_width="match_parent"
+            app:layout_height="wrap_content"
+            app:layout_below="@+id/tvTitle"
+            app:layout_marginTop="-4dp"
+            app:layout_toLeftOf="@+id/btnMore"
+            app:paddingLeft="@dimen/activity_horizontal_margin"
+            app:paddingRight="@dimen/activity_horizontal_margin"
+            app:text="Description" />
+
+        <pasu.vadivasal.view.TextView
+            app:id="@+id/btnMore"
+            app:layout_width="wrap_content"
+            app:layout_height="wrap_content"
+            app:layout_alignParentRight="true"
+            app:layout_centerVertical="true"
+            app:background="?attr/actionBarItemBackground"
+            app:paddingLeft="12dp"
+            app:paddingRight="12dp"
+            app:text="@string/btn_more"
+            app:textColor="@color/title_more_color"
+            app:textSize="15sp"
+            app:visibility="gone" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        app:id="@+id/dataViewer"
+        app:layout_width="wrap_content"
+        app:layout_height="wrap_content"
+        app:layout_below="@+id/rel_desc"
+        app:layout_marginTop="4dp" />
+
+    <ImageView
+        app:id="@+id/img_left"
+        app:layout_width="wrap_content"
+        app:layout_height="wrap_content"
+        app:layout_alignParentLeft="true"
+        app:layout_centerVertical="true"
+        app:layout_marginLeft="@dimen/dp_15"
+        app:rotation="180.0"
+        app:src="@mipmap/ic_launcher"
+        app:visibility="gone" />
+
+    <ImageView
+        app:id="@+id/img_right"
+        app:layout_width="wrap_content"
+        app:layout_height="wrap_content"
+        app:layout_alignParentRight="true"
+        app:layout_centerVertical="true"
+        app:layout_marginRight="@dimen/dp_15"
+        app:src="@mipmap/ic_launcher"
+        app:visibility="gone" />
+</RelativeLayout>

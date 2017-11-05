@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    app:layout_width="match_parent"
+    app:layout_height="match_parent"
+    app:background="@color/white"
+    app:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+    app:orientation="vertical">
+
+    <ImageView
+        app:layout_width="wrap_content"
+        app:layout_height="wrap_content"
+        app:src="@drawable/download" />
+
+    <pasu.vadivasal.view.TextView
+        app:layout_width="wrap_content"
+        app:layout_height="wrap_content"
+        app:layout_gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
+        app:layout_marginTop="@dimen/common_margin"
+        app:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+        app:text="No Player Found"
+        app:textColor="@color/gray_divider"
+        app:textSize="@dimen/sp_18" />
+
+    <pasu.vadivasal.view.Button
+        app:id="@+id/btnPlayerAdd"
+        app:layout_width="wrap_content"
+        app:layout_height="wrap_content"
+        app:layout_gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
+        app:layout_marginTop="@dimen/common_margin"
+        app:paddingLeft="@dimen/dp_10"
+        app:paddingRight="@dimen/dp_10"
+        app:text="Add Player"
+        app:textColor="@color/white"
+        app:textSize="@dimen/sp_16" />
+</LinearLayout>

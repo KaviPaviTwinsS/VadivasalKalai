@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:icon="@drawable/ic_share_black_24dp"
+        android:id="@+id/action_share"
+        android:showAsAction="ifRoom"
+        android:title="@string/btn_share"
+        android:visible="false" />
+    <item
+        android:icon="@drawable/ic_star_border_black_24dp"
+        android:id="@+id/action_search"
+        android:showAsAction="ifRoom"
+        android:title="@string/search"
+        android:visible="false" />
+    <item
+        android:actionLayout="@layout/filter_layout"
+        android:id="@+id/action_filter"
+        android:showAsAction="ifRoom"
+        android:title="@string/filter"
+        android:visible="true" />
+    <item
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:id="@+id/action_info"
+        android:showAsAction="ifRoom"
+        android:title="@string/info"
+        android:visible="false" />
+</menu>

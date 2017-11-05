@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pin_content_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/pin_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
+        android:gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
+        android:orientation="horizontal">
+
+        <pasu.vadivasal.view.EditText
+            android:id="@+id/pin_first_edittext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_weight="1.0" />
+
+        <pasu.vadivasal.view.EditText
+            android:id="@+id/pin_second_edittext"
+           
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_weight="1.0" />
+
+        <pasu.vadivasal.view.EditText
+            android:id="@+id/pin_third_edittext"
+           
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_weight="1.0" />
+
+        <pasu.vadivasal.view.EditText
+            android:id="@+id/pin_forth_edittext"
+           
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0" />
+    </LinearLayout>
+
+    <pasu.vadivasal.view.EditText
+        android:id="@+id/pin_hidden_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
+        android:cursorVisible="false"
+        android:gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
+        android:inputType="textUri|textEmailSubject|textLongMessage|textPostalAddress|textVisiblePassword|textFilter|textWebEmailAddress|number|numberSigned|numberDecimal|numberPassword|phone|date"
+        android:maxLength="4"
+        android:textColor="#00000000" />
+</LinearLayout>
