@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent_divider"
+    >
+
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
+    <pasu.vadivasal.view.CustomViewPager
+        android:id="@+id/image_view_pager"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_height="match_parent" />
+    <RelativeLayout
+        android:id="@+id/slide_lay"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:background="@color/transparent_divider"
+        android:layout_gravity="top">
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/slideImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="7dp"
+android:background="@color/transparent"
+            android:layout_marginStart="7dp"
+            app:srcCompat="@drawable/ic_arrow_back_white_24dp"
+            android:padding="10dp"
+            android:focusable="true"
+            android:clickable="true"
+            android:textSize="16sp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/headerTxt"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/slideImg"
+            android:layout_toRightOf="@id/slideImg"
+            android:padding="5dp"
+            android:textColor="@android:color/black" />
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/shareImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/headerTxt"
+            android:layout_alignParentEnd="true"
+            android:clickable="true"
+            android:background="@color/transparent"
+            android:focusable="true"
+            android:padding="10dp"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/share_white" />
+
+    </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/left_icon"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:gravity="left"/>
+
+        <TextView
+            android:id="@+id/right_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:layout_marginLeft="180dp"
+            android:background="@android:color/transparent" />
+    </LinearLayout>
+
+</FrameLayout>
+
+</RelativeLayout>

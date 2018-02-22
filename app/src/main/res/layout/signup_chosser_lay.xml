@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+
+        android:id="@+id/raw_su"
+        layout="@layout/raw_signup" />
+<android.support.v7.widget.AppCompatImageView
+    android:id="@+id/info"
+    android:padding="@dimen/dp_10"
+    android:visibility="gone"
+    android:layout_alignParentRight="true"
+    android:layout_below="@+id/raw_su"
+    app:srcCompat="@drawable/ic_info_outline_black_24dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/pad_20dp"
+
+        android:gravity="center_horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:layout_gravity="left"
+            android:checked="true"
+            android:visibility="gone"
+            android:text="@string/j_fan"
+            android:textSize="18dp" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:visibility="gone"
+            android:layout_gravity="left"
+            android:checked="false"
+            android:text="@string/Tamper_or_bullowner"
+            android:textSize="18dp" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:layout_gravity="left"
+            android:checked="false"
+            android:visibility="gone"
+            android:text="@string/jallikattu_photographer"
+            android:textSize="18dp" />
+    </RadioGroup>
+<pasu.vadivasal.view.TextView
+    android:id="@+id/intro_about_app"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_margin="24dp"
+    android:layout_centerVertical="true"
+    android:textSize="@dimen/sp_18"
+    app:asset_font_file_name="@string/font_roboto_slab_bold"
+    android:layout_height="wrap_content"
+    android:textColor="@color/dark_gray"
+    android:text="@string/about_app_intro"/>
+    <Button
+        android:id="@+id/google_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/intro_about_app"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:background="#d34836"
+        android:padding="@dimen/dp_12"
+        android:text="@string/join_with_google"
+
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/otp_signup"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioGroup"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/ripple_btn_save"
+        android:padding="@dimen/dp_12"
+        android:text="@string/otp_verification"
+        android:textColor="@color/white"
+        android:visibility="gone" />
+
+    <pasu.vadivasal.view.Button
+        android:id="@+id/btnLater"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/background_color"
+        android:gravity="center"
+        android:text="@string/btn_maybe_later"
+        android:textColor="@color/gray_text"
+        android:textSize="@dimen/sp_16"
+        app:asset_font_file_name="@string/font_sourcesans_pro_semibold" />
+</RelativeLayout>
