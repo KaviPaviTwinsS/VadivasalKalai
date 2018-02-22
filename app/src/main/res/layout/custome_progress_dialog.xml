@@ -7,9 +7,9 @@
 
     <ProgressBar
         android:id="@+id/dialogProgressBar"
-        style="@style/ProgressAppTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:indeterminateDrawable="@drawable/progressbar_custom"
         android:layout_centerInParent="true"
         android:layout_gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
         android:visibility="visible" />

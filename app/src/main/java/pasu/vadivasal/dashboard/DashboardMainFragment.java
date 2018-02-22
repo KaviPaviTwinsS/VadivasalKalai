@@ -1,5 +1,11 @@
 package pasu.vadivasal.dashboard;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,6 +30,9 @@ import java.util.List;
 import pasu.vadivasal.R;
 import pasu.vadivasal.adapter.base.BaseQuickAdapter;
 import pasu.vadivasal.adapter.base.entity.MultiItemEntity;
+import pasu.vadivasal.android.SessionSave;
+import pasu.vadivasal.android.Utils;
+import pasu.vadivasal.globalModle.Appconstants;
 import pasu.vadivasal.model.DashBoardData;
 
 /**
@@ -33,7 +42,7 @@ import pasu.vadivasal.model.DashBoardData;
 public class DashboardMainFragment extends Fragment {
     private RecyclerView rvDashboard;
     private ProgressBar progressBar;
-
+public static boolean versionAlertShown;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,6 +50,7 @@ public class DashboardMainFragment extends Fragment {
         rvDashboard = (RecyclerView) v.findViewById(R.id.rvDashboard);
         progressBar = (ProgressBar) v.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
+
         // mTextMessage = (TextView) v.findViewById(R.id.message);
 //        DashBoardData data = new DashBoardData();
 //        ArrayList<TournamentData> tarray = new ArrayList<>();
@@ -51,7 +61,7 @@ public class DashboardMainFragment extends Fragment {
 //            TournamentData tournamentData = new TournamentData();
 //            tournamentData.setBullwon(100);
 //            tournamentData.setPlayerwon(150);
-//            tournamentData.setPlace("Allanganallur");
+//            tournamentData.setVenue("Allanganallur");
 //            tournamentData.setType(2);
 //            tarray.add(tournamentData);
 //
@@ -78,7 +88,7 @@ public class DashboardMainFragment extends Fragment {
 //        data.setLatestVideos(vlarray);
 //        System.out.println("dashdata" + toString(data));
 
-        getData();
+
 //        final List<MultiItemEntity> data = getMultipleItemData(new DashBoardData());
 //        final DashboardAdapter multipleItemAdapter = new DashboardAdapter(getActivity(), data);
 //        final GridLayoutManager manager = new GridLayoutManager(getActivity(), 4);
@@ -90,7 +100,14 @@ public class DashboardMainFragment extends Fragment {
 //            }
 //        });
 //        rvDashboard.setAdapter(multipleItemAdapter);
+        getData();
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
     }
 
     public static String toString(Object s) {
@@ -101,7 +118,7 @@ public class DashboardMainFragment extends Fragment {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
         final String TAG = "Dashboard data";
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
@@ -114,8 +131,43 @@ public class DashboardMainFragment extends Fragment {
 //                datav.setBull(plarray);
 //                datav.setPlayer(blarray);
 //                datav.setLatestVideos(vlarray);
+                int verCode =0;
+                PackageInfo pInfo=null;
+                try {
+                     pInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
+                    String version = pInfo.versionName;
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
 
-                if (getActivity() != null) {
+                if(pInfo!=null)
+                verCode= pInfo.versionCode;
+                if(verCode<datav.getLatestVerison() && !versionAlertShown){
+
+                if(datav.isForceUpdate())
+                    Utils.showAlert(getActivity(),datav.getVersionAlertTitle(),datav.getVersionAlert(),getString(R.string.ok),"", new Dialog.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getActivity().getPackageName()));
+                            getActivity().startActivity(intent);
+                            SessionSave.saveSession(Appconstants.FORCE_UPDATE,true,getActivity());
+                        }
+                    },false);
+                else if(!datav.isForceUpdate()){
+                    versionAlertShown=true;
+                    Utils.showAlert(getActivity(),datav.getVersionAlertTitle(),datav.getVersionAlert(),getString(R.string.ok),getString(R.string.btn_maybe_later), new Dialog.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            System.out.println("position___"+i);
+                            if(i!=-2){
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getActivity().getPackageName()));
+                            getActivity().startActivity(intent);}
+                        }
+                    },true);}}
+                if (getActivity() != null && !(datav.isForceUpdate() && verCode<datav.getLatestVerison())) {
+                    SessionSave.saveSession(Appconstants.ABOUT_APP,datav.getAbout_app(),getActivity());
+                    SessionSave.saveSession(Appconstants.SHARE_CONTENT,datav.getShare_app(),getActivity());
+                    SessionSave.saveSession(Appconstants.FORCE_UPDATE,false,getActivity());
                     final List<MultiItemEntity> data = getMultipleItemData(datav);
                     final DashboardAdapter multipleItemAdapter = new DashboardAdapter(getActivity(), data);
                     final GridLayoutManager manager = new GridLayoutManager(getActivity(), 4);
@@ -140,7 +192,7 @@ public class DashboardMainFragment extends Fragment {
 
     public List<MultiItemEntity> getMultipleItemData(DashBoardData data) {
         List<MultiItemEntity> list = new ArrayList<>();
-        list.add(new MultipleItem(getString(R.string.thirukural_head), data.getThirukural(), MultipleItem.TEXT));
+   //     list.add(new MultipleItem(getString(R.string.thirukural_head), data.getThirukural(), MultipleItem.TEXT));
 //        ArrayList<TournamentData> data = new ArrayList<>();
 //        for (int i = 0; i < 10; i++) {
 //            data.add(new TournamentData());
@@ -150,15 +202,16 @@ public class DashboardMainFragment extends Fragment {
 //            VideosArray.add(new Video());
 //        }
 
-        list.add(new DashboardMatchItem(getActivity(), getString(R.string.tournament), getString(R.string.tap_to_check), data.getTournamentDatas(), 11));
-        list.add(new DashboardVideoItem(getActivity(), getActivity().getString(R.string.super_bull_heroes), "", data.getLatestVideos(), 99));
+        list.add(new DashboardMatchItem(getActivity(), getString(R.string.title_tournament), getString(R.string.tap_to_check), data.getTournamentDatas(), 11));
+
         //  list.add(new MultipleItem(getString(R.string.thirukural_head), getString(R.string.thirukural_main), MultipleItem.TEXT));
 //        ArrayList<PlayerDash> datas = new ArrayList<>();
 //        for (int i = 0; i < 10; i++) {
 //            datas.add(new PlayerDash());
 //        }
         list.add(new DashboardPlayerItem(getActivity(), getActivity().getString(R.string.super_cric_heroes), getActivity().getString(R.string.heroes_msg), data.getPlayer(), 20));
-        list.add(new MultipleItem(getString(R.string.thirukural_head), getString(R.string.thirukural_sec), MultipleItem.TEXT));
+        list.add(new DashboardVideoItem(getActivity(), getActivity().getString(R.string.super_bull_heroes), "", data.getLatestVideos(), 99));
+        list.add(new DashboardPhotoItem(getActivity(),getString(R.string.trending_photos), getString(R.string.tap_to_see),data.getPhotos(), MultipleItem.IMG));
         list.add(new DashboardPlayerItem(getActivity(), getActivity().getString(R.string.super_bull_heroes), getActivity().getString(R.string.bull_heroes_msg), data.getBull(), 20));
 
 

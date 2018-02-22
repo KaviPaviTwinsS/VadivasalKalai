@@ -93,7 +93,7 @@ public class MaterialUpConceptActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_activity_main);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.materialup_tabs);
-        ViewPager viewPager = (ViewPager) findViewById(R.id.materialup_viewpager);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         AppBarLayout appbarLayout = (AppBarLayout) findViewById(R.id.materialup_appbar);
         mProfileImage = (ImageView) findViewById(R.id.materialup_profile_image);
         profile_lay = (CoordinatorLayout) findViewById(R.id.profile_lay);

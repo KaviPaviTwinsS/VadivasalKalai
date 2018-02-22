@@ -1,6 +1,13 @@
 <resources>
+
+
+    <plurals name="likes_count">
+        <item quantity="one">%d like</item>
+        <item quantity="other">%d likes</item>
+    </plurals>
+    <string name="user_profile_photo">http://igcdn-photos-f-a.akamaihd.net/hphotos-ak-xpa1/t51.2885-19/929118_455075441302693_1605108410_a.jpg</string>
     <string name="facebook_app_id"></string>
-    <string name="app_name">Jallikattu</string>
+    <string name="app_name">I Love Jallikattu</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -11,14 +18,14 @@
     <string name="btn_more">MORE</string>
     <string name="thirukural_head">Thirukural</string>
     <string name="appbar_scrolling_view_behavior">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
-    <string name="tournament">Tournament</string>
-    <string name="super_cric_heroes">Manjuvirattu Heros</string>
+    <string name="tournament">Events</string>
+    <string name="super_cric_heroes">Players around you</string>
     <string name="heroes_msg">Tap to check their profile</string>
-    <string name="super_bull_heroes">Stunning bull Tampering</string>
+    <string name="super_bull_heroes">Bulls around you</string>
     <string name="bull_heroes_msg">Tap to check their profile</string>
-    <string name="error_icon"></string>
-    <string name="right_icon"></string>
-    <string name="warning_icon"></string>
+    <string name="error_icon"></string>
+    <string name="right_icon"></string>
+    <string name="warning_icon"></string>
     <string name="error_msg_please_select_any_player">Select any player</string>
     <string name="btn_title_add">Add</string>
     <string name="no_media_found">No media found</string>
@@ -51,10 +58,10 @@
     <string name="tab_title_status">Status</string>
     <string name="tab_title_summary">SUMMARY</string>
     <string name="tab_title_teams">Teams</string>
-    <string name="tab_tournament">Tournaments</string>
+    <string name="tab_tournament">Event</string>
     <string name="msg_under_development">Under development</string>
     <string name="loading">Loading</string>
-    <string name="load_failed">Try again</string>
+    <string name="load_failed">End of list</string>
     <string name="load_end">End of the list</string>
     <string name="follow">Follow</string>
     <string name="followers">Followers</string>
@@ -62,7 +69,7 @@
 
     <string name="click_write_mesg">Write message</string>
     <string name="contact_phone_number">+91 8667730776</string>
-    <string name="speak_mesg">If you need urgent help, call following number</string>
+    <string name="speak_mesg">அவசர தகவலுக்கு இந்த எண்ணை தொடர்பு கொள்ளவும் </string>
 
     <string name="font_roboto_slab_bold">RobotoSlab_Bold.ttf</string>
     <string name="font_roboto_slab_light">RobotoSlab_Light.ttf</string>
@@ -78,7 +85,7 @@
     <string name="tab_write">WRITE</string>
     <string name="tab_speak">SPEAK</string>
     <string name="words">0/200 (words)</string>
-    <string name="write_mesg">If you want to score a tournament, please give us your details. We will call you back.</string>
+    <string name="write_mesg">உங்கள் ஊர் ஜல்லிகட்டை இந்த செயலியில் பதிவேற்றம் செய்ய அதன் விவரங்களை , அல்லது இந்த செயலி பற்றிய கருத்துகளை பதிவு செய்யவும்.</string>
     <string name="_0_200_words">0/200 (words)</string>
     <string name="btn_send">Send</string>
 
@@ -132,7 +139,7 @@
     <string name="City">City</string>
     <string name="email">email</string>
     <string name="about">About</string>
-
+    <string name="permission_title_rationale">Permission needed</string>
 
     <string name="camera">Camera</string>
     <string name="profile_image">Profile Image</string>
@@ -142,7 +149,7 @@
     <string name="cancel">Cancel</string>
     <string name="submit">Submit</string>
     <string name="title_more">More</string>
-    <string name="title_tournament">Tournament</string>
+    <string name="title_tournament">Jallikattu Events</string>
     <string name="hi">Hai</string>
     <string name="player_data_issue">Selected player info is hidden temporarily. Kindly try after sometimes</string>
     <string name="tournament_host_mesg">Host Message</string>
@@ -159,6 +166,103 @@
     <string name="no_media_title">No media found</string>
     <string name="no_media_message">No media to show</string>
     <string name="organizer_s_detail">organizer detail</string>
-    <string name="tournament_s_detail">Tournament detail</string>
+    <string name="tournament_s_detail">Event\'s detail</string>
     <string name="likes">Likes</string>
+    <string name="top_bull">Top Bull</string>
+    <string name="top_tamper">Top tamper</string>
+    <string name="tab_title_statistics">Staistics</string>
+    <string name="squads">Participants</string>
+    <string name="match">Match</string>
+    <string name="series">Events</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="venue">Venue</string>
+    <string name="umpires">Organizer</string>
+    <string name="third_Umpire">Commentator</string>
+    <string name="refree">Refree</string>
+    <string name="tampers">Tampers</string>
+    <string name="prizes">Prizes</string>
+    <string name="tab_title_about">About</string>
+    <string name="title_newsfeed">News</string>
+    <string name="label_please_confirm_your_country_code_and_enter_your_phone_number">Please confirm your country code and enter your phone number.</string>
+    <string name="login_by">Login By</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="pin">PIN</string>
+    <string name="label_existing_user">Existing user?</string>
+    <string name="btn_login">Login</string>
+    <string name="why_phone_number_text">Why my mobile number?</string>
+    <string name="btn_maybe_later">May be later</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_forgot_password">Forgot password</string>
+    <string name="show_pin">Show pin</string>
+    <string name="enter_pin">Enter pin number</string>
+    <string name="btn_edit">Edit</string>
+    <string name="btn_yes">Yes</string>
+    <string name="number_correct">Is your phone number correct?</string>
+    <string name="why_need_user_number"><![CDATA[<b> I Love Jallikattu </b>]]>  use phone number to uniquely identify players. Others would never have access to your phone numbers without your consent.\\n\\nWE DON\'T SPAM OR SELL YOUR DATA.</string>
+    <string name="msg_verify_phone">Verifying %s</string>
+    <string name="hint_code">code</string>
+    <string name="btn_login_via_otp">Login</string>
+    <string name="i_m_done">Done</string>
+    <string name="didn_t_receive_the_code">Didn\'t receive the code?</string>
+    <string name="btn_resend_otp">Resend OTP</string>
+    <string name="label_smssendacknowledge">We have sent you an SMS with a code to the number above.</string>
+    <string name="label_enter6digit">To complete your phone number verification, please enter the 5-digit activation code.</string>
+    <string name="maximum_limit_reached">Maximum limit reached</string>
+    <string name="verify_number">Verify Mobile Number</string>
+    <string name="verify_otp_msg">Please enter OTP received via SMS to verify your mobile number.</string>
+    <string name="error_valid_code">Enter valid code</string>
+    <string name="please_wait">Please wait</string>
+    <string name="j_fan">Jallikattu Fan</string>
+    <string name="Tamper_or_bullowner">Tamper/Bull Owner</string>
+    <string name="jallikattu_photographer">Jallikattu Photographer</string>
+    <string name="otp_verification">Verify my number</string>
+    <string name="trending_photos">Trending Photos</string>
+    <string name="tap_to_see">Tap to view</string>
+    <string name="commentary_empty">News will be updated soon</string>
+    <string name="statistics_empty">நிகழ்வு முடிவில் தகவல் பகிர படும். தவறாமல் மீண்டும் வரவும்...</string>
+    <string name="tamper_won">Tampers won</string>
+    <string name="bull_won">Bulls won</string>
+    <string name="tab_video">Video</string>
+    <string name="permission_read_storage_rationale">Need to store photo</string>
+    <string name="label_select_video">Select video</string>
+    <string name="ok">Okay</string>
+    <string name="toast_cannot_retrieve_selected_video">Can\'t retrieve video</string>
+    <string name="what_do_you_do">What do you want to do</string>
+    <string name="title_pin_set">Your registered mobile number with ILJ:</string>
+    <string name="go_to_article">Go to article</string>
+    <string name="view_score">View Detail</string>
+    <string name="share_news_msg">Download the ILJ App to know more: https://play.google.com/store/apps/details?id=pasu.vaadivaasal</string>
+    <string name="activity_image_trans">activity_image_transition</string>
+    <string name="activity_text_trans">activity_search_transition</string>
+    <string name="local_cricket_news">Jallikattu news</string>
+    <string name="trending">Trending</string>
+    <string name="about_app_intro">தமிழனின் ஒற்றுமையை உலகம் உணர செய்த சல்லிகட்டு விளையாட்டை அணைத்து மக்களிடமும் கொண்டு சேர்க்கும் சிறு முயற்சி தான் இந்த செயலி</string>
+    <string name="logout_alert">Are you sure, want to logout?</string>
+    <string name="logout">Logout</string>
+    <string name="register_bull_owner">Jallikattu Bull owner</string>
+    <string name="register_tamper">Jallikattu player</string>
+    <string name="register_photographer">Jallikattu photographer</string>
+    <string name="played_in">Played in</string>
+    <string name="bio">BIO</string>
+    <string name="uploading">Uploading</string>
+    <string name="upload_success">Uploaded sucessfully</string>
+    <string name="try_again">Try again</string>
+    <string name="profile_gallery_empty">Click add button to upload photos</string>
+    <string name="role">Role</string>
+    <string name="register_me">Register me as</string>
+    <string name="ask_login_message">Kindly login to complete action</string>
+    <string name="kindly_login">Kindly Login :)</string>
+    <string name="comming_soon">Comming soon</string>
+    <string name="browse_player">Browse player</string>
+    <string name="browse_bull">Browse bull</string>
+    <string name="tamil_comming">தமிழில் மிக விரைவில்</string>
+    <string name="rate_app">எங்கள் முயற்சியை பாராட்ட விரும்பினால்</string>
+    <string name="posted_success">Success! Thanks for ur comments :)</string>
+    <string name="add_post">Add to post</string>
+    <string name="invalid_code">Invalid Code. Please try again</string>
+    <string name="go_to_event">Go to event</string>
+    <string name="tournament_gallery_empty">நிகழ்வு முடிவில் தகவல் பகிர படும். தவறாமல் மீண்டும் வரவும்...</string>
+    <string name="share">Share</string>
+    <string name="asset_statements" translatable="false">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"https://ilovejallikattu.000webhostapp.com\",\n  }\n}]</string>
 </resources>

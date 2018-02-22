@@ -26,7 +26,8 @@ public class DashboardPlayerAdapter extends BaseQuickAdapter<PlayerDash, BaseVie
         super(R.layout.raw_dashboard_player_and_team_item, data);
         this.data = data;
         this.context = context;
-        this.width = (context.getResources().getDisplayMetrics().widthPixels * 30) / 100;
+
+        this.width = (context.getResources().getDisplayMetrics().widthPixels * 28) / 100;
     }
 
     protected void convert(BaseViewHolder helper, PlayerDash player) {

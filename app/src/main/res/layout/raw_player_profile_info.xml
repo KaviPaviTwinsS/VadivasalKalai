@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/background_color"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
@@ -13,162 +14,22 @@
         android:orientation="vertical"
         android:visibility="visible">
 
-    <LinearLayout
-        android:id="@+id/lnr_top_match"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:visibility="gone">
 
-        <android.support.v7.widget.CardView
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_4"
-            android:layout_weight="1.0"
-            android:layout_width="wrap_content">
-
-            <LinearLayout
-                android:gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/dp_10"
-                android:paddingTop="@dimen/dp_10">
-
-                <pasu.vadivasal.view.TextView
-                    app:asset_font_file_name="@string/font_roboto_slab_bold"
-                    android:id="@+id/tvMatches"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:textAllCaps="true"
-                    android:textColor="@color/match_info_bg_color"
-                    android:textSize="@dimen/sp_20" />
-
-                <pasu.vadivasal.view.TextView
-                    app:asset_font_file_name="@string/font_sourcesans_pro_regular"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_5"
-                    android:layout_width="wrap_content"
-                    android:text="MAtches"
-                    android:textAllCaps="true"
-                    android:textColor="@color/gray_text"
-                    android:textSize="@dimen/sp_14" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:layout_width="wrap_content">
-
-            <LinearLayout
-                android:gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/dp_10"
-                android:paddingTop="@dimen/dp_10">
-
-                <pasu.vadivasal.view.TextView
-                    app:asset_font_file_name="@string/font_roboto_slab_bold"
-                    android:id="@+id/tvRun"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_5"
-                    android:layout_width="wrap_content"
-                    android:textColor="@color/match_info_bg_color"
-                    android:textSize="@dimen/sp_20" />
-
-                <pasu.vadivasal.view.TextView
-                    app:asset_font_file_name="@string/font_sourcesans_pro_regular"
-                    android:id="@+id/tvTitleRun"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Run"
-                    android:textAllCaps="true"
-                    android:textColor="@color/gray_text"
-                    android:textSize="@dimen/sp_14" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:layout_width="wrap_content">
-
-            <LinearLayout
-                android:gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/dp_10"
-                android:paddingTop="@dimen/dp_10">
-
-                <pasu.vadivasal.view.TextView
-                    app:asset_font_file_name="@string/font_roboto_slab_bold"
-                    android:id="@+id/tvWicket"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_5"
-                    android:layout_width="wrap_content"
-                    android:textColor="@color/match_info_bg_color"
-                    android:textSize="@dimen/sp_20" />
-
-                <pasu.vadivasal.view.TextView
-                    app:asset_font_file_name="@string/font_sourcesans_pro_regular"
-                    android:id="@+id/tvTitleWicket"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Wicket"
-                    android:textAllCaps="true"
-                    android:textColor="@color/gray_text"
-                    android:textSize="@dimen/sp_14" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            app:cardElevation="4dp"
-            app:cardUseCompatPadding="true"
-            android:id="@+id/card_Catches"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dp_4"
-            android:layout_weight="1.0"
-            android:layout_width="wrap_content">
-
-            <LinearLayout
-                android:gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/dp_10"
-                android:paddingTop="@dimen/dp_10">
-
-                <pasu.vadivasal.view.TextView
-                    app:asset_font_file_name="@string/font_roboto_slab_bold"
-                    android:id="@+id/tvCatches"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_5"
-                    android:layout_width="wrap_content"
-                    android:textColor="@color/match_info_bg_color"
-                    android:textSize="@dimen/sp_20" />
-
-                <pasu.vadivasal.view.TextView
-                    app:asset_font_file_name="@string/font_sourcesans_pro_regular"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Catches"
-                    android:textAllCaps="true"
-                    android:textColor="@color/gray_text"
-                    android:textSize="@dimen/sp_14" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-    </LinearLayout>
+            android:layout_centerInParent="true"
+            android:indeterminate="true"
+            android:padding="50dp"
+            android:layout_gravity="center"
+            android:indeterminateDrawable="@drawable/progressbar_custom"
+            android:visibility="visible" />
 
     <android.support.v7.widget.CardView
+        android:id="@+id/main_linear_card"
         app:cardElevation="@dimen/dp_4"
+        android:visibility="gone"
         app:cardUseCompatPadding="true"
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
@@ -192,7 +53,7 @@
                 app:asset_font_file_name="@string/font_sourcesans_pro_semibold"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Location"
+                android:text="@string/City"
                 android:textAllCaps="true"
                 android:textColor="@color/gray_text"
                 android:textSize="@dimen/sp_14" />
@@ -200,7 +61,7 @@
             <pasu.vadivasal.view.TextView
                 app:asset_font_file_name="@string/font_sourcesans_pro_regular"
                 android:id="@+id/tvLocation"
-                android:text="Madurai"
+                tools:text="Madurai"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:layout_width="match_parent"
@@ -219,7 +80,7 @@
                 android:id="@+id/tvTitleDOB"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="DOB"
+                android:text="@string/hint_date_of_birth"
                 android:textAllCaps="true"
                 android:textColor="@color/gray_text"
                 android:textSize="@dimen/sp_14" />
@@ -229,7 +90,7 @@
                 android:id="@+id/tvDOB"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="29-09-1993"
+                tools:text="29-09-1993"
                 android:layout_width="match_parent"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
@@ -272,17 +133,17 @@
                 app:asset_font_file_name="@string/font_sourcesans_pro_semibold"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Team"
+                android:text="@string/role"
                 android:textAllCaps="true"
                 android:textColor="@color/gray_text"
                 android:textSize="@dimen/sp_14" />
 
             <pasu.vadivasal.view.TextView
                 app:asset_font_file_name="@string/font_sourcesans_pro_regular"
-                android:id="@+id/tvPlayedTeam"
+                android:id="@+id/role_txt"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="Alanganallur,Palamedu &amp; Kangayam"
+                tools:text="Alanganallur,Palamedu &amp; Kangayam"
                 android:layout_width="match_parent"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
@@ -299,7 +160,7 @@
                 app:asset_font_file_name="@string/font_sourcesans_pro_semibold"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Bio"
+                android:text="@string/bio"
                 android:textAllCaps="true"
                 android:textColor="@color/gray_text"
                 android:textSize="@dimen/sp_14" />
@@ -309,7 +170,7 @@
                 android:id="@+id/tvBio"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="@string/dummy_bio"
+                tools:text="@string/dummy_bio"
                 android:layout_width="match_parent"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />

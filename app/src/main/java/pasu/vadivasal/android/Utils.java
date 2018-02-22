@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Bitmap.Config;
@@ -23,6 +24,7 @@ import android.net.NetworkInfo;
 import android.net.ParseException;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Build.VERSION;
 import android.renderscript.Allocation;
 import android.renderscript.Allocation.MipmapControl;
@@ -38,6 +40,7 @@ import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.CardView;
+import android.text.Html;
 import android.text.SpannableString;
 import android.text.TextUtils.TruncateAt;
 import android.text.format.Formatter;
@@ -49,6 +52,7 @@ import android.util.TypedValue;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
@@ -77,6 +81,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -86,7 +91,127 @@ import pasu.vadivasal.view.EditText;
 import pasu.vadivasal.view.TextView;
 
 public class Utils {
+
+    private static int screenWidth = 0;
+    private static int screenHeight = 0;
+
+    public static final String COMMAND_LINE_END = "\n";
+
+
+    public static String getDate(long timeStamp) {
+
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy h:mm a");
+            Date netDate = (new Date(timeStamp));
+            return sdf.format(netDate);
+        } catch (Exception ex) {
+            return "xx";
+        }
+    }
+
+
+    public static String TimeAgo(long timeStamp) {
+        String time = "";
+        try {
+//            SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss");
+//            Date past = format.parse("2016.02.05 AD at 23:59:30");
+
+            Date past = new Date(timeStamp);
+            Date now = new Date();
+            long seconds = TimeUnit.MILLISECONDS.toSeconds(now.getTime() - past.getTime());
+            long minutes = TimeUnit.MILLISECONDS.toMinutes(now.getTime() - past.getTime());
+            long hours = TimeUnit.MILLISECONDS.toHours(now.getTime() - past.getTime());
+            long days = TimeUnit.MILLISECONDS.toDays(now.getTime() - past.getTime());
+//
+//          System.out.println("hai "+past.toString()+TimeUnit.MILLISECONDS.toSeconds(now.getTime() - past.getTime()) + " milliseconds ago");
+//          System.out.println(TimeUnit.MILLISECONDS.toMinutes(now.getTime() - past.getTime()) + " minutes ago");
+//          System.out.println(TimeUnit.MILLISECONDS.toHours(now.getTime() - past.getTime()) + " hours ago");
+//          System.out.println(TimeUnit.MILLISECONDS.toDays(now.getTime() - past.getTime()) + " days ago");
+
+            if (seconds < 60) {
+                time = seconds + " seconds ago";
+                System.out.println(seconds + " seconds ago");
+            } else if (minutes < 60) {
+                time = minutes + " minutes ago";
+                System.out.println(minutes + " minutes ago");
+            } else if (hours < 24) {
+                time = hours + " hours ago";
+                System.out.println(hours + " hours ago");
+            } else {
+                time = days + " days ago";
+                System.out.println(days + " days ago");
+            }
+        } catch (Exception j) {
+            j.printStackTrace();
+        }
+        return time;
+    }
+
+    public static String getTimeOnly(long timeStamp){
+
+        try{
+            SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
+            Date netDate = (new Date(timeStamp));
+            return sdf.format(netDate);
+        }
+        catch(Exception ex){
+            return "xx";
+        }
+    }
+    public static String getDateOnly(long timeStamp){
+
+        try{
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
+            Date netDate = (new Date(timeStamp));
+            return sdf.format(netDate);
+        }
+        catch(Exception ex){
+            return "xx";
+        }
+    }
+
+    public static int dpToPx(int dp) {
+        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+    }
+
+    public static int getScreenHeight(Context c) {
+        if (screenHeight == 0) {
+            WindowManager wm = (WindowManager) c.getSystemService(Context.WINDOW_SERVICE);
+            Display display = wm.getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            screenHeight = size.y;
+        }
+
+        return screenHeight;
+    }
+
+    public static int getScreenWidth(Context c) {
+        if (screenWidth == 0) {
+            WindowManager wm = (WindowManager) c.getSystemService(Context.WINDOW_SERVICE);
+            Display display = wm.getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            screenWidth = size.x;
+        }
+
+        return screenWidth;
+    }
+
+    public static boolean isAndroid5() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+    }
     private static char[] f17c = new char[]{'K', 'M', 'G'};
+
+    public static String limitToLength(String s,int length) {
+        if(s!=null && s.length()>0){
+            if(s.length()>length)
+                return s.substring(0,length-4)+"...";
+        }else
+            return "";
+
+        return s;
+    }
 
     static class C05572 implements OnClickListener {
         C05572() {
@@ -373,31 +498,32 @@ public class Utils {
         return "";
     }
 
-//    public static void showAlert(Context context, String title, String message, String positiveButtonTitle, String nagativeButtonTitle, OnClickListener dialogClickListener, boolean isCancelable) {
-//        if (!((Activity) context).isFinishing()) {
-//            try {
-//                Builder ab = new Builder(context, R.style.CustomAlertDialogStyle);
-//                View dialogView = ((Activity) context).getLayoutInflater().inflate(R.layout.raw_alert_dialog_custom, null);
-//                ab.setView(dialogView);
-//                ab.setCancelable(isCancelable);
-//                TextView tvTitle = (TextView) dialogView.findViewById(R.id.tvTitle);
-//                TextView tvDescription = (TextView) dialogView.findViewById(R.id.tvMsg);
-//                if (title.length() == 0) {
-//                    tvTitle.setVisibility(8);
-//                } else {
-//                    tvTitle.setText(title);
-//                }
-//                if (nagativeButtonTitle.length() != 0) {
-//                    ab.setNegativeButton((CharSequence) nagativeButtonTitle, dialogClickListener);
-//                }
-//                tvDescription.setText(message);
-//                ab.setPositiveButton((CharSequence) positiveButtonTitle, dialogClickListener);
-//                ab.create().show();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
+    public static void showAlert(Context context, String title, String message, String positiveButtonTitle, String nagativeButtonTitle, OnClickListener dialogClickListener, boolean isCancelable) {
+        if (!((Activity) context).isFinishing()) {
+            try {
+                Builder ab = new Builder(context, R.style.CustomAlertDialogStyle);
+                View dialogView = ((Activity) context).getLayoutInflater().inflate(R.layout.raw_alert_dialog_custom, null);
+                ab.setView(dialogView);
+                ab.setCancelable(isCancelable);
+                TextView tvTitle = (TextView) dialogView.findViewById(R.id.tvTitle);
+                TextView tvDescription = (TextView) dialogView.findViewById(R.id.tvMsg);
+                if (title.length() == 0) {
+                    tvTitle.setVisibility(View.GONE);
+                } else {
+                    tvTitle.setText(title);
+                }
+                if (nagativeButtonTitle.length() != 0) {
+                    ab.setNegativeButton((CharSequence) nagativeButtonTitle, dialogClickListener);
+                }
+                System.out.println("message ...d"+message.replace("\\n","<br>"));
+                tvDescription.setText(Html.fromHtml(message.replace("\\n","<br>")));
+                ab.setPositiveButton((CharSequence) positiveButtonTitle, dialogClickListener);
+                ab.create().show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public static Bitmap takeScreenShot(Activity activity) {
         View view = activity.getWindow().getDecorView();
@@ -452,7 +578,7 @@ public class Utils {
 //            TextView tvTitle = (TextView) dialogView.findViewById(R.id.tvTitle);
 //            TextView tvDescription = (TextView) dialogView.findViewById(R.id.tvMsg);
 //            if (title.length() == 0) {
-//                tvTitle.setVisibility(8);
+//                tvTitle.setVisibility(View.GONE);
 //            } else {
 //                tvTitle.setText(title);
 //            }
@@ -1074,27 +1200,27 @@ public class Utils {
 //        tvMessage.setText(message);
 //        tvMessage.setMovementMethod(new ScrollingMovementMethod());
 //        if (isEmptyString(positive)) {
-//            btnPositive.setVisibility(8);
+//            btnPositive.setVisibility(View.GONE);
 //        } else {
-//            btnPositive.setVisibility(0);
+//            btnPositive.setVisibility(View.VISIBLE);
 //            btnPositive.setText(positive);
 //        }
 //        if (isEmptyString(negative)) {
-//            btnNegative.setVisibility(8);
+//            btnNegative.setVisibility(View.GONE);
 //        } else {
-//            btnNegative.setVisibility(0);
+//            btnNegative.setVisibility(View.VISIBLE);
 //            btnNegative.setText(negative);
 //        }
 //        if (isEmptyString(natural)) {
-//            btnNatural.setVisibility(8);
+//            btnNatural.setVisibility(View.GONE);
 //        } else {
-//            btnNatural.setVisibility(0);
+//            btnNatural.setVisibility(View.VISIBLE);
 //            btnNatural.setText(natural);
 //        }
 //        if (isEmptyString(info)) {
-//            tvInfo.setVisibility(8);
+//            tvInfo.setVisibility(View.GONE);
 //        } else {
-//            tvInfo.setVisibility(0);
+//            tvInfo.setVisibility(View.VISIBLE);
 //            tvInfo.setText(info);
 //        }
 //        final boolean z = isDismiss;
@@ -1525,7 +1651,7 @@ public class Utils {
     }
 
     public static void hideDivider(View divider) {
-        divider.setVisibility(8);
+        divider.setVisibility(View.GONE);
     }
 
     public static Bitmap getBitmapfromUrl(String imageUrl) {

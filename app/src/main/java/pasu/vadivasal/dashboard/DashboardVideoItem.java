@@ -11,10 +11,10 @@ import pasu.vadivasal.model.Video;
 
 public class DashboardVideoItem extends BaseDashboardMultiItem {
     private DashboardVideoAdapter adapter;
-    private ArrayList<Video> data;
+    private ArrayList<Media> data;
 
-    public DashboardVideoItem(Context context, String title, String description, ArrayList<Video> data, int itemType) {
-        super(title, description, itemType);
+    public DashboardVideoItem(Context context, String title, String description, ArrayList<Media> data, int itemType) {
+        super(title, description, itemType,data);
         this.data = data;
         this.adapter = new DashboardVideoAdapter(context, this.data, true);
     }

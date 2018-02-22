@@ -1,95 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tool="http://schemas.android.com/tools"
-    android:cardUseCompatPadding="true"
-    app:clickable="true"
-    app:id="@+id/main_card"
-    app:layout_height="wrap_content"
-    app:layout_width="match_parent">
+    app:cardUseCompatPadding="true"
+    android:clickable="true"
+    android:id="@+id/main_card"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
 
     <RelativeLayout
-        app:layout_height="200dp"
-        app:layout_width="match_parent">
+        android:layout_height="170dp"
+        android:layout_width="match_parent">
 
         <ImageView
-            app:id="@+id/imgMedia"
-            app:layout_height="match_parent"
-            app:layout_width="match_parent" />
+            android:id="@+id/imgMedia"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/image_logo"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/images" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/ivPlay"
+            android:layout_centerInParent="true"
+            android:layout_height="50dp"
+            android:layout_width="50dp"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_play_circle_24dp"
+            android:visibility="visible" />
 
         <ImageView
-            app:layout_height="match_parent"
-            app:layout_width="match_parent"
-            app:scaleType="centerCrop"
-            app:src="@drawable/images" />
-
-        <ImageView
-            app:id="@+id/ivPlay"
-            app:layout_centerInParent="true"
-            app:layout_height="50dp"
-            app:layout_width="50dp"
-            app:scaleType="centerInside"
-            app:src="@drawable/ic_play_circle_24dp"
-            app:visibility="visible" />
-
-        <ImageView
-            app:id="@+id/ivShare"
-            app:layout_alignParentBottom="true"
-            app:layout_alignParentRight="true"
-            app:layout_height="wrap_content"
-            app:layout_margin="@dimen/dp_10"
-            app:layout_width="wrap_content"
-            app:padding="@dimen/dp_15"
-            app:scaleType="centerInside"
-            app:visibility="gone" />
+            android:id="@+id/ivShare"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:padding="@dimen/dp_15"
+            android:scaleType="centerInside"
+            android:visibility="gone" />
 
         <pasu.vadivasal.view.TextView
-            app:ellipsize="end"
-            app:id="@+id/tvTitle"
-            app:layout_above="@+id/lnrDescription"
-            app:layout_height="wrap_content"
-            app:layout_width="match_parent"
-            app:maxLines="1"
-            app:paddingLeft="8dp"
-            app:paddingRight="8dp"
-            app:paddingTop="4dp"
-            app:text="Stunning caught"
-            app:textColor="@color/white"
-            app:textSize="18sp" />
+            android:ellipsize="end"
+            android:id="@+id/tvTitle"
+            android:layout_above="@+id/lnrDescription"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:maxLines="1"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:text="Stunning caught"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
         <LinearLayout
-            app:id="@+id/lnrDescription"
-            app:layout_alignParentBottom="true"
-            app:layout_height="wrap_content"
-            app:layout_width="match_parent"
-            app:orientation="vertical"
-            app:paddingBottom="8dp">
+            android:id="@+id/lnrDescription"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="8dp">
 
             <pasu.vadivasal.view.TextView
-                app:ellipsize="end"
-                app:id="@+id/tvDescription"
-                app:layout_height="wrap_content"
-                app:layout_width="match_parent"
-                app:maxLines="1"
-                app:paddingLeft="8dp"
-                app:paddingRight="8dp"
-                app:text="Digi Spartan vs SVCC Lions"
-                app:textColor="@color/white"
-                app:textSize="18sp" />
+                android:ellipsize="end"
+                android:id="@+id/tvDescription"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:maxLines="1"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="Digi Spartan vs SVCC Lions"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <pasu.vadivasal.view.TextView
-                app:ellipsize="end"
-                app:id="@+id/tvZone"
-                app:layout_height="wrap_content"
-                app:layout_width="match_parent"
-                app:maxLines="1"
-                app:paddingLeft="8dp"
-                app:paddingRight="8dp"
-                app:text="zone"
-                app:textColor="@color/white"
-                app:textSize="16sp"
-                app:visibility="gone" />
+                android:ellipsize="end"
+                android:id="@+id/tvZone"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:maxLines="1"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="zone"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:visibility="gone" />
         </LinearLayout>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

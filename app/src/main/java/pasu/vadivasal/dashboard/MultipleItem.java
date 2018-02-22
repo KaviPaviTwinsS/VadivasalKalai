@@ -19,7 +19,7 @@ public class MultipleItem extends BaseDashboardMultiItem {
     private String description;
 
     public MultipleItem(String title, String description,int itemType) {
-        super(title, description, itemType);
+        super(title, description, itemType,null);
         this.title = title;
         this.description = description;
         this.itemType = itemType;

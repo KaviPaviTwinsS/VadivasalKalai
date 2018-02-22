@@ -24,6 +24,7 @@ import pasu.vadivasal.R;
 import pasu.vadivasal.adapter.base.recycler.Paginate;
 import pasu.vadivasal.globalModle.MatchDetails;
 import pasu.vadivasal.matchList.SavedGameListAdapter;
+import pasu.vadivasal.model.TournamentData;
 
 
 /**
@@ -35,10 +36,10 @@ public class MatchListPage extends Fragment implements Paginate.Callbacks {
     private RecyclerView mRecyclerView;
     ViewGroup no_data_lay;
 
-    int type;
+    private int type;
     String typeString = "";
     boolean isOnline=true;
-    private ArrayList<MatchDetails> datas = new ArrayList<>();
+    private ArrayList<TournamentData> datas = new ArrayList<>();
     private DatabaseReference myRef;
     private ValueEventListener valueEventListener;
     private ProgressBar progress_bar;
@@ -47,7 +48,7 @@ public class MatchListPage extends Fragment implements Paginate.Callbacks {
     private boolean loading;
     private boolean allItemLoaded;
     private SavedGameListAdapter savedGameListAdapter;
-    private ArrayList<MatchDetails> dummuy_datas = new ArrayList<>();
+    private ArrayList<TournamentData> dummuy_datas = new ArrayList<>();
 
     @Override
     public void onStop() {
@@ -69,7 +70,7 @@ public class MatchListPage extends Fragment implements Paginate.Callbacks {
         if (getArguments() != null) {
             type = getArguments().getInt("type");
            // isOnline = getArguments().getBoolean("is_online", true);
-            setUpRecyclerView(1);
+            setUpRecyclerView(type);
         } else
             System.out.println("______setttitt" + null);
         v.findViewById(R.id.error_action_button).setOnClickListener(new View.OnClickListener() {
@@ -94,7 +95,7 @@ public class MatchListPage extends Fragment implements Paginate.Callbacks {
     private void setUpRecyclerView(final int type) {
         System.out.println("______setttitt" + type + isOnline);
         //RealmResults data = null;
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
         if (isOnline) {
 
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), OrientationHelper.VERTICAL, false);
@@ -113,10 +114,10 @@ public class MatchListPage extends Fragment implements Paginate.Callbacks {
             } else {
                 typeString = "recent";
             }
-            myRef = database.getReference("matchList/" + typeString);
+            myRef = database.getReference("tournament-new/about/");
             Query queryRef;
-
-            queryRef = myRef.orderByKey()
+          //  System.out.println("orderByChild(\"status\").equalTo(type)"+type);
+            queryRef = myRef.orderByChild("status").equalTo(type)
                     .limitToLast(10);
 
             valueEventListener = new ValueEventListener() {
@@ -129,12 +130,12 @@ public class MatchListPage extends Fragment implements Paginate.Callbacks {
                         System.out.println("md.getValue()*" + dataSnapshot.getChildrenCount() + "__" + savedGameListAdapter.getItemCount());
                         for (DataSnapshot md : dataSnapshot.getChildren()) {
                             if (md.getValue() != null && !md.getValue().equals("")) {
-                                if (datas.size() > 0 && datas.get(datas.size() - 1).getMatch_id() == Integer.parseInt(md.getKey())) {
+                                if (datas.size() > 0 && datas.get(datas.size() - 1).getKey().equals(md.getKey())) {
 
                                     System.out.println("datatacccc");
                                 } else {
-                                    MatchDetails matchDetails = new MatchDetails();
-//                                    matchDetails.setMatch_id(Integer.parseInt(md.getKey()));
+                                    TournamentData matchDetails =  md.getValue(TournamentData.class);
+//                                    matchDetails.setMatch_id(Integer.parseInt(md.getTournament_key()));
 //                                    matchDetails.setmatchShortSummary(CommanData.toString(md.getValue()));
 
                                     dummuy_datas.add(matchDetails);
@@ -163,8 +164,9 @@ public class MatchListPage extends Fragment implements Paginate.Callbacks {
                         savedGameListAdapter.addData(datas);
 
                     } else {
-//                        System.out.println("databaseerrorss" );
-//                        no_data_lay.setVisibility(View.VISIBLE);
+                        System.out.println("databaseerrorss" +datas.size());
+                        if(datas.size()==0)
+                        no_data_lay.setVisibility(View.VISIBLE);
                     }
                 }
 
@@ -219,9 +221,9 @@ public class MatchListPage extends Fragment implements Paginate.Callbacks {
 
         if (datas.size() > 0 && page > 0) {
             loading = true;
-            System.out.println("Nan__" + datas.size() + "__" + datas.get(datas.size() - 1).getMatch_id());
+            System.out.println("Nan__" + datas.size() + "__" + datas.get(datas.size() - 1).getKey());
             Query queryRef = myRef.orderByKey()
-                    .endAt(String.valueOf(datas.get(datas.size() - 1).getMatch_id())).limitToFirst(10);
+                    .endAt(String.valueOf(datas.get(datas.size() - 1).getKey())).limitToFirst(10);
             queryRef.addListenerForSingleValueEvent(valueEventListener);
         }
     }

@@ -1,5 +1,7 @@
 package pasu.vadivasal.videopackage;
 
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import android.view.Surface;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -39,16 +42,30 @@ import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.google.android.exoplayer2.video.VideoRendererEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
+import pasu.vadivasal.MainActivity;
 import pasu.vadivasal.R;
+import pasu.vadivasal.VideoFullScreenActivity;
 import pasu.vadivasal.android.Utils;
+import pasu.vadivasal.globalModle.Media;
+import pasu.vadivasal.globalModle.News;
+import pasu.vadivasal.model.Video;
 
 /**
  * Created by developer on 26/9/17.
  */
 
 
-public class VideoActivityMain extends AppCompatActivity implements VideoRendererEventListener {
+public class VideoActivityMain extends AppCompatActivity implements VideoRendererEventListener, VideoAdapter.VideoInterface {
 
 
     private static final String TAG = "VideoActivityMain";
@@ -56,22 +73,51 @@ public class VideoActivityMain extends AppCompatActivity implements VideoRendere
     private SimpleExoPlayer player;
     private ProgressBar exo_progressbar_custom;
     private ImageView exo_back;
-      private RecyclerView recyclerview;
+    private RecyclerView recyclerview;
+    Media[] videos;
+    private String selectedMedia = "";
+    private int toplay;
+    private TextView video_desc;
+    private boolean isfromNotificaiton;
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(this, VideoFullScreenActivity.class);
+            if (player != null)
+                i.putExtra("pos", player.getContentPosition());
+            i.putExtra("videos", selectedMedia);
+            startActivity(i);
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            //  Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void onBackPressed() {
+
+
+        if(isfromNotificaiton){
+            final Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+
+        }
+        Utils.finishActivitySlide(this);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.video_activity_main);
+        toplay = getIntent().getIntExtra("toplay", 0);
         exo_progressbar_custom = (ProgressBar) findViewById(R.id.exo_progressbar_custom);
-        exo_back=(ImageView)findViewById(R.id.exo_back);
-        recyclerview=(RecyclerView)findViewById(R.id.recyclerview);
-
+        exo_back = (ImageView) findViewById(R.id.exo_back);
+        recyclerview = (RecyclerView) findViewById(R.id.recyclerview);
+        video_desc = findViewById(R.id.video_desc);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerview.setLayoutManager(mLayoutManager);
         //recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerview.setItemAnimator(new DefaultItemAnimator());
-        recyclerview.setAdapter(new VideoAdapter(this));
-
 
 
 //        resolutionTextView = new TextView(this);
@@ -99,7 +145,6 @@ public class VideoActivityMain extends AppCompatActivity implements VideoRendere
         simpleExoPlayerView.setPlayer(player);
 
 
-
         exo_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,103 +152,47 @@ public class VideoActivityMain extends AppCompatActivity implements VideoRendere
             }
         });
 
+        if (getIntent() != null) {
+            if (getIntent().getStringExtra("videos") != null) {
+                videos = Utils.fromJson(getIntent().getStringExtra("videos"), Media[].class);
+                if (videos != null) {
+                    recyclerview.setAdapter(new VideoAdapter(this, videos, toplay, this));
+                    //  ((VideoAdapter)recyclerview.getAdapter()).setSelection(0);
+                    videoSelected(toplay);
+                    video_desc.setText(videos[toplay].getDescription());
+                }
+            }else{
+                isfromNotificaiton=true;
+                System.out.println("video Actvity"+getIntent().getStringExtra("id"));
+                if(getIntent().getStringExtra("id")!=null && !getIntent().getStringExtra("id").equals(""))
+                FirebaseDatabase.getInstance().getReference( getIntent().getStringExtra("id")).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                       Media video = dataSnapshot.getValue(Media.class);
+                       videos=new Media[1];
+                       videos[0]=video;
 
-// I. ADJUST HERE:
-//CHOOSE CONTENT: LiveStream / SdCard
+                        try {
+                            if (videos != null) {
+                                recyclerview.setAdapter(new VideoAdapter(VideoActivityMain.this, videos, toplay, VideoActivityMain.this));
+                                //  ((VideoAdapter)recyclerview.getAdapter()).setSelection(0);
+                                videoSelected(toplay);
+                                video_desc.setText(videos[toplay].getDescription());
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
 
-//LIVE STREAM SOURCE: * Livestream links may be out of date so find any m3u8 files online and replace:
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-//        Uri mp4VideoUri =Uri.parse("http://81.7.13.162/hls/ss1/index.m3u8"); //random 720p source
-        Uri mp4VideoUri = Uri.parse("https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8"); //Radnom 540p indian channel
-//        Uri mp4VideoUri =Uri.parse("FIND A WORKING LINK ABD PLUg INTO HERE"); //PLUG INTO HERE<------------------------------------------
-
-
-//VIDEO FROM SD CARD: (2 steps. set up file and path, then change videoSource to get the file)
-//        String urimp4 = "path/FileName.mp4"; //upload file to device and add path/name.mp4
-//        Uri mp4VideoUri = Uri.parse(Environment.getExternalStorageDirectory().getAbsolutePath()+urimp4);
-
-
-//Measures bandwidth during playback. Can be null if not required.
-        DefaultBandwidthMeter bandwidthMeterA = new DefaultBandwidthMeter();
-//Produces DataSource instances through which media data is loaded.
-        DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(this, Util.getUserAgent(this, "exoplayer2example"), bandwidthMeterA);
-
-
-//Produces Extractor instances for parsing the media data.
-        ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
-
-
-// II. ADJUST HERE:
-
-//This is the MediaSource representing the media to be played:
-//FOR SD CARD SOURCE:
-//        MediaSource videoSource = new ExtractorMediaSource(mp4VideoUri, dataSourceFactory, extractorsFactory, null, null);
-
-//FOR LIVESTREAM LINK:
-        //   MediaSource videoSource = new HlsMediaSource(mp4VideoUri, dataSourceFactory, 1, null, null);
-
-        MediaSource videoSource = new ExtractorMediaSource(Uri.parse("https://firebasestorage.googleapis.com/v0/b/ilovecricket-5c636.appspot.com/o/jalli?alt=media&token=415af55b-e8b6-4e92-81ca-56de99f10109"),
-                dataSourceFactory, extractorsFactory, null, null);
-        final LoopingMediaSource loopingSource = new LoopingMediaSource(videoSource);
-
-// Prepare the player with the source.
-        player.prepare(loopingSource);
-
-        player.addListener(new ExoPlayer.EventListener() {
-            @Override
-            public void onTimelineChanged(Timeline timeline, Object manifest) {
-                Log.v(TAG, "Listener-onTimelineChanged...");
-
+                    }
+                });
             }
 
-            @Override
-            public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
-                Log.v(TAG, "Listener-onTracksChanged...");
-                exo_progressbar_custom.setVisibility(View.GONE);
-            }
+        }
 
-            @Override
-            public void onLoadingChanged(boolean isLoading) {
-                Log.v(TAG, "Listener-onLoadingChanged...isLoading:" + isLoading);
-            }
-
-            @Override
-            public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-                Log.v(TAG, "Listener-onPlayerStateChanged..." + playbackState);
-                if (playbackState == 2) {
-                    if (exo_progressbar_custom != null)
-                        exo_progressbar_custom.setVisibility(View.VISIBLE);
-                } else if (playbackState == 3){
-                    if (exo_progressbar_custom != null)
-                        exo_progressbar_custom.setVisibility(View.GONE);}
-            }
-
-            @Override
-            public void onRepeatModeChanged(int repeatMode) {
-                Log.v(TAG, "Listener-onRepeatModeChanged...");
-            }
-
-            @Override
-            public void onPlayerError(ExoPlaybackException error) {
-                Log.v(TAG, "Listener-onPlayerError...");
-                player.stop();
-                player.prepare(loopingSource);
-                player.setPlayWhenReady(true);
-            }
-
-            @Override
-            public void onPositionDiscontinuity() {
-                Log.v(TAG, "Listener-onPositionDiscontinuity...");
-            }
-
-            @Override
-            public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
-                Log.v(TAG, "Listener-onPlaybackParametersChanged...");
-            }
-        });
-
-        player.setPlayWhenReady(true); //run file/link when ready to play.
-        player.setVideoDebugListener(this); //for listening to resolution change and  outputing the resolution
     }//End of onCreate
 
     @Override
@@ -248,6 +237,8 @@ public class VideoActivityMain extends AppCompatActivity implements VideoRendere
     @Override
     protected void onStop() {
         super.onStop();
+        if (player != null)
+            player.stop();
         Log.v(TAG, "onStop()...");
     }
 
@@ -274,5 +265,110 @@ public class VideoActivityMain extends AppCompatActivity implements VideoRendere
         super.onDestroy();
         Log.v(TAG, "onDestroy()...");
         player.release();
+    }
+
+    @Override
+    public void videoSelected(int pos) {
+
+// I. ADJUST HERE:
+//CHOOSE CONTENT: LiveStream / SdCard
+
+//LIVE STREAM SOURCE: * Livestream links may be out of date so find any m3u8 files online and replace:
+
+//        Uri mp4VideoUri =Uri.parse("http://81.7.13.162/hls/ss1/index.m3u8"); //random 720p source
+        Uri mp4VideoUri = Uri.parse("https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8"); //Radnom 540p indian channel
+//        Uri mp4VideoUri =Uri.parse("FIND A WORKING LINK ABD PLUg INTO HERE"); //PLUG INTO HERE<------------------------------------------
+
+
+//VIDEO FROM SD CARD: (2 steps. set up file and path, then change videoSource to get the file)
+//        String urimp4 = "path/FileName.mp4"; //upload file to device and add path/name.mp4
+//        Uri mp4VideoUri = Uri.parse(Environment.getExternalStorageDirectory().getAbsolutePath()+urimp4);
+
+
+//Measures bandwidth during playback. Can be null if not required.
+        DefaultBandwidthMeter bandwidthMeterA = new DefaultBandwidthMeter();
+//Produces DataSource instances through which media data is loaded.
+        DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(this, Util.getUserAgent(this, "exoplayer2example"), bandwidthMeterA);
+
+
+//Produces Extractor instances for parsing the media data.
+        ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
+
+
+// II. ADJUST HERE:
+
+//This is the MediaSource representing the media to be played:
+//FOR SD CARD SOURCE:
+//        MediaSource videoSource = new ExtractorMediaSource(mp4VideoUri, dataSourceFactory, extractorsFactory, null, null);
+//FOR LIVESTREAM LINK:
+        //   MediaSource videoSource = new HlsMediaSource(mp4VideoUri, dataSourceFactory, 1, null, null);
+        System.out.println("kkkk___" + pos);
+        System.out.println("kkkk___" + videos[pos].getMediaUrl());
+
+
+        MediaSource videoSource = new ExtractorMediaSource(Uri.parse(videos[pos].getMediaUrl()),
+                dataSourceFactory, extractorsFactory, null, null);
+        final LoopingMediaSource loopingSource = new LoopingMediaSource(videoSource);
+
+// Prepare the player with the source.
+        player.prepare(loopingSource);
+
+        player.addListener(new ExoPlayer.EventListener() {
+            @Override
+            public void onTimelineChanged(Timeline timeline, Object manifest) {
+                Log.v(TAG, "Listener-onTimelineChanged...");
+
+            }
+
+            @Override
+            public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
+                Log.v(TAG, "Listener-onTracksChanged...");
+                exo_progressbar_custom.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onLoadingChanged(boolean isLoading) {
+                Log.v(TAG, "Listener-onLoadingChanged...isLoading:" + isLoading);
+            }
+
+            @Override
+            public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+                Log.v(TAG, "Listener-onPlayerStateChanged..." + playbackState);
+                if (playbackState == 2) {
+                    if (exo_progressbar_custom != null)
+                        exo_progressbar_custom.setVisibility(View.VISIBLE);
+                } else if (playbackState == 3) {
+                    if (exo_progressbar_custom != null)
+                        exo_progressbar_custom.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onRepeatModeChanged(int repeatMode) {
+                Log.v(TAG, "Listener-onRepeatModeChanged...");
+            }
+
+            @Override
+            public void onPlayerError(ExoPlaybackException error) {
+                Log.v(TAG, "Listener-onPlayerError...");
+                player.stop();
+                player.prepare(loopingSource);
+                player.setPlayWhenReady(true);
+            }
+
+            @Override
+            public void onPositionDiscontinuity() {
+                Log.v(TAG, "Listener-onPositionDiscontinuity...");
+            }
+
+            @Override
+            public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
+                Log.v(TAG, "Listener-onPlaybackParametersChanged...");
+            }
+        });
+
+        player.setPlayWhenReady(true); //run file/link when ready to play.
+        player.setVideoDebugListener(this); //for listening to resolution change and  outputing the resolution
+
     }
 }

@@ -1,6 +1,8 @@
 package pasu.vadivasal.contactus;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,14 +12,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Date;
+
+import pasu.vadivasal.MainActivity;
 import pasu.vadivasal.R;
 import pasu.vadivasal.android.AppConstants;
 import pasu.vadivasal.android.Utils;
-
+import pasu.vadivasal.globalModle.ContactUsRequest;
 
 public class ContactWriteFragment extends Fragment {
-//    Button btn_send;
+    //    Button btn_send;
 //    EditText edt_comment;
 //    EditText edt_name;
 //    EditText edt_mobile;
@@ -34,6 +46,7 @@ public class ContactWriteFragment extends Fragment {
             txt_count;
     pasu.vadivasal.view.Button
             btn_send;
+    private ProgressDialog mProgressDialog;
 
     class C05721 implements OnClickListener {
         C05721() {
@@ -119,11 +132,55 @@ public class ContactWriteFragment extends Fragment {
 
     public void onStop() {
         //  ApiCallManager.cancelCall("contact_us");
+        hideProgressDialog();
         super.onStop();
     }
+    public void showProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(getActivity());
+            mProgressDialog.setMessage(getString(R.string.processing));
+            mProgressDialog.setIndeterminate(true);
+        }
 
+        mProgressDialog.show();
+    }
+
+    public void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+    }
     public void writeContactApi() {
         final Dialog dialog = Utils.showProgress(getActivity(), true);
+        DatabaseReference myref = FirebaseDatabase.getInstance().getReference("FeedBacks").push();
+        ContactUsRequest contactUsRequest = new ContactUsRequest();
+        contactUsRequest.setName(this.edt_name.getText().toString());
+        contactUsRequest.setComments(this.edt_comment.getText().toString());
+        contactUsRequest.setPhno(this.edt_mobile.getText().toString());
+        contactUsRequest.setTime(new Date().getTime());
+  showProgressDialog();
+        myref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                hideProgressDialog();
+                if (dataSnapshot.exists()) {
+                    Toast.makeText(getActivity(), getString(R.string.posted_success), Toast.LENGTH_LONG).show();
+                    final Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity(), getString(R.string.try_again), Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                hideProgressDialog();
+                Toast.makeText(getActivity(), getString(R.string.try_again), Toast.LENGTH_LONG).show();
+            }
+        });
+        myref.setValue(contactUsRequest);
 //        ApiCallManager.enqueue("contact_us", CricHeroes.apiClient.contactUs(Utils.udid(getActivity()), new ContactUsRequest(this.edt_name.getText().toString(), this.edt_mobile.getText().toString(), this.edt_comment.getText().toString(), this.type)), new CallbackAdapter() {
 //            public void onApiResponse(ErrorResponse err, BaseResponse response) {
 //                Utils.hideProgress(dialog);

@@ -14,7 +14,7 @@ public class DashboardMatchItem extends BaseDashboardMultiItem {
     private ArrayList<TournamentData> data;
 
     public DashboardMatchItem(Context context, String title, String description, ArrayList<TournamentData> data, int itemType) {
-        super(title, description, itemType);
+        super(title, description, itemType, data);
         this.data = data;
         this.adapter = new DashboardMatchAdapter(context, this.data);
         System.out.println("datttttta"+data.size());

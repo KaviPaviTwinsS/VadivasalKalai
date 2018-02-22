@@ -5,12 +5,28 @@ package pasu.vadivasal.model;
  */
 
 public class TournamentData  {
-    public String getTournamentName() {
-        return tournamentName;
+
+
+    int playerwon,bullwon;
+    int totalPlayer,totalBull;
+    String type;
+    String venue;
+    int status;
+    String key;
+    String tournamentCoverPhoto;
+    String name;
+    long date;
+    long toDate=0;
+    String viewers;
+    String about;
+
+
+    public String getName() {
+        return name;
     }
 
-    public void setTournamentName(String tournamentName) {
-        this.tournamentName = tournamentName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public long getDate() {
@@ -53,26 +69,72 @@ public class TournamentData  {
         this.totalBull = totalBull;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public String getPlace() {
-        return place;
+    public String getVenue() {
+        return venue;
     }
 
-    public void setPlace(String place) {
-        this.place = place;
+    public void setVenue(String venue) {
+        this.venue = venue;
     }
 
-    String tournamentName;
-    long date;
-    int playerwon,bullwon;
-    int totalPlayer,totalBull;
-    int type;
-    String place;
+
+
+    public long getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(long toDate) {
+        this.toDate = toDate;
+    }
+
+    public String getViewers() {
+        return viewers;
+    }
+
+    public void setViewers(String viewers) {
+        this.viewers = viewers;
+    }
+
+
+
+    public String getTournamentCoverPhoto() {
+        return tournamentCoverPhoto;
+    }
+
+    public void setTournamentCoverPhoto(String tournamentCoverPhoto) {
+        this.tournamentCoverPhoto = tournamentCoverPhoto;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String bio) {
+        this.about = bio;
+    }
+
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
 }

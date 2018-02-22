@@ -1,12 +1,20 @@
 package pasu.vadivasal.videopackage;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import pasu.vadivasal.R;
+import pasu.vadivasal.android.Utils;
+import pasu.vadivasal.globalModle.Media;
 
 /**
  * Created by developer on 26/9/17.
@@ -16,11 +24,16 @@ import pasu.vadivasal.R;
 public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.MyViewHolder> {
 
     private Context mContext;
-//    private List<Album> albumList;
+    private Media[] albumList;
+    int selectedItem;
+    VideoInterface videoInterface;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-//        public TextView title, count;
+        //        public TextView title, count;
 //        public ImageView thumbnail, overflow;
+        LinearLayout card_view;
+        TextView video_desc, video_date;
+        ImageView video_thumb;
 
         public MyViewHolder(View view) {
             super(view);
@@ -28,13 +41,31 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.MyViewHolder
 //            count = (TextView) view.findViewById(R.id.count);
 //            thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
 //            overflow = (ImageView) view.findViewById(R.id.overflow);
+            card_view = (LinearLayout) view.findViewById(R.id.card_view);
+            video_desc = (TextView) view.findViewById(R.id.video_desc);
+            video_thumb = (ImageView) view.findViewById(R.id.video_thumb);
+            video_date = (TextView) view.findViewById(R.id.video_date);
+            card_view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    selectedItem = getAdapterPosition();
+                    notifyDataSetChanged();
+                    videoInterface.videoSelected(selectedItem);
+                }
+            });
         }
     }
 
+    public interface VideoInterface {
+        void videoSelected(int pos);
+    }
 
-    public VideoAdapter(Context mContext) {
+    public VideoAdapter(Context mContext, Media[] media, int pos, VideoInterface videoInterface) {
         this.mContext = mContext;
-       // this.albumList = albumList;
+        this.albumList = media;
+        this.selectedItem = pos;
+        this.videoInterface = videoInterface;
+        // this.albumList = albumList;
     }
 
     @Override
@@ -45,10 +76,22 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.MyViewHolder
         return new MyViewHolder(itemView);
     }
 
+    void setSelection(int pos) {
+        selectedItem = pos;
+    }
+
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
 //        Album album = albumList.get(position);
-//        holder.title.setText(album.getName());
+        if(position<albumList.length){
+        if (position == selectedItem)
+            holder.card_view.setBackgroundColor(ContextCompat.getColor(mContext, R.color.divider));
+        else
+            holder.card_view.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
+            System.out.println("[poooooo"+position+"__"+albumList.length);
+        holder.video_desc.setText(albumList[position].getDescription());
+        holder.video_date.setText(Utils.getDateOnly(albumList[position].getDate()));
+        Picasso.with(mContext).load(albumList[position].getThumbnail()).into(holder.video_thumb);}
 //        holder.count.setText(album.getNumOfSongs() + " songs");
 //
 //        // loading album cover using Glide library
@@ -96,9 +139,8 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.MyViewHolder
 //            return false;
 //        }
 //    }
-
     @Override
     public int getItemCount() {
-        return 10;
+        return albumList.length;
     }
 }

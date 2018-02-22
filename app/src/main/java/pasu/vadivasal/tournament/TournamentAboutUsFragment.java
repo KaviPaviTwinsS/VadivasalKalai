@@ -2,6 +2,7 @@ package pasu.vadivasal.tournament;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,7 @@ public class TournamentAboutUsFragment extends Fragment {
             txt_error, tvTitle, tvDetail;
     String mesg;
     private ViewGroup viewEmpty;
+    private TextView aboutText;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_about_us, container, false);
@@ -95,36 +97,37 @@ public class TournamentAboutUsFragment extends Fragment {
 
     public void setData(JSONObject data, String mesg) {
         this.mesg = mesg;
-//        if (data != null) {
-//            if (Utils.isEmptyString(data.optString("about_us"))) {
-//                this.web.setVisibility(8);
+        aboutText.setText(Html.fromHtml(mesg));
+//        if (itemArrayList != null) {
+//            if (Utils.isEmptyString(itemArrayList.optString("about_us"))) {
+//                this.web.setVisibility(View.GONE);
 //            } else {
 //                this.web.getSettings().setBuiltInZoomControls(true);
 //                this.web.getSettings().setDisplayZoomControls(false);
 //                this.web.setScrollbarFadingEnabled(true);
 //                this.web.setVerticalScrollBarEnabled(false);
-//                this.web.loadData(data.optString("about_us"), "text/html", HttpRequest.CHARSET_UTF8);
+//                this.web.loadData(itemArrayList.optString("about_us"), "text/html", HttpRequest.CHARSET_UTF8);
 //            }
 //            if (getActivity() instanceof TournamentMatchesActivity) {
 //                this.layOrganizerDetail.removeAllViews();
 //                this.layTournamentDetail.removeAllViews();
 //                this.layAssociations.removeAllViews();
-//                if (!Utils.isEmptyString(data.optString("organizer_name"))) {
-//                    addOrganizerData("Name", data.optString("organizer_name"));
+//                if (!Utils.isEmptyString(itemArrayList.optString("organizer_name"))) {
+//                    addOrganizerData("Name", itemArrayList.optString("organizer_name"));
 //                }
-//                if (!Utils.isEmptyString(data.optString("name"))) {
-//                    addTournamentData("Name", data.optString("name"));
+//                if (!Utils.isEmptyString(itemArrayList.optString("name"))) {
+//                    addTournamentData("Name", itemArrayList.optString("name"));
 //                }
-//                if (!Utils.isEmptyString(data.optString("from_date"))) {
-//                    if (!Utils.isEmptyString(data.optString("to_date"))) {
-//                       // addTournamentData(HttpRequest.HEADER_DATE, Utils.changeDateformate(data.optString("from_date"), "yyyy-MM-dd'T'HH:mm:ss", "dd MMM, yyyy") + " to " + Utils.changeDateformate(data.optString("to_date"), "yyyy-MM-dd'T'HH:mm:ss", "dd MMM, yyyy"));
+//                if (!Utils.isEmptyString(itemArrayList.optString("from_date"))) {
+//                    if (!Utils.isEmptyString(itemArrayList.optString("to_date"))) {
+//                       // addTournamentData(HttpRequest.HEADER_DATE, Utils.changeDateformate(itemArrayList.optString("from_date"), "yyyy-MM-dd'T'HH:mm:ss", "dd MMM, yyyy") + " to " + Utils.changeDateformate(itemArrayList.optString("to_date"), "yyyy-MM-dd'T'HH:mm:ss", "dd MMM, yyyy"));
 //                    }
 //                }
-//                if (!Utils.isEmptyString(data.optString("city_name"))) {
-//                    JSONArray array = data.optJSONArray("grounds");
+//                if (!Utils.isEmptyString(itemArrayList.optString("city_name"))) {
+//                    JSONArray array = itemArrayList.optJSONArray("grounds");
 //                    HashMap<String, String> grounds = new HashMap();
 //                    if (array == null || array.length() <= 0) {
-//                        addTournamentData("Locations", data.optString("city_name").replace(",", ShellUtils.COMMAND_LINE_END));
+//                        addTournamentData("Locations", itemArrayList.optString("city_name").replace(",", ShellUtils.COMMAND_LINE_END));
 //                    } else {
 //                        for (int i = 0; i < array.length(); i++) {
 //                            JSONObject object = array.getJSONObject(i);
@@ -152,11 +155,11 @@ public class TournamentAboutUsFragment extends Fragment {
 //                        addTournamentData("Locations", locations);
 //                    }
 //                }
-//                if (!Utils.isEmptyString(data.optString(AppConstants.EXTRA_BALLTYPE))) {
-//                    addTournamentData("Ball Type", data.optString(AppConstants.EXTRA_BALLTYPE));
+//                if (!Utils.isEmptyString(itemArrayList.optString(AppConstants.EXTRA_BALLTYPE))) {
+//                    addTournamentData("Ball Type", itemArrayList.optString(AppConstants.EXTRA_BALLTYPE));
 //                }
-//                if (!Utils.isEmptyString(data.optString("association_name"))) {
-//                    addAssociationData("Association", data.optString("association_name"));
+//                if (!Utils.isEmptyString(itemArrayList.optString("association_name"))) {
+//                    addAssociationData("Association", itemArrayList.optString("association_name"));
 //                    return;
 //                }
 //                return;
@@ -178,7 +181,7 @@ public class TournamentAboutUsFragment extends Fragment {
     }
 
 //    private void addOrganizerData(String title, String value) {
-//        this.layOrganizer.setVisibility(0);
+//        this.layOrganizer.setVisibility(View.VISIBLE);
 //        View headerBatting = getActivity().getLayoutInflater().inflate(R.layout.raw_tournament_about, null);
 //        View divider = getActivity().getLayoutInflater().inflate(R.layout.raw_divider, null);
 //        TextView tvValue = (TextView) headerBatting.rootView.findViewById(R.id.tvValue);
@@ -191,7 +194,7 @@ public class TournamentAboutUsFragment extends Fragment {
 //    }
 //
 //    private void addTournamentData(String title, String value) {
-//        this.layTournament.setVisibility(0);
+//        this.layTournament.setVisibility(View.VISIBLE);
 //        View divider = getActivity().getLayoutInflater().inflate(R.layout.raw_divider, null);
 //        View headerBatting = getActivity().getLayoutInflater().inflate(R.layout.raw_tournament_about, null);
 //        TextView tvValue = (TextView) headerBatting.rootView.findViewById(R.id.tvValue);
@@ -204,7 +207,7 @@ public class TournamentAboutUsFragment extends Fragment {
 //    }
 //
 //    private void addAssociationData(String title, String value) {
-//        this.cardAssociation.setVisibility(0);
+//        this.cardAssociation.setVisibility(View.VISIBLE);
 //        View divider = getActivity().getLayoutInflater().inflate(R.layout.raw_divider, null);
 //        View headerBatting = getActivity().getLayoutInflater().inflate(R.layout.raw_tournament_about, null);
 //        TextView tvValue = (TextView) headerBatting.rootView.findViewById(R.id.tvValue);

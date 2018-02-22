@@ -325,9 +325,9 @@ public class PlayerProfileActivity extends BaseActivity implements OnTabSelected
 //                }
             }
         });
-//        this.fabShare.setVisibility(8);
+//        this.fabShare.setVisibility(View.GONE);
 //        this.fabShare.setOnClickListener(new C08281());
-//        this.layoutNoInternet.setVisibility(8);
+//        this.layoutNoInternet.setVisibility(View.GONE);
 //        this.btnFollow.setOnClickListener(this);
 //        this.btnRetry.setOnClickListener(this);
 //        Utils.hideDivider(this.divider);
@@ -341,12 +341,12 @@ public class PlayerProfileActivity extends BaseActivity implements OnTabSelected
         if (this.isMyProfile) {
 //            this.playerName = CricHeroes.getApp().getCurrentUser().getName();
 //            this.tvPlayerName.setText(this.playerName);
-//            this.btnFollow.setVisibility(8);
-//            this.card_Follow.setVisibility(8);
+//            this.btnFollow.setVisibility(View.GONE);
+//            this.card_Follow.setVisibility(View.GONE);
 //            this.imgPlayer.setOnClickListener(new C08303());
         }
 //        if (!CricHeroes.getApp().isGuestUser() && CricHeroes.getApp().getCurrentUser().getUserId() == this.playerId) {
-//            this.btnFollow.setVisibility(8);
+//            this.btnFollow.setVisibility(View.GONE);
 //        }
 //        this.filterMap.put(Integer.valueOf(0), getString(R.string.title_teams));
     }
@@ -393,7 +393,7 @@ public class PlayerProfileActivity extends BaseActivity implements OnTabSelected
 
     private void changeFollowStatus() {
 //        if (CricHeroes.getApp().isGuestUser()) {
-//            this.btnFollow.setVisibility(8);
+//            this.btnFollow.setVisibility(View.GONE);
 //        }
 //        if (this.isFollow == 1) {
 //            this.btnFollow.setText(getString(R.string.following));
@@ -538,10 +538,10 @@ public class PlayerProfileActivity extends BaseActivity implements OnTabSelected
 //            runOnUiThread(new Runnable() {
 //                public void run() {
 //                    if (count == 0) {
-//                        PlayerProfileActivity.this.txtViewCount.setVisibility(8);
+//                        PlayerProfileActivity.this.txtViewCount.setVisibility(View.GONE);
 //                        return;
 //                    }
-//                    PlayerProfileActivity.this.txtViewCount.setVisibility(0);
+//                    PlayerProfileActivity.this.txtViewCount.setVisibility(View.VISIBLE);
 //                    PlayerProfileActivity.this.txtViewCount.setText(Integer.toString(count));
 //                }
 //            });

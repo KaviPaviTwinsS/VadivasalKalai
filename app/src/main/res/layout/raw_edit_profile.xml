@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -14,10 +14,10 @@
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/X_img"
+            srcCompact="@drawable/close_cross"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:padding="@dimen/dp_10"
-            srcCompact="@drawable/close_cross" />
+            android:padding="@dimen/dp_10" />
 
 
         <TextView
@@ -48,12 +48,11 @@
             android:orientation="vertical">
 
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/img_lay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_20"
-                android:gravity="center"
                 android:orientation="horizontal">
 
                 <pasu.vadivasal.view.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -65,17 +64,19 @@
                     android:layout_gravity="center" />
 
                 <TextView
-                    android:id="@+id/imge_chose_txt"
+                    android:id="@+id/text_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="right"
                     android:padding="@dimen/pad_10dp"
-                    android:text="@string/choose_an_image"
+                    android:layout_centerVertical="true"
+                    android:text="@string/logout"
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/dp_15"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
 
             <LinearLayout
@@ -104,6 +105,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="textPersonName"
                     android:maxLines="1"
+                    android:maxLength="32"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/sp_18" />
 
@@ -174,6 +176,22 @@
                     android:textSize="@dimen/pad_20sp" />
 
                 <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:gravity="center_vertical"
+                    android:imeOptions="actionNext"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:textColor="@android:color/black"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="@dimen/sp_18"
+                    android:visibility="gone" />
+
+                <TextView
                     android:id="@+id/phnumb_txt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -181,11 +199,19 @@
                     android:layout_marginRight="10dp"
                     android:gravity="center_vertical"
                     android:imeOptions="actionNext"
-                    android:inputType="phone"
                     android:maxLines="1"
                     android:textColor="@android:color/black"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:textSize="@dimen/sp_18" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="@dimen/pad_10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@color/gray_divider" />
+
 
                 <TextView
                     android:id="@+id/email"
@@ -207,9 +233,58 @@
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
+                    android:enabled="false"
                     android:textColor="@android:color/black"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:textSize="@dimen/sp_18" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:gravity="center_vertical"
+                    android:text="@string/role"
+                    android:textColor="#d3d3d3"
+                    android:textSize="@dimen/pad_20sp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:gravity="center_vertical"
+                    android:imeOptions="actionNext"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:textColor="@android:color/black"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="@dimen/sp_18"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/role_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center_vertical"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:textColor="@android:color/black"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="@dimen/sp_18" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="@dimen/pad_10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@color/gray_divider" />
+
+
 
                 <TextView
                     android:layout_width="match_parent"

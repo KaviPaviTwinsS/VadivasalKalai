@@ -194,7 +194,6 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
      * Return the color drawn behind the circle-shaped drawable.
      *
      * @return The color drawn behind the drawable
-     *
      * @deprecated Fill color support is going to be removed in the future
      */
     @Deprecated
@@ -207,7 +206,6 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
      * this has no effect if the drawable is opaque or no drawable is set.
      *
      * @param fillColor The color to be drawn behind the drawable
-     *
      * @deprecated Fill color support is going to be removed in the future
      */
     @Deprecated
@@ -227,7 +225,6 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
      *
      * @param fillColorRes The color resource to be resolved to a color and
      *                     drawn behind the drawable
-     *
      * @deprecated Fill color support is going to be removed in the future
      */
     @Deprecated
@@ -330,18 +327,25 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
         }
 
         try {
-            Bitmap bitmap;
+            Bitmap bitmap = null;
 
             if (drawable instanceof ColorDrawable) {
                 bitmap = Bitmap.createBitmap(COLORDRAWABLE_DIMENSION, COLORDRAWABLE_DIMENSION, BITMAP_CONFIG);
             } else {
-                bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), BITMAP_CONFIG);
+                try {
+                    bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), BITMAP_CONFIG);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-
-            Canvas canvas = new Canvas(bitmap);
-            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-            drawable.draw(canvas);
-            return bitmap;
+            if (bitmap != null) {
+                Canvas canvas = new Canvas(bitmap);
+                drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+                drawable.draw(canvas);
+            }
+            if (bitmap != null)
+                return bitmap;
+            else return ((BitmapDrawable) drawable).getBitmap();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -404,7 +408,7 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
     }
 
     private RectF calculateBounds() {
-        int availableWidth  = getWidth() - getPaddingLeft() - getPaddingRight();
+        int availableWidth = getWidth() - getPaddingLeft() - getPaddingRight();
         int availableHeight = getHeight() - getPaddingTop() - getPaddingBottom();
 
         int sideLength = Math.min(availableWidth, availableHeight);

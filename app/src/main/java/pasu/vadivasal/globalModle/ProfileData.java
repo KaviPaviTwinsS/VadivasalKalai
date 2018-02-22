@@ -8,13 +8,22 @@ import java.util.HashMap;
 
 public class ProfileData {
     private String name;
-    private String dob;
-    private String description;
+    private String dob="";
+    private String description="";
     private int type;
     private long phonenumber;
     private String mail;
     private String profileImageUrl;
 
+    public String getGoogleUserID() {
+        return googleUserID;
+    }
+
+    public void setGoogleUserID(String googleUserID) {
+        this.googleUserID = googleUserID;
+    }
+
+    private String googleUserID;
 
     public String getProfileImageUrl() {
         return profileImageUrl;
@@ -27,8 +36,8 @@ public class ProfileData {
 
     private HashMap<String, String> followers= new HashMap<String, String>() {
     };
-    private String City;
-    private String PlayedTeam;
+    private String City="";
+    private String PlayedTeam="-";
     //private ArrayList<Media> media;
 
     HashMap<String, Media> media = new HashMap<String, Media>() {

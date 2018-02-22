@@ -15,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pasu.vadivasal.R;
@@ -70,6 +71,11 @@ public class ImageGridAdapter extends RecyclerView.Adapter<ImageGridAdapter.View
         notifyItemInserted(position);
     }
 
+    public void add(int position, ArrayList<Media> item) {
+        values.addAll(position, item);
+        System.out.println("Calleddddd");
+        notifyItemRangeInserted(position,item.size());
+    }
     public void remove(int position) {
         values.remove(position);
         notifyItemRemoved(position);

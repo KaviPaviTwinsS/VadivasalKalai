@@ -1,51 +1,43 @@
 {
   "project_info": {
-    "project_number": "458698095677",
-    "firebase_url": "https://ilovecricket-5c636.firebaseio.com",
-    "project_id": "ilovecricket-5c636",
-    "storage_bucket": "ilovecricket-5c636.appspot.com"
+    "project_number": "548371928282",
+    "firebase_url": "https://jallikattu-1a841.firebaseio.com",
+    "project_id": "jallikattu-1a841",
+    "storage_bucket": "jallikattu-1a841.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:458698095677:android:36a5514019d14984",
+        "mobilesdk_app_id": "1:548371928282:android:899dacd199605129",
         "android_client_info": {
-          "package_name": "pasu.ilc"
+          "package_name": "pasu.vaadivaasal"
         }
       },
       "oauth_client": [
         {
-          "client_id": "458698095677-knrohpqij7lepbutrson608o71fl0cp2.apps.googleusercontent.com",
+          "client_id": "548371928282-3vivqv4b4olmkn3v60kho3p5qu7mbche.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "pasu.ilc",
-            "certificate_hash": "2f3e82c70c76f7dba33786ece58893ae38c1fb18"
+            "package_name": "pasu.vaadivaasal",
+            "certificate_hash": "18b1bb0a576987ec85bbeeac8284c41478bc213f"
           }
         },
         {
-          "client_id": "458698095677-p4007hkmjsjqc96vtdktla5dfemv5hkk.apps.googleusercontent.com",
+          "client_id": "548371928282-12bgdk9b5rjv86joa353bfqglpnnchcb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "pasu.ilc",
+            "package_name": "pasu.vaadivaasal",
             "certificate_hash": "ac3d59cc51a4e7cbcc234c5135f8c09721d51ed2"
           }
         },
         {
-          "client_id": "458698095677-cgsbsmc45qtrgltu49pasrajilisk1oo.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "pasu.ilc",
-            "certificate_hash": "70db817716f1142c6e096219dcf2bcfb3c3885a3"
-          }
-        },
-        {
-          "client_id": "458698095677-lakl90vjiaeu61jn6us9opg4ft8mbj1m.apps.googleusercontent.com",
+          "client_id": "548371928282-jaou4c9d333cgtg6j1nq79es3iebj3ap.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAEdbC3kpdvKMnFkSb7Xc4vPRT2H0u4TPM"
+          "current_key": "AIzaSyD947aPQQkUYbras5SCHfQCPWHMHZSLPZg"
         }
       ],
       "services": {
@@ -56,51 +48,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "458698095677-lakl90vjiaeu61jn6us9opg4ft8mbj1m.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:458698095677:android:576aa2069bfc994f",
-        "android_client_info": {
-          "package_name": "pasu.manjuvirattu"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "458698095677-1c4dnd7kg58gupq2kl7aag5nicjci42e.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "pasu.manjuvirattu",
-            "certificate_hash": "70db817716f1142c6e096219dcf2bcfb3c3885a3"
-          }
-        },
-        {
-          "client_id": "458698095677-lakl90vjiaeu61jn6us9opg4ft8mbj1m.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAEdbC3kpdvKMnFkSb7Xc4vPRT2H0u4TPM"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "458698095677-lakl90vjiaeu61jn6us9opg4ft8mbj1m.apps.googleusercontent.com",
+              "client_id": "548371928282-jaou4c9d333cgtg6j1nq79es3iebj3ap.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

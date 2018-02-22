@@ -28,7 +28,7 @@ public class DashboardPlayerItem extends BaseDashboardMultiItem {
     Context context;
 
     public DashboardPlayerItem(Context context, String title, String description, ArrayList<PlayerDash> data, int itemType) {
-        super(title, description, itemType);
+        super(title, description, itemType,data);
         this.data = data;
         this.context = context;
         this.adapter = new DashboardPlayerAdapter(context, this.data);

@@ -50,7 +50,7 @@ public class MatchListMainFragment extends Fragment implements TabLayout.OnTabSe
 
         //Adding adapter to pager
         viewPager.setAdapter(adapter);
-        viewPager.setCurrentItem(1);
+        viewPager.setCurrentItem(0);
         //      tool_bar = (android.support.v7.widget.Toolbar) v.findViewById(realmstudy.R.id.tool_bar);
 //        tool_bar.setTitle(getString(R.string.score_board));
 

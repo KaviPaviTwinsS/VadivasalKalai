@@ -16,24 +16,27 @@
         app:controller_layout_id="@layout/custom_controls"
         app:resize_mode="fill" />
 
-    <TextView
+    <pasu.vadivasal.view.TextView
         android:id="@+id/video_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/player_view"
-        android:padding="10dp"
-        android:text="A stunning stunt when tampering and caught"
+        android:padding="5dp"
+        app:asset_font_file_name="@string/font_sourcesans_pro_semibold"
+        android:text="-"
         android:textColor="#000"
-        android:textSize="20dp" />
+        android:textSize="15dp" />
 
-    <TextView
+    <pasu.vadivasal.view.TextView
         android:id="@+id/more_video"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/video_desc"
-        android:padding="10dp"
+        android:padding="5dp"
+        app:asset_font_file_name="@string/font_sourcesans_pro_light"
+
         android:text="More Videos"
-        android:textSize="18sp" />
+        android:textSize="12sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"

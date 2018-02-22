@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -47,20 +48,27 @@ public class CommentaryAdapter extends BaseMultiItemQuickAdapter<BaseDashboardMu
         switch (helper.getItemViewType()) {
             case MultipleItem.TEXT:
                 helper.setText(R.id.commentary_time, item.getTitle());
-                helper.setText(R.id.commentary_text, item.getDescription());
+                helper.setText(R.id.commentary_text, Html.fromHtml( getHighlightedText(item.getTitle(),true)+" "+item.getDescription()));
                 break;
 
 
             case MultipleItem.IMG_TEXT:
                 helper.setText(R.id.commentary_time, item.getTitle());
-                helper.setText(R.id.commentary_text, item.getDescription());
+                helper.setText(R.id.commentary_text, Html.fromHtml( getHighlightedText(item.getTitle()+" "+item.getDescription(),true)));
+//                helper.setText(R.id.commentary_text, item.getDescription());
 
                 break;
 
 
         }
-    }
 
+    }
+    private String getHighlightedText(String text, boolean isHighlight) {
+        if (isHighlight) {
+            return "<b>" + text + "</b>";
+        }
+        return text;
+    }
     protected BaseViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
         BaseViewHolder viewHolder = super.onCreateDefViewHolder(parent, viewType);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.mContext, 0, false);

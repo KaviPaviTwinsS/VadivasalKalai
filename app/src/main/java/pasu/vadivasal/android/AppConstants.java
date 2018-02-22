@@ -236,7 +236,7 @@ public class AppConstants {
     public static final int REQUEST_CROP = 6709;
     public static final int REQUEST_PICK = 9162;
     public static final String TAG = "tag";
-    public static final String THUMB_IMAGE = "?thumb=true";
+    public static final String THUMB_IMAGE = "";
     public static final int TOAST_ERROR = 1;
     public static final int TOAST_SUCCESS = 2;
     public static final int TOAST_WARNING = 3;

@@ -30,6 +30,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.TypefaceSpan;
@@ -44,6 +45,10 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.JsonObject;
 
 import com.squareup.picasso.Picasso;
@@ -57,10 +62,15 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import io.fabric.sdk.android.services.settings.SettingsJsonConstants;
 import pasu.vadivasal.BaseActivity;
+import pasu.vadivasal.MainActivity;
 import pasu.vadivasal.R;
 import pasu.vadivasal.android.AppConstants;
+import pasu.vadivasal.android.BlurTransformation;
 import pasu.vadivasal.android.Utils;
+import pasu.vadivasal.globalModle.Appconstants;
+import pasu.vadivasal.model.TournamentData;
 import pasu.vadivasal.view.CircleImageView;
 import pasu.vadivasal.view.TextView;
 
@@ -69,7 +79,6 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
     private TournamentPagerAdapter adapter;
     String coverPicUrl;
     Dialog dialog;
-    //    LikeButton ivFav;
     String logoUrl;
     private int position;
     public String premium;
@@ -78,8 +87,9 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
     Target target1 = new C13765();
     public String title = "";
     private SpannableString titleSpan;
-    int tournamentId;
+    String tournamentId;
     public int type;
+    String aboutData;
 
 
     android.support.design.widget.AppBarLayout
@@ -114,6 +124,8 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
     pasu.vadivasal.view.Button
             btnLeaveTeam;
     int isFavorite;
+    private TournamentData tournamentData;
+    private boolean isfromNotificaiton;
 
     class C13701 implements OnClickListener {
         C13701() {
@@ -252,12 +264,12 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
 //                    TournamentMatchesActivity.this.isFavorite = jsonObject.optInt("is_favourite");
 //                    TournamentMatchesActivity.this.type = jsonObject.optInt("type");
 //                    System.out.println("isFavorite " + TournamentMatchesActivity.this.isFavorite);
-//                    TournamentMatchesActivity.this.ivFav.setVisibility(0);
+//                    TournamentMatchesActivity.this.ivFav.setVisibility(View.VISIBLE);
 //                    int totalViews = jsonObject.optInt("total_views");
 //                    if (jsonObject.optInt("is_display_view") != 1 || totalViews <= 0) {
 //                        TournamentMatchesActivity.this.tvViewer.setVisibility(View.GONE);
 //                    } else {
-//                        TournamentMatchesActivity.this.tvViewer.setVisibility(0);
+//                        TournamentMatchesActivity.this.tvViewer.setVisibility(View.VISIBLE);
 //                        TournamentMatchesActivity.this.tvViewer.setText(TournamentMatchesActivity.this.getString(R.string.views, new Object[]{String.valueOf(totalViews)}));
 //                    }
 //                    TournamentMatchesActivity.this.ivFav.setLiked(Boolean.valueOf(TournamentMatchesActivity.this.isFavorite != 0));
@@ -273,7 +285,7 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
 //                    TournamentMatchesActivity.this.txt_date.setText("Date: " + Utils.changeDateformate(jsonObject.optString("from_date"), "yyyy-MM-dd'T'HH:mm:ss", "dd MMM, yyyy") + " to " + Utils.changeDateformate(jsonObject.optString("to_date"), "yyyy-MM-dd'T'HH:mm:ss", "dd MMM, yyyy"));
 //                    TournamentMatchesActivity.this.premium = jsonObject.optString("tournament_category");
 //                    if (!TextUtils.isEmpty(TournamentMatchesActivity.this.premium) && TournamentMatchesActivity.this.premium.equalsIgnoreCase(AppConstants.PREMIUM)) {
-//                        TournamentMatchesActivity.this.imgPremiumIcon.setVisibility(0);
+//                        TournamentMatchesActivity.this.imgPremiumIcon.setVisibility(View.VISIBLE);
 //                        AppCompatTextView tv = (AppCompatTextView) ((LinearLayout) ((LinearLayout) TournamentMatchesActivity.this.tabLayoutScoreCard.getChildAt(0)).getChildAt(4)).getChildAt(1);
 //                        tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.sponsors_tab_badge, 0);
 //                        tv.setCompoundDrawablePadding(10);
@@ -291,8 +303,13 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView((int) R.layout.activity_player_profile);
-
-
+        this.tournamentId = getIntent().getStringExtra(Appconstants.TourID);
+        try {
+            this.aboutData = (getIntent().getStringExtra("about"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("tournamentID__" + tournamentId);
         app_bar_layout = (android.support.design.widget.AppBarLayout
                 ) findViewById(R.id.app_bar_layout);
         collapsing_toolbar = (android.support.design.widget.CollapsingToolbarLayout
@@ -301,6 +318,7 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
                 ) findViewById(R.id.layoutcollapse);
         imgBlurBackground = (ImageView
                 ) findViewById(R.id.imgBlurBackground);
+
         img_shadow = (ImageView
                 ) findViewById(R.id.img_shadow);
         layCenter = (LinearLayout
@@ -346,14 +364,82 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
                 ) findViewById(R.id.txt_error);
         btnLeaveTeam = (pasu.vadivasal.view.Button
                 ) findViewById(R.id.btnLeaveTeam);
+        findViewById(R.id.ivBack).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+         tournamentData = Utils.fromJson(aboutData, TournamentData.class);
+        if(tournamentData==null){
+            isfromNotificaiton=true;
+            if(getIntent().getStringExtra(Appconstants.TourID)!=null && !getIntent().getStringExtra(Appconstants.TourID).equals(""))
+                FirebaseDatabase.getInstance().getReference("tournament-new/about/"+ getIntent().getStringExtra(Appconstants.TourID)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
 
+                        tournamentData = dataSnapshot.getValue( TournamentData.class);
+                            Picasso.with(TournamentMatchesActivity.this).load(tournamentData.getTournamentCoverPhoto())
+                                    // .resize(SettingsJsonConstants.ANALYTICS_FLUSH_INTERVAL_SECS_DEFAULT, 200)
+                                    //.transform(new BlurTransformation(this))
+                                    .into(TournamentMatchesActivity.this.imgBlurBackground);
+                        tvViewer.setText(tournamentData.getViewers());
+                        tvViewer.setVisibility(View.VISIBLE);
+                        tvPlayerName.setText(tournamentData.getName());
+                        if (tournamentData.getToDate() != 0)
+                            txt_date.setText(Utils.getDateOnly(tournamentData.getDate()) + " to " + Utils.getDateOnly(tournamentData.getToDate()));
+                        else
+                            txt_date.setText(Utils.getDateOnly(tournamentData.getDate()).toString());
+                        if(adapter.getFragment(0)!=null && adapter.getFragment(0) instanceof  InfoFragment){
+                            ((InfoFragment)adapter.getFragment(0)).setData(tournamentData);
+                        }
+                        System.out.println("nagaa"+tournamentData.getAbout());}
+                    }
 
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+        }else{
+
+        Picasso.with(this).load(tournamentData.getTournamentCoverPhoto())
+                // .resize(SettingsJsonConstants.ANALYTICS_FLUSH_INTERVAL_SECS_DEFAULT, 200)
+                //.transform(new BlurTransformation(this))
+                .into(this.imgBlurBackground);
+//        Picasso.with(this).load(R.drawable.download)
+//               // .resize(SettingsJsonConstants.ANALYTICS_FLUSH_INTERVAL_SECS_DEFAULT, 200)
+//                //.transform(new BlurTransformation(this))
+//                .into(this.imgPlayer);
+        tvViewer.setText(tournamentData.getViewers());
+        tvViewer.setVisibility(View.VISIBLE);
+        tvPlayerName.setText(tournamentData.getName());
+        if (tournamentData.getToDate() != 0)
+            txt_date.setText(Utils.getDateOnly(tournamentData.getDate()) + " to " + Utils.getDateOnly(tournamentData.getToDate()));
+        else
+            txt_date.setText(Utils.getDateOnly(tournamentData.getDate()).toString());}
         //ButterKnife.bind((Activity) this);
         setSupportActionBar(this.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ivInfo.setVisibility(View.GONE);
+        ivInfo.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (VERSION.SDK_INT >= 23) {
+                    if (ContextCompat.checkSelfPermission(TournamentMatchesActivity.this, "android.permission.WRITE_EXTERNAL_STORAGE") != 0) {
+                        requestPermissions(new String[]{"android.permission.WRITE_EXTERNAL_STORAGE"}, 102);
+                        return;
+                    }
+                    shareBitmap(TournamentMatchesActivity.this.layoutcollapse);
+                    return;
+                }
+                shareBitmap(TournamentMatchesActivity.this.layoutcollapse);
+            }
+        });
 //        this.title = getIntent().getStringExtra("title");
 //        this.collapsing_toolbar.setTitle(" ");
-//        this.tournamentId = getIntent().getIntExtra(AppConstants.EXTRA_TOURNAMENTID, 0);
+
 //        this.position = getIntent().getIntExtra(AppConstants.EXTRA_POSITION, 0);
 //        if (!Utils.isEmptyString(this.title)) {
 //            this.logoUrl = getIntent().getStringExtra(AppConstants.EXTRA_TOURNAMENT_LOGO);
@@ -362,26 +448,32 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
 //            setTournamentData();
 //        }
 //        Log.e("coverPicUrl", "= " + this.coverPicUrl);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.tab_title_matches));
-        this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.tab_title_Leaderboard));
-        this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.tab_title_boundary_tracker));
-        this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.tab_title_heroes));
-        this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.tab_title_sponsor));
-        this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.tab_title_teams));
-        this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.tab_title_standings));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.tab_title_about));
+        this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.tab_title_commentary));
+//        this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.tab_title_Leaderboard));
+        this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.tab_title_statistics));
+//        this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.tab_title_heroes));
+//        this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.tab_title_sponsor));
+//        this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.prizes));
         this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.tab_title_media));
-        this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.tab_title_about_us));
+        this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.tab_video));
+        this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.tab_title_sponsor));
+
+
+        //        this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.tab_title_teams));
+//        this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.tab_title_standings));
+
         this.tabLayoutScoreCard.setTabGravity(0);
         this.tabLayoutScoreCard.setTabMode(0);
-//        this.vHide.setVisibility(View.GONE);
+//         this.vHide.setVisibility(View.GONE);
 //        this.card_Follow.setVisibility(View.GONE);
 //        this.fabShare.setVisibility(View.GONE);
-//        this.btnFollow.setVisibility(View.GONE);
+        this.btnFollow.setVisibility(View.GONE);
 //        this.txt_date.setVisibility(View.VISIBLE);
 //        this.dialog = Utils.showProgress(this, false);
 //        this.imgPlayer.setOnClickListener(new C13701());
-        this.adapter = new TournamentPagerAdapter(getSupportFragmentManager(), this.tabLayoutScoreCard.getTabCount());
+        this.adapter = new TournamentPagerAdapter(getSupportFragmentManager(), this.tabLayoutScoreCard.getTabCount(), tournamentId);
         this.viewPager.setOffscreenPageLimit(this.tabLayoutScoreCard.getTabCount());
         this.viewPager.setAdapter(this.adapter);
         this.viewPager.addOnPageChangeListener(new TabLayoutOnPageChangeListener(this.tabLayoutScoreCard));
@@ -410,7 +502,7 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
             Picasso.with(this).load(this.logoUrl + AppConstants.THUMB_IMAGE).placeholder((int) R.drawable.ic_bull_logo).error((int) R.drawable.ic_bull_logo).into(this.target);
         }
         if (Utils.isEmptyString(this.coverPicUrl)) {
-            //    Picasso.with(this).load((int) R.drawable.ic_bull_logo).resize(SettingsJsonConstants.ANALYTICS_FLUSH_INTERVAL_SECS_DEFAULT, 200).transform(new BlurTransformation(this)).into(this.imgBlurBackground);
+            Picasso.with(this).load((int) R.drawable.ic_bull_logo).resize(SettingsJsonConstants.ANALYTICS_FLUSH_INTERVAL_SECS_DEFAULT, 200).transform(new BlurTransformation(this)).into(this.imgBlurBackground);
         } else {
             Picasso.with(this).load(this.coverPicUrl + AppConstants.THUMB_IMAGE).placeholder((int) R.drawable.ic_bull_logo).into(this.target1);
         }
@@ -467,6 +559,14 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
     }
 
     public void onBackPressed() {
+
+
+        if(isfromNotificaiton){
+            final Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+
+        }
         Utils.finishActivitySlide(this);
     }
 
@@ -485,7 +585,7 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
 
     private void addTournamentToFavorite() {
         int i = 1;
-        int i2 = this.tournamentId;
+        //int i2 = this.tournamentId;
         if (this.isFavorite == 1) {
             i = 0;
         }
@@ -656,7 +756,7 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
 
     private Bitmap getLogoBitmap(Bitmap bitmap) {
         try {
-            Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+            Bitmap icon = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
             Bitmap link = Bitmap.createBitmap(bitmap.getWidth(), 80, Config.ARGB_8888);
             Canvas c3 = new Canvas(link);
             Typeface tfBold = Typeface.createFromAsset(getAssets(), getString(R.string.font_sourcesans_pro_regular));

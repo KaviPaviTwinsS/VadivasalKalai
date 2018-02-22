@@ -5,6 +5,7 @@ package pasu.vadivasal.Profile;
  */
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -22,9 +23,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,10 +57,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import pasu.vadivasal.MainActivity;
 import pasu.vadivasal.R;
+import pasu.vadivasal.android.SessionSave;
 import pasu.vadivasal.android.Utils;
+import pasu.vadivasal.globalModle.Appconstants;
 import pasu.vadivasal.globalModle.Media;
 import pasu.vadivasal.globalModle.ProfileData;
+import pasu.vadivasal.photographyInsta.CommentsAutoActivity;
+import pasu.vadivasal.regLogin.VerificationActivity;
 
 /**
  * Created by developer on 26/9/17.
@@ -66,11 +74,11 @@ import pasu.vadivasal.globalModle.ProfileData;
 public class EditProfileActivity extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 228;
-    TextView sav_txt, dob, chose_img_txt;
-    EditText name, phnum, city, email, about;
+    TextView sav_txt, dob, text_logout, phnum, role_txt;
+    EditText name, city, email, about;
     String name_str, phnum_str, dob_str, city_str, email_str;
     String name_str_old, phnum_str_old, dob_str_old, city_str_old, email_str_old;
-    LinearLayout imglay;
+    ViewGroup imglay;
     private static int IMG_RESULT = 1;
     String ImageDecode;
     ImageView imageViewLoad;
@@ -84,6 +92,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private SlideDateTimeListener listener;
     private String destinationFileName = "profileImage";
     private Uri imageUri;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,13 +101,14 @@ public class EditProfileActivity extends AppCompatActivity {
         listener = new DateTimeListner();
         this.dateFormatter = new SimpleDateFormat("dd MMM yyyy");
         sav_txt = (TextView) findViewById(R.id.save_txt);
-        chose_img_txt = (TextView) findViewById(R.id.imge_chose_txt);
+        text_logout = (TextView) findViewById(R.id.text_logout);
         name = (EditText) findViewById(R.id.name_txt);
-        phnum = (EditText) findViewById(R.id.phnumb_txt);
+        phnum = findViewById(R.id.phnumb_txt);
+        role_txt = findViewById(R.id.role_txt);
         dob = (TextView) findViewById(R.id.dob_txt);
         city = (EditText) findViewById(R.id.city_txt);
         email = (EditText) findViewById(R.id.email_txt);
-        imglay = (LinearLayout) findViewById(R.id.img_lay);
+        imglay = (RelativeLayout) findViewById(R.id.img_lay);
         imageViewLoad = (ImageView) findViewById(R.id.profile_image);
         about = (EditText) findViewById(R.id.desc_text);
         dob.setOnClickListener(new View.OnClickListener() {
@@ -121,6 +131,22 @@ public class EditProfileActivity extends AppCompatActivity {
 //                dpd.show(getActivity().getFragmentManager(), "Datepickerdialog");
             }
         });
+        text_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                SessionSave.saveSession(Appconstants.USER_PROFILE_PHONE_NUMBER, "", EditProfileActivity.this);
+                SessionSave.saveSession(Appconstants.LOGIN_TYPE, "", EditProfileActivity.this);
+                SessionSave.saveSession(Appconstants.USER_PROFILE_IMAGE, "", EditProfileActivity.this);
+                SessionSave.saveSession(Appconstants.USER_PROFILE_NAME, "", EditProfileActivity.this);
+                SessionSave.saveSession(Appconstants.USER_PROFILE_GOOGLE_ID, "", EditProfileActivity.this);
+                SessionSave.saveSession(Appconstants.USER_PROFILE_EMAIL_ID, "", EditProfileActivity.this);
+                SessionSave.saveSession(Appconstants.USER_PROFILE_PHONE_NUMBER, "", EditProfileActivity.this);
+                SessionSave.saveSession(Appconstants.LOGIN_TYPE, 0, EditProfileActivity.this);
+                startActivity(new Intent(EditProfileActivity.this, MainActivity.class));
+                finish();
+            }
+        });
         if (getIntent() != null)
             if (getIntent().getStringExtra("data") != null) {
                 profileData = Utils.fromJson(getIntent().getStringExtra("data"), ProfileData.class);
@@ -130,7 +156,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 city_str_old = profileData.getCity();
                 email_str_old = profileData.getMail();
                 about_str_old = profileData.getDescription();
-                Picasso.with(this).load(profileData.getProfileImageUrl()).into(imageViewLoad);
+                Picasso.with(this).load(profileData.getProfileImageUrl()).placeholder(R.drawable.user).error(R.drawable.user).into(imageViewLoad);
                 setProfileData();
             }
         sav_txt.setOnClickListener(new View.OnClickListener() {
@@ -208,34 +234,41 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
     }
+
     private void getCamera() {
-        new android.app.AlertDialog.Builder(this).setMessage("" + getResources().getString(R.string.choose_an_image)).setTitle("" + getResources().getString(R.string.profile_image)).setCancelable(true).setNegativeButton("" + getResources().getString(R.string.gallery), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialog, final int which) {
-                // TODO Auto-generated method stub
-                System.gc();
-                final Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_PICK);
-                startActivityForResult(intent, 0);
-                dialog.cancel();
-            }
-        }).setPositiveButton("" + getResources().getString(R.string.camera), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialog, final int which) {
-                // TODO Auto-generated method stub
-                dialog.cancel();
-                final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                final File photo = new File(Environment.getExternalStorageDirectory() + getApplication().getPackageName() + "/img");
-                if (!photo.exists())
-                    photo.mkdirs();
-                final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                final File mediaFile = new File(photo.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
-                imageUri = Uri.fromFile(mediaFile);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                startActivityForResult(intent, 1);
-            }
-        }).show();
+//        new android.app.AlertDialog.Builder(this).setMessage("" + getResources().getString(R.string.choose_an_image)).setTitle("" + getResources().getString(R.string.profile_image)).setCancelable(true).setNegativeButton("" + getResources().getString(R.string.gallery), new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(final DialogInterface dialog, final int which) {
+//                // TODO Auto-generated method stub
+//                System.gc();
+//                final Intent intent = new Intent();
+//                intent.setType("image/*");
+//                intent.setAction(Intent.ACTION_PICK);
+//                startActivityForResult(intent, 0);
+//                dialog.cancel();
+//            }
+//        }).setPositiveButton("" + getResources().getString(R.string.camera), new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(final DialogInterface dialog, final int which) {
+//                // TODO Auto-generated method stub
+//                dialog.cancel();
+//                final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                final File photo = new File(Environment.getExternalStorageDirectory() + "/"+getApplication().getPackageName() + "/img");
+//                if (!photo.exists())
+//                    photo.mkdirs();
+//                final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+//                final File mediaFile = new File(photo.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
+//                imageUri = Uri.fromFile(mediaFile);
+//                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+//                startActivityForResult(intent, 1);
+//            }
+//        }).show();
+
+        final Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_PICK);
+        startActivityForResult(intent, 0);
     }
 
     private void setProfileData() {
@@ -245,6 +278,12 @@ public class EditProfileActivity extends AppCompatActivity {
         phnum.setText(phnum_str_old);
         email.setText(email_str_old);
         about.setText(about_str_old);
+        if (profileData.getType() == Appconstants.TYPE_BULL_OWNER)
+            role_txt.setText(getString(R.string.register_bull_owner));
+        else if (profileData.getType() == Appconstants.TYPE_PLAYER)
+            role_txt.setText(getString(R.string.register_tamper));
+        else if (profileData.getType() == Appconstants.TYPE_PHOTOGRAPHER)
+            role_txt.setText(getString(R.string.register_photographer));
     }
 
     private void setDateTimeField() {
@@ -268,7 +307,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private void saveProfile() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        String profile_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String profile_id = SessionSave.getSession(Appconstants.USER_PROFILE_GOOGLE_ID, EditProfileActivity.this);
         System.out.println("getDataaaa" + profile_id + "__" + FirebaseAuth.getInstance().getCurrentUser().getUid());
         if (!name_str.equals(name_str_old))
             database.getReference("profile/" + profile_id + "/name").setValue(name_str);
@@ -293,7 +332,15 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    Toast.makeText(getApplicationContext(), "suceess logging", Toast.LENGTH_LONG).show();
+                    SessionSave.saveSession(Appconstants.USER_PROFILE_NAME,name_str,EditProfileActivity.this);
+                    startActivity(new Intent(EditProfileActivity.this, MainActivity.class));
+//                    int[] startingLocation = new int[2];
+////                    view.getLocationOnScreen(startingLocation);
+////                    startingLocation[0] += view.getWidth() / 2;
+//                    UserProfileActivity.startUserProfileFromLocation(startingLocation, (AppCompatActivity) EditProfileActivity.this, true, SessionSave.getSession(Appconstants.USER_PROFILE_GOOGLE_ID,EditProfileActivity.this));
+//                    ((AppCompatActivity) EditProfileActivity.this).overridePendingTransition(0, 0);
+                    finish();
+                    //   Toast.makeText(getApplicationContext(),, Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -308,8 +355,8 @@ public class EditProfileActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestcode, int resultCode, Intent data) {
         super.onActivityResult(requestcode, resultCode, data);
-
-         imageUri = data.getData();
+        if (data != null) {
+            imageUri = data.getData();
 //        if (resultCode == RESULT_OK) {
 //            try {
 //                final Uri imageUri = data.getData();
@@ -327,42 +374,43 @@ public class EditProfileActivity extends AppCompatActivity {
 //        }
 
 
-        if (requestcode == UCrop.REQUEST_CROP) {
-            handleCropResult(data);
-        } else if (resultCode == RESULT_OK) {
-            System.gc();
-            switch (requestcode) {
-                case 0:
-                    try {
-                        UCrop uCrop = UCrop.of(Uri.fromFile(new File(getRealPathFromURI(data.getDataString()))), Uri.fromFile(new File(EditProfileActivity.this.getCacheDir(), destinationFileName)))
-                                .withAspectRatio(4, 4)
-                                .withMaxResultSize(500, 500);
-                        UCrop.Options options = new UCrop.Options();
-                        options.setToolbarColor(ContextCompat.getColor(EditProfileActivity.this, R.color.colorPrimary));
-                        options.setStatusBarColor(ContextCompat.getColor(EditProfileActivity.this, R.color.colorPrimary));
-                        options.setToolbarWidgetColor(ContextCompat.getColor(EditProfileActivity.this, R.color.colorAccent));
-                        uCrop.withOptions(options);
-                        uCrop.start(EditProfileActivity.this);
-                        //new ImageCompressionAsyncTask().execute(data.getDataString());
+            if (requestcode == UCrop.REQUEST_CROP) {
+                handleCropResult(data);
+            } else if (resultCode == RESULT_OK) {
+                System.gc();
+                switch (requestcode) {
+                    case 0:
+                        try {
+                            UCrop uCrop = UCrop.of(Uri.fromFile(new File(getRealPathFromURI(data.getDataString()))), Uri.fromFile(new File(EditProfileActivity.this.getCacheDir(), destinationFileName)))
+                                    .withAspectRatio(4, 4)
+                                    .withMaxResultSize(500, 500);
+                            UCrop.Options options = new UCrop.Options();
+                            options.setToolbarColor(ContextCompat.getColor(EditProfileActivity.this, R.color.colorPrimary));
+                            options.setStatusBarColor(ContextCompat.getColor(EditProfileActivity.this, R.color.colorPrimary));
+                            options.setToolbarWidgetColor(ContextCompat.getColor(EditProfileActivity.this, R.color.colorAccent));
+                            uCrop.withOptions(options);
+                            uCrop.start(EditProfileActivity.this);
+                            //new ImageCompressionAsyncTask().execute(data.getDataString());
 //                            CropImage.activity( Uri.parse(data.getDataString()))
 //                                    .start(getContext(),this);
-                    } catch (final Exception e) {
-                    }
-                    break;
-                case 1:
-                    try {
-                        //  new ImageCompressionAsyncTask().execute(imageUri.toString()).get();
+                        } catch (final Exception e) {
+                        }
+                        break;
+                    case 1:
+                        try {
+                            //  new ImageCompressionAsyncTask().execute(imageUri.toString()).get();
 //                            CropImage.activity(imageUri)
 //                                    .start(getContext(),this);
 
-                        UCrop.of(imageUri, Uri.fromFile(new File(EditProfileActivity.this.getCacheDir(), destinationFileName)))
-                                .withAspectRatio(4, 4)
-                                .withMaxResultSize(100, 100)
-                                .start(EditProfileActivity.this);
-                    } catch (final Exception e) {
-                        e.printStackTrace();
-                    }
-                    break;
+                            UCrop.of(imageUri, Uri.fromFile(new File(EditProfileActivity.this.getCacheDir(), destinationFileName)))
+                                    .withAspectRatio(4, 4)
+                                    .withMaxResultSize(100, 100)
+                                    .start(EditProfileActivity.this);
+                        } catch (final Exception e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                }
             }
         }
     }
@@ -389,7 +437,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     .invalidate(f);
             Picasso.with(EditProfileActivity.this)
                     .load(f).into(imageViewLoad);
-            uploadFile(resultUri, "images/profileimage/" + FirebaseAuth.getInstance().getCurrentUser().getUid() + ".jpg", true);
+            uploadFile(resultUri, "images/profileimage/" + SessionSave.getSession(Appconstants.USER_PROFILE_GOOGLE_ID, EditProfileActivity.this) + ".jpg", true);
             System.out.println("Hellow" + resultUri);
         } else {
             // Toast.makeText(SampleActivity.this, R.string.toast_cannot_retrieve_cropped_image, Toast.LENGTH_SHORT).show();
@@ -401,15 +449,15 @@ public class EditProfileActivity extends AppCompatActivity {
         //if there is a file to upload
         if (filePath != null) {
             //displaying a progress dialog while upload is going on
-//            final ProgressDialog progressDialog = new ProgressDialog(this);
-//            progressDialog.setTitle("Uploading");
-//            progressDialog.show();
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading");
+            progressDialog.show();
             //progressBar.setVisibility(View.VISIBLE);
             FirebaseStorage storage = FirebaseStorage.getInstance();
             FirebaseOptions opts = FirebaseApp.getInstance().getOptions();
             Log.i("", "Bucket = " + opts.getStorageBucket());
 
-            StorageReference storageReference = storage.getReferenceFromUrl("gs://ilovecricket-5c636.appspot.com");
+            StorageReference storageReference = storage.getReferenceFromUrl("gs://jallikattu-1a841.appspot.com");
             StorageReference riversRef = storageReference.child(riversRefPath);
             riversRef.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -469,9 +517,20 @@ public class EditProfileActivity extends AppCompatActivity {
 
         DatabaseReference ref;
         if (isProfileImage) {
-            database.getReference("profile/" + FirebaseAuth.getInstance().getCurrentUser().getUid() + "/profileImageUrl").setValue(newFileUrl);
+            database.getReference("profile/" + SessionSave.getSession(Appconstants.USER_PROFILE_GOOGLE_ID, EditProfileActivity.this) + "/about/profileImageUrl").setValue(newFileUrl, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                    if (progressDialog != null)
+                        progressDialog.dismiss();
+                    if (databaseError != null)
+                        Toast.makeText(getApplicationContext(), getString(R.string.try_again), Toast.LENGTH_LONG).show();
+                    else
+                        Toast.makeText(getApplicationContext(), getString(R.string.upload_success), Toast.LENGTH_LONG).show();
+                }
+            });
+            SessionSave.saveSession(Appconstants.USER_PROFILE_IMAGE, newFileUrl, EditProfileActivity.this);
         } else {
-            ref = database.getReference("profile/" + FirebaseAuth.getInstance().getCurrentUser().getUid() + "/media").push();
+            ref = database.getReference("profile/" + SessionSave.getSession(Appconstants.USER_PROFILE_GOOGLE_ID, EditProfileActivity.this) + "/media").push();
             m.setId(ref.getKey());
             ref.setValue(m);
         }

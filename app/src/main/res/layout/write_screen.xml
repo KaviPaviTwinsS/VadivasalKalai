@@ -55,9 +55,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:asset_font_file_name="@string/font_sourcesans_pro_regular"
-                        android:imeOptions="actionNone|actionSearch|actionSend|actionNext|actionDone|actionPrevious"
-                        android:inputType="text|textCapCharacters|textCapWords|textCapSentences|textAutoCorrect|textAutoComplete|textMultiLine|textImeMultiLine|textNoSuggestions|textUri|textEmailAddress|textEmailSubject|textShortMessage|textLongMessage|textPersonName|textPostalAddress|textPassword|textVisiblePassword|textWebEditText|textFilter|textPhonetic|textWebEmailAddress|textWebPassword|phone"
+                        android:imeOptions="actionNext"
                         android:lines="1"
+                        android:inputType="textPersonName"
                         android:textColor="@color/dark_gray"
                         android:textSize="@dimen/sp_16" />
                 </android.support.design.widget.TextInputLayout>
@@ -74,7 +74,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:asset_font_file_name="@string/font_sourcesans_pro_regular"
-                        android:imeOptions="actionNone|actionSearch|actionSend|actionNext|actionDone|actionPrevious"
+                        android:imeOptions="actionNext"
                         android:inputType="number|numberSigned|numberDecimal|numberPassword|phone"
                         android:lines="1"
                         android:textColor="@color/dark_gray"
@@ -93,8 +93,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:asset_font_file_name="@string/font_sourcesans_pro_regular"
-                        android:imeOptions="actionNone|actionSearch|actionNext|actionPrevious"
-                        android:inputType="text|textCapCharacters|textCapWords|textCapSentences|textAutoCorrect|textAutoComplete|textMultiLine|textImeMultiLine|textNoSuggestions|textUri|textEmailAddress|textEmailSubject|textShortMessage|textLongMessage|textPersonName|textPostalAddress|textPassword|textVisiblePassword|textWebEditText|textFilter|textPhonetic|textWebEmailAddress|textWebPassword|phone"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
                         android:maxHeight="100dp"
                         android:textColor="@color/dark_gray"
                         android:textSize="@dimen/sp_16" />

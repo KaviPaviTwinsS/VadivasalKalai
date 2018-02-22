@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#212121</color>
-    <color name="colorPrimaryDark">#000000</color>
+
+    <color name="style_color_primary">#2d5d82</color>
+    <color name="style_color_primary_dark">#21425d</color>
+    <color name="style_color_accent">#01bcd5</color>
+
+    <color name="fab_color_pressed">#007787</color>
+    <color name="fab_color_shadow">#44000000</color>
+    <color name="semitransperant">#80000000</color>
+    <color name="btn_default_light_normal">#00000000</color>
+    <color name="btn_default_light_pressed">#40ffffff</color>
+    <color name="btn_send_normal">#02c754</color>
+    <color name="btn_send_pressed">#006633</color>
+    <color name="btn_default_shadow">#99000000</color>
+    <color name="btn_context_menu_normal">#ffffff</color>
+    <color name="btn_context_menu_pressed">#40000000</color>
+    <color name="btn_context_menu_text_red">#ffff0000</color>
+
+    <color name="text_like_counter">#2b5a83</color>
+
+    <color name="bg_comments">#ffffff</color>
+    <color name="colorPrimary">#263238</color>
+    <color name="colorPrimaryDark">#263238</color>
     <color name="colorAccent">#FFC107</color>
     <color name="white">#fff</color>
     <color name="black">#000</color>
@@ -30,4 +50,34 @@
     <color name="dark_gray_50_opacity">#802a373f</color>
     <color name="transparent">#00000000</color>
     <color name="linebottom_light">#d3d3d3</color>
+    <color name="transparent_divider">#40000000</color>
+    <color name="sign_up_text_light">#a1a6aa</color>
+    <color name="sign_up_text_color">#596169</color>
+    <color name="red_link">#ad2112</color>
+    <color name="background_click_color">#b2b4b4</color>
+    <color name="black_text">#000</color>
+    <color name="background_color_overall">#eceff1</color>
+
+    <!--
+        100% — FF
+        95% — F2
+        90% — E6
+        85% — D9
+        80% — CC
+        75% — BF
+        70% — B3
+        65% — A6
+        60% — 99
+        55% — 8C
+        50% — 80
+        45% — 73
+        40% — 66
+        35% — 59
+        30% — 4D
+        25% — 40
+        20% — 33
+        15% — 26
+        10% — 1A
+        5% — 0D
+        0% — 00-->
 </resources>

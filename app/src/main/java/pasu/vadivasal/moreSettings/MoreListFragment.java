@@ -3,10 +3,14 @@ package pasu.vadivasal.moreSettings;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +20,17 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import java.util.Locale;
+
 import pasu.vadivasal.R;
+import pasu.vadivasal.android.SessionSave;
+import pasu.vadivasal.android.Utils;
 import pasu.vadivasal.contactus.ContactUsActivity;
+import pasu.vadivasal.globalModle.Appconstants;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by developer on 20/10/17.
@@ -26,14 +39,33 @@ import pasu.vadivasal.contactus.ContactUsActivity;
 
 public class MoreListFragment extends Fragment implements View.OnClickListener {
 
-    TextView rateApp, language, contact_us;
+    TextView rateApp, language, contact_us,about_app;
     private int intLanguageType = 1;
+    private TextView share_app;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.more_settings, container, false);
         rateApp = v.findViewById(R.id.rateApp);
+        about_app=v.findViewById(R.id.about_app);
+        share_app=v.findViewById(R.id.share_app);
+        share_app.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra("android.intent.extra.TEXT",SessionSave.getSession(Appconstants.SHARE_CONTENT,getActivity())+ getString(R.string.share_news_msg));
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+            }
+        });
+        about_app.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.showAlert(getActivity(),getString(R.string.app_name), SessionSave.getSession(Appconstants.ABOUT_APP,getActivity()),getString(R.string.ok),"",null,true);
+            }
+        });
         contact_us = v.findViewById(R.id.contact_us);
         rateApp.setOnClickListener(this);
         language = v.findViewById(R.id.language);
@@ -51,7 +83,8 @@ public class MoreListFragment extends Fragment implements View.OnClickListener {
                 startActivity(browserIntent);
                 break;
             case R.id.language:
-                selectLanguage();
+                Utils.showAlert(getActivity(),"", getString(R.string.tamil_comming),getString(R.string.ok),"",null,true);
+               // selectLanguage();
                 break;
             case R.id.contact_us:
                 startActivity(new Intent(getActivity(), ContactUsActivity.class));
@@ -101,9 +134,11 @@ public class MoreListFragment extends Fragment implements View.OnClickListener {
                 if (radioButton != null) {
                     if (radioButton.getText().toString().equals(getResources().getString(R.string.english))) {
                         intLanguageType = 1;
+                        setLocale(new Locale("en"));
                         //   paymenttype.setText(getResources().getString(R.string.payment_cash));
                     } else if (radioButton.getText().toString().equals(getResources().getString(R.string.tamil))) {
                         intLanguageType = 2;
+                        setLocale(new Locale("tl"));
                         //paymenttype.setText(getResources().getString(R.string.payment_card));
                     }
 
@@ -130,4 +165,21 @@ public class MoreListFragment extends Fragment implements View.OnClickListener {
         });
 
     }
+
+
+    @SuppressWarnings("deprecation")
+    private void setLocale(Locale locale){
+        Resources resources = getResources();
+        Configuration configuration = resources.getConfiguration();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
+            configuration.setLocale(locale);
+            getApplicationContext().createConfigurationContext(configuration);
+        }
+        else{
+            configuration.locale=locale;
+            resources.updateConfiguration(configuration,displayMetrics);
+        }
+    }
+
 }

@@ -1,5 +1,6 @@
 package pasu.vadivasal.tournament;
 
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,38 +11,58 @@ import android.view.ViewGroup;
 
 import java.lang.ref.WeakReference;
 
+import pasu.vadivasal.globalModle.Appconstants;
+
 public class TournamentPagerAdapter extends FragmentStatePagerAdapter {
     private final SparseArray<WeakReference<Fragment>> instantiatedFragments = new SparseArray();
+    private final Bundle bundle;
     int tabCount;
+    String id, aboutData;
 
-    public TournamentPagerAdapter(FragmentManager fm, int tabCount) {
+    public TournamentPagerAdapter(FragmentManager fm, int tabCount, String tournamentID) {
         super(fm);
         this.tabCount = tabCount;
+        id = tournamentID;
+        bundle = new Bundle();
+        this.aboutData = aboutData;
+        bundle.putString(Appconstants.TourID, id);
     }
 
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new TournamentCommentary();
-//            case 1:
-//                return new LeaderBoardFragment();
-//            case 2:
-//                return new BoundaryTrackerFragment();
-//            case 3:
-//                return new HeroesFragment();
-//            case 4:
-//                return new SponsorsFragment();
-//            case 5:
-//                return new TournamentTeamFragment();
-//            case 6:
-//                return new StandingsFragment();
-//            case 7:
-//                return new TournamentMediaFragment();
-//            case 8:
-//                return new TournamentAboutUsFragment();
+                InfoFragment infoFragment = new InfoFragment();
+                infoFragment.setArguments(bundle);
+                return infoFragment;
+            case 1:
+                TournamentCommentary tournamentCommentary = new TournamentCommentary();
+                tournamentCommentary.setArguments(bundle);
+                return tournamentCommentary;
+            case 2:
+                StatisticsFragment statisticsFragment = new StatisticsFragment();
+                statisticsFragment.setArguments(bundle);
+                return statisticsFragment;
+            case 3:
+                TournamentGalleryFragment tournamentGalleryFragment = new TournamentGalleryFragment();
+                Bundle bundles = (Bundle) bundle.clone();
+                bundles.putInt("type", 0);
+                tournamentGalleryFragment.setArguments(bundles);
+                return tournamentGalleryFragment;
+            case 4:
+                TournamentVideoFragment tournamentGalleryFragment1 = new TournamentVideoFragment();
+                Bundle bundls = (Bundle) bundle.clone();
+                bundls.putInt("type", 1);
+                tournamentGalleryFragment1.setArguments(bundls);
+                return tournamentGalleryFragment1;
+            case 5:
+                TournamentSponsors tournamentGalleryFragment2 = new TournamentSponsors();
+                Bundle bunls = (Bundle) bundle.clone();
+                bunls.putInt("type", 2);
+                tournamentGalleryFragment2.setArguments(bunls);
+                return tournamentGalleryFragment2;
+
             default:
-                return new TournamentAboutUsFragment();
-                // return null;
+                return new InfoFragment();
         }
     }
 

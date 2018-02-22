@@ -1,8 +1,11 @@
 package pasu.vadivasal.dashboard;
 
 
+import java.util.ArrayList;
+
 import pasu.vadivasal.adapter.base.BaseQuickAdapter;
 import pasu.vadivasal.adapter.base.entity.MultiItemEntity;
+import pasu.vadivasal.model.TournamentData;
 
 public abstract class BaseDashboardMultiItem implements MultiItemEntity {
     public static final int ASSOCIATION_ITEM_TYPE = 50;
@@ -23,13 +26,21 @@ public abstract class BaseDashboardMultiItem implements MultiItemEntity {
     private String description;
     private int itemType;
     private String title;
+    ArrayList<? > data;
 
     protected abstract BaseQuickAdapter getAdapter();
 
-    public BaseDashboardMultiItem(String title, String description, int itemType) {
+//    public BaseDashboardMultiItem(String title, String description, int itemType) {
+//        this.title = title;
+//        this.description = description;
+//        this.itemType = itemType;
+//    }
+
+    public BaseDashboardMultiItem(String title, String description, int itemType, ArrayList<? > data) {
         this.title = title;
         this.description = description;
         this.itemType = itemType;
+        this.data=data;
     }
 
     public BaseDashboardMultiItem(int itemType) {
@@ -46,5 +57,9 @@ public abstract class BaseDashboardMultiItem implements MultiItemEntity {
 
     public int getItemType() {
         return this.itemType;
+    }
+
+    public ArrayList<? > getModelList() {
+        return data;
     }
 }

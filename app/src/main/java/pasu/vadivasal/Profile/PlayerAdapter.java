@@ -230,8 +230,8 @@ public class PlayerAdapter extends BaseQuickAdapter<Player, BaseViewHolder> {
     private void selectTeamView(View v) {
 //        CardView cardView = (CardView) v.findViewById(R.id.card_view);
 //        cardView.setCardBackgroundColor(ContextCompat.getColor(this.mContext, R.color.green_background_color));
-//        v.findViewById(R.id.imgSelected).setVisibility(0);
-//        v.findViewById(R.id.cvSelectedBackground).setVisibility(0);
+//        v.findViewById(R.id.imgSelected).setVisibility(View.VISIBLE);
+//        v.findViewById(R.id.cvSelectedBackground).setVisibility(View.VISIBLE);
        // cardView.setCardElevation(10.0f);
     }
 
@@ -244,8 +244,8 @@ public class PlayerAdapter extends BaseQuickAdapter<Player, BaseViewHolder> {
     private void deselectTeamView(View v) {
         CardView cardView = (CardView) v.findViewById(R.id.card_view);
       //  cardView.setCardBackgroundColor(ContextCompat.getColor(this.mContext, 17170443));
-//        v.findViewById(R.id.imgSelected).setVisibility(8);
-//        v.findViewById(R.id.cvSelectedBackground).setVisibility(8);
+//        v.findViewById(R.id.imgSelected).setVisibility(View.GONE);
+//        v.findViewById(R.id.cvSelectedBackground).setVisibility(View.GONE);
         cardView.setCardElevation(4.0f);
     }
 

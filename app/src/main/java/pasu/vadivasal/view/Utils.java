@@ -2,15 +2,19 @@ package pasu.vadivasal.view;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
+import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.graphics.drawable.VectorDrawable;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.util.TypedValue;
+import android.view.Display;
+import android.view.WindowManager;
 
 
 import java.util.ArrayList;
@@ -22,7 +26,18 @@ public class Utils {
     public static double mapValueFromRangeToRange(double value, double fromLow, double fromHigh, double toLow, double toHigh) {
         return (((value - fromLow) / (fromHigh - fromLow)) * (toHigh - toLow)) + toLow;
     }
+    public static int dpToPx(int dp) {
+        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+    }
 
+//    public static int getScreenHeight(Context c) {
+//        if (screenHeight == 0) {
+//            WindowManager wm = (WindowManager) c.getSystemService(Context.WINDOW_SERVICE);
+//            Display display = wm.getDefaultDisplay();
+//            Point size = new Point();
+//            display.getSize(size);
+//            screenHeight = size.y;
+//        }}
     public static double clamp(double value, double low, double high) {
         return Math.min(Math.max(value, low), high);
     }

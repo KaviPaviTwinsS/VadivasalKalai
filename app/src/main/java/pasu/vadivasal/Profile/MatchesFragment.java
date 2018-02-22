@@ -43,14 +43,15 @@ public class MatchesFragment extends Fragment {
         System.out.println("Cameeeeeeeeset" + recyclerView+"__"+mediaArrayList.size());
         if (recyclerView != null) {
             if (mAdapter == null) {
-                mAdapter = new ImageGridAdapter(getActivity(),mediaArrayList);
+                mAdapter = new ImageGridAdapter(getActivity(),new ArrayList<Media>());
                 recyclerView.setAdapter(mAdapter);
+               mAdapter.add(mAdapter.getItemCount(),mediaArrayList);
             } else
-                for (int i = 0; i < mediaArrayList.size(); i++) {
+              //  for (int i = 0; i < mediaArrayList.size(); i++) {
                     System.out.println("Cameeeeeeee" + mAdapter.getItemCount());
-                    mAdapter.add(mAdapter.getItemCount(), mediaArrayList.get(i));
-                }
-            mAdapter.notifyDataSetChanged();
+                    mAdapter.add(mAdapter.getItemCount(), mediaArrayList);
+              //  }
+           // mAdapter.notifyDataSetChanged();
         }
 
     }

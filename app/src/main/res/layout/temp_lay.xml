@@ -1,268 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-        android:id="@+id/drawer_layout"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/dp_60"
+    android:background="@color/background_color_overall"
+    android:orientation="vertical"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp">
+
+    <RelativeLayout
+        android:id="@+id/layMain"
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:paddingLeft="6dp"
-        android:paddingRight="6dp">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:id="@+id/layMain"
-
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <LinearLayout
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
+                <!-- <android.support.v4.widget.SwipeRefreshLayout
+                     android:id="@+id/swipeLayout"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent">-->
 
-                <RelativeLayout
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvDashboard"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                   <!-- <android.support.v4.widget.SwipeRefreshLayout
-                        android:id="@+id/swipeLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">-->
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/rvDashboard"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/white"
-                            android:clipToPadding="false" />
-                  <!--  </android.support.v4.widget.SwipeRefreshLayout>
+                    android:layout_height="match_parent"
+                    android:background="@color/background_color_overall"
+                    android:clipToPadding="false" />
+                <!--  </android.support.v4.widget.SwipeRefreshLayout>
 -->
-                    <RelativeLayout
-                        android:id="@+id/layVideoThumbnail"
+                <RelativeLayout
+                    android:id="@+id/layVideoThumbnail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:visibility="gone">
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/ic_launcher" />
 
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@mipmap/ic_launcher" />
+                    <ImageView
+                        android:id="@+id/ivPlay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:scaleType="centerInside"
+                        android:src="@mipmap/ic_launcher" />
 
-                        <ImageView
-                            android:id="@+id/ivPlay"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:scaleType="centerInside"
-                            android:src="@mipmap/ic_launcher" />
+                    <pasu.vadivasal.view.AutoScrollingText
+                        android:id="@+id/tvPoemText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ivClose"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginRight="@dimen/dp_15"
+                        android:layout_marginTop="@dimen/dp_10"
 
-                        <pasu.vadivasal.view.AutoScrollingText
-                            android:id="@+id/tvPoemText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/ivClose"
-                            android:layout_marginLeft="@dimen/dp_15"
-                            android:layout_marginRight="@dimen/dp_15"
-                            android:layout_marginTop="@dimen/dp_10"
+                        android:ellipsize="marquee"
+                        android:focusable="true"
+                        android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="false"
+                        android:scrollbars="vertical"
+                        android:textColor="@color/gray_divider"
+                        android:textSize="@dimen/sp_16" />
 
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:scrollHorizontally="false"
-                            android:scrollbars="vertical"
-                            android:textColor="@color/gray_divider"
-                            android:textSize="@dimen/sp_16" />
+                    <ImageView
+                        android:id="@+id/ivClose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/dp_15"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/ic_launcher" />
 
-                        <ImageView
-                            android:id="@+id/ivClose"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:padding="@dimen/dp_15"
-                            android:scaleType="centerCrop"
-                            android:src="@mipmap/ic_launcher" />
+                    <pasu.vadivasal.view.Button
+                        android:id="@+id/btnWatchLater"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_margin="@dimen/dp_5"
 
-                        <pasu.vadivasal.view.Button
-                            android:id="@+id/btnWatchLater"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_margin="@dimen/dp_5"
+                        android:background="@color/transperant"
+                        android:text="watch_later"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_16" />
+                </RelativeLayout>
 
-                            android:background="@color/transperant"
-                            android:text="watch_later"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/sp_16" />
-                    </RelativeLayout>
+                <LinearLayout
+                    android:id="@+id/layPin"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/black"
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-                    <LinearLayout
-                        android:id="@+id/layPin"
+                    <ScrollView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/black"
-                        android:orientation="vertical"
-                        android:visibility="gone">
+                        android:layout_weight="1.0">
 
-                        <ScrollView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1.0">
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/sp_16"
+                            android:paddingRight="@dimen/sp_16">
+
+                            <pasu.vadivasal.view.TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+                                android:layout_marginTop="@dimen/dp_24"
+
+                                android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+                                android:text="title_pin_set"
+                                android:textColor="@color/light_grey"
+                                android:textSize="@dimen/sp_14" />
+
+                            <pasu.vadivasal.view.TextView
+                                android:id="@+id/tvPhoneNumber"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+                                android:layout_marginTop="@dimen/dp_24"
+
+                                android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+                                android:text=""
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/sp_24" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:layout_marginTop="@dimen/dp_24"
+                                android:src="@color/divider" />
+
+                            <pasu.vadivasal.view.TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+                                android:layout_marginTop="@dimen/dp_24"
+
+                                android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+                                android:text="set_pin"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/sp_20" />
+
+                            <pasu.vadivasal.view.TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+                                android:layout_marginTop="@dimen/dp_20"
+
+                                android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+                                android:paddingLeft="@dimen/dp_10"
+                                android:paddingRight="@dimen/dp_10"
+                                android:text="desc_pin_set"
+                                android:textColor="@color/light_grey"
+                                android:textSize="@dimen/sp_14" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_24"
+                                android:clipChildren="false"
+                                android:clipToPadding="false"
                                 android:orientation="vertical"
-                                android:paddingLeft="@dimen/sp_16"
-                                android:paddingRight="@dimen/sp_16">
+                                android:paddingLeft="@dimen/dp_15"
+                                android:paddingRight="@dimen/dp_15">
 
-                                <pasu.vadivasal.view.TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
-                                    android:layout_marginTop="@dimen/dp_24"
-
-                                    android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
-                                    android:text="title_pin_set"
-                                    android:textColor="@color/light_grey"
-                                    android:textSize="@dimen/sp_14" />
-
-                                <pasu.vadivasal.view.TextView
-                                    android:id="@+id/tvPhoneNumber"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
-                                    android:layout_marginTop="@dimen/dp_24"
-
-                                    android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
-                                    android:text=""
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/sp_24" />
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="100dp"
-                                    android:layout_marginTop="@dimen/dp_24"
-                                    android:src="@color/divider" />
-
-                                <pasu.vadivasal.view.TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
-                                    android:layout_marginTop="@dimen/dp_24"
-
-                                    android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
-                                    android:text="set_pin"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/sp_20" />
-
-                                <pasu.vadivasal.view.TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
-                                    android:layout_marginTop="@dimen/dp_20"
-
-                                    android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
-                                    android:paddingLeft="@dimen/dp_10"
-                                    android:paddingRight="@dimen/dp_10"
-                                    android:text="desc_pin_set"
-                                    android:textColor="@color/light_grey"
-                                    android:textSize="@dimen/sp_14" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/dp_24"
-                                    android:clipChildren="false"
-                                    android:clipToPadding="false"
-                                    android:orientation="vertical"
-                                    android:paddingLeft="@dimen/dp_15"
-                                    android:paddingRight="@dimen/dp_15">
-
-                                    <include
-                                        layout="@layout/raw_pin_view"
-                                        android:gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end" />
-                                </LinearLayout>
-
-                                <pasu.vadivasal.view.TextView
-                                    android:id="@+id/tvShowPin"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
-                                    android:layout_marginBottom="@dimen/dp_15"
-                                    android:layout_marginTop="@dimen/dp_15"
-
-                                    android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
-                                    android:padding="@dimen/dp_5"
-                                    android:text="show_pin"
-                                    android:textAllCaps="true"
-                                    android:textColor="@color/colorAccent"
-                                    android:textSize="@dimen/sp_14"
-                                    android:visibility="visible" />
+                                <include
+                                    layout="@layout/raw_pin_view"
+                                    android:gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end" />
                             </LinearLayout>
-                        </ScrollView>
 
-                        <LinearLayout
-                            android:id="@+id/layoutButtonSaveOrNext"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="top|bottom|center_vertical|fill_vertical|center|fill"
-                            android:visibility="visible">
-
-                            <pasu.vadivasal.view.Button
-                                android:id="@+id/btnMaybeLate"
+                            <pasu.vadivasal.view.TextView
+                                android:id="@+id/tvShowPin"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1.0"
+                                android:layout_gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+                                android:layout_marginBottom="@dimen/dp_15"
+                                android:layout_marginTop="@dimen/dp_15"
 
-                                android:text="btn_maybe_later"
-                                android:textSize="@dimen/sp_14" />
-
-                            <pasu.vadivasal.view.Button
-                                android:id="@+id/btnSubmit"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.0"
-
-                                android:text="btn_submit"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/sp_14" />
+                                android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+                                android:padding="@dimen/dp_5"
+                                android:text="show_pin"
+                                android:textAllCaps="true"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="@dimen/sp_14"
+                                android:visibility="visible" />
                         </LinearLayout>
+                    </ScrollView>
+
+                    <LinearLayout
+                        android:id="@+id/layoutButtonSaveOrNext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|bottom|center_vertical|fill_vertical|center|fill"
+                        android:visibility="visible">
+
+                        <pasu.vadivasal.view.Button
+                            android:id="@+id/btnMaybeLate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.0"
+
+                            android:text="btn_maybe_later"
+                            android:textSize="@dimen/sp_14" />
+
+                        <pasu.vadivasal.view.Button
+                            android:id="@+id/btnSubmit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.0"
+
+                            android:text="btn_submit"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp_14" />
                     </LinearLayout>
-                </RelativeLayout>
-            </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fabStartMatch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:background="@color/colorPrimary"
-                android:src="@mipmap/ic_launcher"
-                android:visibility="gone" />
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:indeterminate="true"
-                android:visibility="gone" />
-        </RelativeLayout>
-
-        <include
-            android:id="@+id/layoutNoInternet"
-            layout="@layout/raw_no_internet_connection"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabStartMatch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:background="@color/colorPrimary"
+            android:src="@mipmap/ic_launcher"
             android:visibility="gone" />
 
-    </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminate="true"
+            android:paddingBottom="50dp"
+            android:indeterminateDrawable="@drawable/progressbar_custom"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/layoutNoInternet"
+        layout="@layout/raw_no_internet_connection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+</LinearLayout>

@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res/android"
-    xmlns:tool="http://schemas.android.com/tools"
-    app:id="@+id/card_view"
-    app:layout_width="wrap_content"
-    app:layout_height="wrap_content"
-    app:layout_marginLeft="1dp"
-    app:layout_marginRight="1dp"
-    app:clickable="true"
-    android:cardBackgroundColor="@color/background_color"
-    android:cardElevation="2dp"
-    android:cardUseCompatPadding="true">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.app.com/apk/res-auto"
+    xmlns:tool="http://schemas.app.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:clickable="true"
+    app:cardBackgroundColor="@color/background_color"
+    app:cardElevation="2dp"
+    app:cardUseCompatPadding="true">
 
     <RelativeLayout
-        app:layout_width="wrap_content"
-        app:layout_height="wrap_content"
-        app:background="@color/white"
-        app:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
-        app:orientation="vertical">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <pasu.vadivasal.view.SquaredImageView
-            app:id="@+id/ivPlayer"
-            app:layout_width="150dp"
-            app:layout_height="150dp"
-            app:layout_gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
-            app:scaleType="centerCrop"
-            app:src="@drawable/download" />
+            android:id="@+id/ivPlayer"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+            android:scaleType="centerCrop"
+            android:src="@drawable/download" />
 
         <pasu.vadivasal.view.TextView
-            app:id="@+id/tvName"
-            app:layout_width="wrap_content"
-            app:layout_height="wrap_content"
-            app:layout_below="@+id/ivPlayer"
-            app:layout_centerHorizontal="true"
-            app:layout_marginTop="4dp"
-            app:ellipsize="end"
-            app:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
-            app:lines="2"
-            app:maxLines="2"
-            app:paddingBottom="4dp"
-            app:paddingLeft="4dp"
-            app:paddingRight="4dp"
-            app:text="Madurai veran"
-            app:textColor="@color/black"
-            app:textSize="@dimen/sp_12" />
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivPlayer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+            android:lines="2"
+            android:maxLines="2"
+            android:paddingBottom="4dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:text="Madurai veran"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_12" />
     </RelativeLayout>
 </android.support.v7.widget.CardView>

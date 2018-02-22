@@ -31,7 +31,7 @@ public class MatchListPager extends FragmentStatePagerAdapter {
         //Returning the current tabs
         switch (position) {
             case 0:
-
+                System.out.println("calleddddd"+0);
                 MatchListPage frag = new MatchListPage();
                 Bundle b = new Bundle();
                 b.putInt("type", 0);

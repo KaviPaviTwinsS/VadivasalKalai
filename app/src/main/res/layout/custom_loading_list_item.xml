@@ -14,6 +14,7 @@
         android:textColor="@color/colorPrimary" />
 
     <ProgressBar
+        android:indeterminateDrawable="@drawable/progressbar_custom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

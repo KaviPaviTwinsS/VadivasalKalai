@@ -6,22 +6,30 @@ import pasu.vadivasal.globalModle.Media;
  * Created by Admin on 05-11-2017.
  */
 
- class CommentaryData {
-    public String getComment() {
-        return comment;
+public class CommentaryData {
+
+    private Media media;
+    private String long_description;
+    private long time;
+    private String tournament_key;
+
+
+    public String getLong_description() {
+        return long_description;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setLong_description(String long_description) {
+        this.long_description = long_description;
     }
 
-    public String getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(long time) {
         this.time = time;
     }
+
     public Media getMedia() {
         return media;
     }
@@ -30,6 +38,14 @@ import pasu.vadivasal.globalModle.Media;
         this.media = media;
     }
 
-    Media media;
-    String comment,time;
+
+    public String getTournament_key() {
+        return tournament_key;
+    }
+
+    public void setTournament_key(String tournament_key) {
+        this.tournament_key = tournament_key;
+    }
+
+
 }

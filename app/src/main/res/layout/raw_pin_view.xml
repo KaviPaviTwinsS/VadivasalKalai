@@ -49,9 +49,9 @@
         android:id="@+id/pin_hidden_edittext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
+        android:layout_gravity="center"
         android:cursorVisible="false"
-        android:gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
+        android:gravity="center"
         android:inputType="textUri|textEmailSubject|textLongMessage|textPostalAddress|textVisiblePassword|textFilter|textWebEmailAddress|number|numberSigned|numberDecimal|numberPassword|phone|date"
         android:maxLength="4"
         android:textColor="#00000000" />

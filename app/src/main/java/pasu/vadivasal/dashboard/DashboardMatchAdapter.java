@@ -2,10 +2,14 @@ package pasu.vadivasal.dashboard;
 import pasu.vadivasal.R;
 import pasu.vadivasal.adapter.base.BaseQuickAdapter;
 import pasu.vadivasal.adapter.base.BaseViewHolder;
+import pasu.vadivasal.globalModle.Appconstants;
 import pasu.vadivasal.model.TournamentData;
+import pasu.vadivasal.tournament.TournamentMatchesActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
+import android.view.View;
 
 
 import java.util.List;
@@ -15,19 +19,29 @@ import java.util.List;
 class DashboardMatchAdapter extends BaseQuickAdapter<TournamentData, BaseViewHolder> {
     String divider;
     int width;
+    private Context context;
 
 
     DashboardMatchAdapter(Context context, List<TournamentData> data) {
         super(R.layout.raw_dashboard_match_item, data);
         this.divider = "";
+        this.context=context;
         this.divider = "<font color='#444444'>&#160&#160 | &#160&#160</font>";
         this.width = (context.getResources().getDisplayMetrics().widthPixels * 97) / 100;
     }
 
-    protected void convert(BaseViewHolder helper, TournamentData match) {
+    protected void convert(BaseViewHolder helper, final TournamentData match) {
         CharSequence matchSummary;
         CardView cardView = (CardView) helper.getView(R.id.cvMatchStatus);
         ((CardView) helper.getView(R.id.main_card)).getLayoutParams().width = this.width;
+        helper.getView(R.id.main_card).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(context, TournamentMatchesActivity.class);
+                i.putExtra(Appconstants.TourID,match.getKey());
+                context.startActivity(i);
+            }
+        });
         String roundName = "";
 //        if (!Utils.isEmptyString(match.getTournamentRoundName())) {
 //            roundName = match.getTournamentRoundName();
@@ -47,10 +61,10 @@ class DashboardMatchAdapter extends BaseQuickAdapter<TournamentData, BaseViewHol
 //        }
 //        switch (match.getType()) {
 //            case 1:
-//                if (Utils.isEmptyString(match.getTournamentName())) {
+//                if (Utils.isEmptyString(match.getName())) {
 //                    helper.setText((int) R.id.tvTournamentTitle, (CharSequence) "Individual TournamentData");
 //                } else {
-//                    helper.setText((int) R.id.tvTournamentTitle, match.getTournamentName());
+//                    helper.setText((int) R.id.tvTournamentTitle, match.getName());
 //                }
 //                if (Utils.isEmptyString(match.getMatchEventType()) || !(match.getMatchEventType().equalsIgnoreCase("STUMPS") || match.getMatchEventType().equalsIgnoreCase("HOLD"))) {
 //                    helper.setText((int) R.id.tvMatchStatus, (CharSequence) "LIVE");
@@ -129,10 +143,10 @@ class DashboardMatchAdapter extends BaseQuickAdapter<TournamentData, BaseViewHol
 //                }
 //                return;
 //            case 2:
-//                if (Utils.isEmptyString(match.getTournamentName())) {
+//                if (Utils.isEmptyString(match.getName())) {
 //                    helper.setText((int) R.id.tvTournamentTitle, (CharSequence) "Individual TournamentData");
 //                } else {
-//                    helper.setText((int) R.id.tvTournamentTitle, match.getTournamentName());
+//                    helper.setText((int) R.id.tvTournamentTitle, match.getName());
 //                }
 //                helper.setText((int) R.id.tvMatchStatus, (CharSequence) "UPCOMING");
 //                cardView.setCardBackgroundColor(Color.parseColor("#14B493"));
@@ -153,10 +167,10 @@ class DashboardMatchAdapter extends BaseQuickAdapter<TournamentData, BaseViewHol
 //            case 3:
 //                cardView.setCardBackgroundColor(Color.parseColor("#30393E"));
 //                helper.setText((int) R.id.tvMatchStatus, (CharSequence) "RESULT");
-//                if (Utils.isEmptyString(match.getTournamentName())) {
+//                if (Utils.isEmptyString(match.getName())) {
 //                    helper.setText((int) R.id.tvTournamentTitle, (CharSequence) "Individual TournamentData");
 //                } else {
-//                    helper.setText((int) R.id.tvTournamentTitle, match.getTournamentName());
+//                    helper.setText((int) R.id.tvTournamentTitle, match.getName());
 //                }
 //                helper.setText((int) R.id.tvTeamAName, match.getTeamA());
 //                helper.setText((int) R.id.tvTeamBName, match.getTeamB());
