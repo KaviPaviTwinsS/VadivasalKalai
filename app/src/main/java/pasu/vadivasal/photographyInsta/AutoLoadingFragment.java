@@ -1215,7 +1215,6 @@ hideProgressDialog();
                                 AutoLoadingFragment.this.adapter.loadMoreComplete();
                                 System.out.println("datataccccitemafter" + arrayList.size() + AutoLoadingFragment.this.adapter.getItemCount());
                             }
-
                         }
                         if (AutoLoadingFragment.this.baseResponse != null && arrayList.size() % 10 != 0) {
                             AutoLoadingFragment.this.adapter.loadMoreEnd();
