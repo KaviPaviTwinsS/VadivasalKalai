@@ -51,50 +51,7 @@ public static boolean versionAlertShown;
         progressBar = v.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
-        // mTextMessage = (TextView) v.findViewById(R.id.message);
-//        for (int i = 0; i < 10; i++) {
-//            TournamentData tournamentData = new TournamentData();
-//            tournamentData.setBullwon(100);
-//            tournamentData.setPlayerwon(150);
-//            tournamentData.setVenue("Allanganallur");
-//            tournamentData.setType(2);
-//            tarray.add(tournamentData);
-//
-//            PlayerDash bull = new PlayerDash();
-//            bull.setImageUrl("dskjf");
-//            bull.setName("Veeran");
-//            blarray.add(bull);
-//
-//
-//            PlayerDash tamper = new PlayerDash();
-//            tamper.setImageUrl("dskjf");
-//            tamper.setName("Veeran");
-//            plarray.add(tamper);
-//
-//            Video vl = new Video();
-//            vl.setDescription("helloooo");
-//            vl.setLikes(125);
-//            vlarray.add(vl);
-//
-//        }
-//        data.setTournamentDatas(tarray);
-//        data.setBull(plarray);
-//        data.setPlayer(blarray);
-//        data.setLatestVideos(vlarray);
-//        System.out.println("dashdata" + toString(data));
 
-
-//        final List<MultiItemEntity> data = getMultipleItemData(new DashBoardData());
-//        final DashboardAdapter multipleItemAdapter = new DashboardAdapter(getActivity(), data);
-//        final GridLayoutManager manager = new GridLayoutManager(getActivity(), 4);
-//        rvDashboard.setLayoutManager(manager);
-//        multipleItemAdapter.setSpanSizeLookup(new BaseQuickAdapter.SpanSizeLookup() {
-//            @Override
-//            public int getSpanSize(GridLayoutManager gridLayoutManager, int position) {
-//                return 4;
-//            }
-//        });
-//        rvDashboard.setAdapter(multipleItemAdapter);
         getData();
         return v;
     }
