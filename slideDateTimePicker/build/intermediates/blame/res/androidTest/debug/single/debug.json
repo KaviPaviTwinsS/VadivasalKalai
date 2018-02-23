@@ -1,7 +1,23 @@
 [
     {
+        "merged": "D:\\svn\\ILOVEJALLIKATTU\\slideDateTimePicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_selection_divider.9.png.flat",
+        "source": "D:\\svn\\ILOVEJALLIKATTU\\slideDateTimePicker\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\selection_divider.9.png"
+    },
+    {
+        "merged": "D:\\svn\\ILOVEJALLIKATTU\\slideDateTimePicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_fragment_date.xml.flat",
+        "source": "D:\\svn\\ILOVEJALLIKATTU\\slideDateTimePicker\\build\\intermediates\\bundles\\debug\\res\\layout\\fragment_date.xml"
+    },
+    {
+        "merged": "D:\\svn\\ILOVEJALLIKATTU\\slideDateTimePicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_selection_divider.9.png.flat",
+        "source": "D:\\svn\\ILOVEJALLIKATTU\\slideDateTimePicker\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\selection_divider.9.png"
+    },
+    {
         "merged": "D:\\androidnaga\\Pass\\slideDateTimePicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_custom_tab.xml.flat",
         "source": "D:\\androidnaga\\Pass\\slideDateTimePicker\\build\\intermediates\\bundles\\debug\\res\\layout\\custom_tab.xml"
+    },
+    {
+        "merged": "D:\\svn\\ILOVEJALLIKATTU\\slideDateTimePicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_selection_divider.9.png.flat",
+        "source": "D:\\svn\\ILOVEJALLIKATTU\\slideDateTimePicker\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\selection_divider.9.png"
     },
     {
         "merged": "D:\\androidnaga\\Pass\\slideDateTimePicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_selection_divider.9.png.flat",
@@ -12,6 +28,10 @@
         "source": "D:\\androidnaga\\Pass\\slideDateTimePicker\\build\\intermediates\\bundles\\debug\\res\\layout\\fragment_date.xml"
     },
     {
+        "merged": "D:\\svn\\ILOVEJALLIKATTU\\slideDateTimePicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_slide_date_time_picker.xml.flat",
+        "source": "D:\\svn\\ILOVEJALLIKATTU\\slideDateTimePicker\\build\\intermediates\\bundles\\debug\\res\\layout\\slide_date_time_picker.xml"
+    },
+    {
         "merged": "D:\\androidnaga\\Pass\\slideDateTimePicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_selection_divider.9.png.flat",
         "source": "D:\\androidnaga\\Pass\\slideDateTimePicker\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\selection_divider.9.png"
     },
@@ -20,8 +40,16 @@
         "source": "D:\\androidnaga\\Pass\\slideDateTimePicker\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\selection_divider.9.png"
     },
     {
+        "merged": "D:\\svn\\ILOVEJALLIKATTU\\slideDateTimePicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_fragment_time.xml.flat",
+        "source": "D:\\svn\\ILOVEJALLIKATTU\\slideDateTimePicker\\build\\intermediates\\bundles\\debug\\res\\layout\\fragment_time.xml"
+    },
+    {
         "merged": "D:\\androidnaga\\Pass\\slideDateTimePicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_slide_date_time_picker.xml.flat",
         "source": "D:\\androidnaga\\Pass\\slideDateTimePicker\\build\\intermediates\\bundles\\debug\\res\\layout\\slide_date_time_picker.xml"
+    },
+    {
+        "merged": "D:\\svn\\ILOVEJALLIKATTU\\slideDateTimePicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_custom_tab.xml.flat",
+        "source": "D:\\svn\\ILOVEJALLIKATTU\\slideDateTimePicker\\build\\intermediates\\bundles\\debug\\res\\layout\\custom_tab.xml"
     },
     {
         "merged": "D:\\androidnaga\\Pass\\slideDateTimePicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_fragment_time.xml.flat",
