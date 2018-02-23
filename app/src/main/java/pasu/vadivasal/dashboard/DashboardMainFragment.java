@@ -47,8 +47,8 @@ public static boolean versionAlertShown;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.temp_lay, container, false);
-        rvDashboard = (RecyclerView) v.findViewById(R.id.rvDashboard);
-        progressBar = (ProgressBar) v.findViewById(R.id.progressBar);
+        rvDashboard = v.findViewById(R.id.rvDashboard);
+        progressBar = v.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
         // mTextMessage = (TextView) v.findViewById(R.id.message);
@@ -187,15 +187,6 @@ public static boolean versionAlertShown;
 
     public List<MultiItemEntity> getMultipleItemData(DashBoardData data) {
         List<MultiItemEntity> list = new ArrayList<>();
-   //     list.add(new MultipleItem(getString(R.string.thirukural_head), data.getThirukural(), MultipleItem.TEXT));
-//        ArrayList<TournamentData> data = new ArrayList<>();
-//        for (int i = 0; i < 10; i++) {
-//            data.add(new TournamentData());
-//        }
-//        ArrayList<Video> VideosArray = new ArrayList<>();
-//        for (int i = 0; i < 10; i++) {
-//            VideosArray.add(new Video());
-//        }
 
         list.add(new DashboardMatchItem(getActivity(), getString(R.string.title_tournament), getString(R.string.tap_to_check), data.getTournamentDatas(), 11));
 
