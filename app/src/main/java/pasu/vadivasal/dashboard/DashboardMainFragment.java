@@ -52,11 +52,6 @@ public static boolean versionAlertShown;
         progressBar.setVisibility(View.VISIBLE);
 
         // mTextMessage = (TextView) v.findViewById(R.id.message);
-//        DashBoardData data = new DashBoardData();
-//        ArrayList<TournamentData> tarray = new ArrayList<>();
-//        ArrayList<PlayerDash> plarray = new ArrayList<>();
-//        ArrayList<PlayerDash> blarray = new ArrayList<>();
-//        ArrayList<Video> vlarray = new ArrayList<>();
 //        for (int i = 0; i < 10; i++) {
 //            TournamentData tournamentData = new TournamentData();
 //            tournamentData.setBullwon(100);
