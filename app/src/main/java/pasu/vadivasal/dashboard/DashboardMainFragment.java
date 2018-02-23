@@ -127,10 +127,6 @@ public static boolean versionAlertShown;
                 progressBar.setVisibility(View.GONE);
                 Log.d(TAG, "Value is: " + dataSnapshot.getValue().toString());
                 DashBoardData datav = dataSnapshot.getValue(DashBoardData.class);
-//                datav.setTournamentDatas( dataSnapshot.getRef());
-//                datav.setBull(plarray);
-//                datav.setPlayer(blarray);
-//                datav.setLatestVideos(vlarray);
                 int verCode =0;
                 PackageInfo pInfo=null;
                 try {
