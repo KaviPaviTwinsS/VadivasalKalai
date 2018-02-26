@@ -7,7 +7,7 @@
     </plurals>
     <string name="user_profile_photo">http://igcdn-photos-f-a.akamaihd.net/hphotos-ak-xpa1/t51.2885-19/929118_455075441302693_1605108410_a.jpg</string>
     <string name="facebook_app_id"></string>
-    <string name="app_name">I Love Jallikattu</string>
+    <string name="app_name">ILJ Demo</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
