@@ -48,8 +48,8 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
         View v = LayoutInflater.from(parent.getContext()).inflate( R.layout.raw_dashboard_match_item, parent, false);
         switch (TYPE){
             case 0:v.getLayoutParams().width = (int) (getScreenWidth() / 1.1); break;
-            case 1:v.getLayoutParams().width = (int) (getScreenWidth() / 3); break;
-            case 2:v.getLayoutParams().width = (int) (getScreenWidth() / 1); break;
+            case 1:v.getLayoutParams().width = getScreenWidth() / 3; break;
+            case 2:v.getLayoutParams().width = getScreenWidth() / 1; break;
         }
         HorizontalAdapter.ViewHolder viewHolder = new HorizontalAdapter.ViewHolder(v);
         return viewHolder;
@@ -67,14 +67,14 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
     @Override
     public void onBindViewHolder(final HorizontalAdapter.ViewHolder holder, final int position) {
      //   holder.itemName.setText(mList.get(position));
-        ViewHolder viewHolder = (ViewHolder) holder;
+        ViewHolder viewHolder = holder;
 //        // we need to show the "normal" state
 //        viewHolder.itemView.setBackgroundColor(Color.WHITE);
 //        viewHolder.titleView.setVisibility(View.VISIBLE);
 //        // viewHolder.titleView.setText(item);
 //        viewHolder.venue.setText(matchShortSummaryData.getLocation());
         TournamentData datas=mList.get(position);
-        viewHolder.tvMatchInfo.setText(datas.getType());
+        viewHolder.tvMatchInfo.setText(""+datas.getType());
         viewHolder.tvTournamentTitle.setText(datas.getName());
         if((datas.getToDate())!=0)
         viewHolder.tvSummary.setText(""+ Utils.getDateOnly(datas.getDate())+" to "+ Utils.getDateOnly(datas.getToDate()));
@@ -123,12 +123,12 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
 
         public ViewHolder(View itemView) {
             super(itemView);
-            titleView = (CardView) itemView.findViewById(R.id.main_card);
-            bullwon = (LinearLayout) itemView.findViewById(R.id.bullwon);
-            playerwon = (LinearLayout) itemView.findViewById(R.id.playerwon);
-            bio = (TextView) itemView.findViewById(R.id.bio);
+            titleView = itemView.findViewById(R.id.main_card);
+            bullwon = itemView.findViewById(R.id.bullwon);
+            playerwon = itemView.findViewById(R.id.playerwon);
+            bio = itemView.findViewById(R.id.bio);
             bio.setVisibility(View.GONE);
-            tournament_cover_photo= (ImageView) itemView.findViewById(R.id.tournament_cover_photo);
+            tournament_cover_photo= itemView.findViewById(R.id.tournament_cover_photo);
             titleView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -139,14 +139,14 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
                     mContext.startActivity(i);
                 }
             });
-            tvTournamentTitle = (TextView) itemView.findViewById(R.id.tvTournamentTitle);
-            tvSummary = (TextView) itemView.findViewById(R.id.tvSummary);
-            tvMatchInfo = (TextView) itemView.findViewById(R.id.tvMatchInfo);
+            tvTournamentTitle = itemView.findViewById(R.id.tvTournamentTitle);
+            tvSummary = itemView.findViewById(R.id.tvSummary);
+            tvMatchInfo = itemView.findViewById(R.id.tvMatchInfo);
 //            away_team_name = (TextView) itemView.findViewById(R.id.away_team_name);
 //            venue = (TextView) itemView.findViewById(R.id.venue);
 //            delete_item = (AppCompatImageView) itemView.findViewById(R.id.delete_item);
-            tvTeamAScore = (TextView) itemView.findViewById(R.id.tvTeamAScore);
-            tvTeamBScore = (TextView) itemView.findViewById(R.id.tvTeamBScore);
+            tvTeamAScore = itemView.findViewById(R.id.tvTeamAScore);
+            tvTeamBScore = itemView.findViewById(R.id.tvTeamBScore);
           //  itemName = (TextView) itemView.findViewById(R.id.tvItem);
         }
     }

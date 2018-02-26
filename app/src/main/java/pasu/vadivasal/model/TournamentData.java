@@ -9,7 +9,7 @@ public class TournamentData  {
 
     int playerwon,bullwon;
     int totalPlayer,totalBull;
-    String type;
+    int type;
     String venue;
     int status;
     String key;
@@ -69,11 +69,11 @@ public class TournamentData  {
         this.totalBull = totalBull;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 

@@ -88,7 +88,7 @@ public class SavedGameListAdapter extends RecyclerView.Adapter {
 //        // viewHolder.titleView.setText(item);
 //        viewHolder.venue.setText(matchShortSummaryData.getLocation());
         TournamentData datas=data.get(position);
-        viewHolder.tvMatchInfo.setText(datas.getType());
+        viewHolder.tvMatchInfo.setText(""+datas.getType());
         viewHolder.tvTournamentTitle.setText(datas.getName());
         viewHolder.tvSummary.setText(""+ Utils.getDate(datas.getDate()));
         Picasso.with(context).load(datas.getTournamentCoverPhoto()).into(viewHolder.tournament_cover_photo);
@@ -146,9 +146,9 @@ public class SavedGameListAdapter extends RecyclerView.Adapter {
 
         public TestViewHolder(ViewGroup parent) {
             super(LayoutInflater.from(parent.getContext()).inflate(R.layout.raw_dashboard_match_item, parent, false));
-            titleView = (CardView) itemView.findViewById(R.id.main_card);
-            bullwon = (LinearLayout) itemView.findViewById(R.id.bullwon);
-            playerwon = (LinearLayout) itemView.findViewById(R.id.playerwon);
+            titleView = itemView.findViewById(R.id.main_card);
+            bullwon = itemView.findViewById(R.id.bullwon);
+            playerwon = itemView.findViewById(R.id.playerwon);
             bio = itemView.findViewById(R.id.bio);
             titleView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -160,14 +160,14 @@ public class SavedGameListAdapter extends RecyclerView.Adapter {
                     context.startActivity(i);
                 }
             });
-            tvTournamentTitle = (TextView) itemView.findViewById(R.id.tvTournamentTitle);
-            tvSummary = (TextView) itemView.findViewById(R.id.tvSummary);
-            tvMatchInfo = (TextView) itemView.findViewById(R.id.tvMatchInfo);
+            tvTournamentTitle = itemView.findViewById(R.id.tvTournamentTitle);
+            tvSummary = itemView.findViewById(R.id.tvSummary);
+            tvMatchInfo = itemView.findViewById(R.id.tvMatchInfo);
 //            away_team_name = (TextView) itemView.findViewById(R.id.away_team_name);
 //            venue = (TextView) itemView.findViewById(R.id.venue);
             tournament_cover_photo = (AppCompatImageView) itemView.findViewById(R.id.tournament_cover_photo);
-            tvTeamAScore = (TextView) itemView.findViewById(R.id.tvTeamAScore);
-            tvTeamBScore = (TextView) itemView.findViewById(R.id.tvTeamBScore);
+            tvTeamAScore = itemView.findViewById(R.id.tvTeamAScore);
+            tvTeamBScore = itemView.findViewById(R.id.tvTeamBScore);
         }
     }
 }
