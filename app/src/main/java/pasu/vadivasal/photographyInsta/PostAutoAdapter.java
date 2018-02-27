@@ -81,6 +81,7 @@ import pasu.vadivasal.model.PostModel;
 import pasu.vadivasal.regLogin.SignUpActivity;
 import pasu.vadivasal.regLogin.SocialLoginCustom;
 import pasu.vadivasal.view.CircleImageView;
+import pasu.vadivasal.view.EditText;
 
 /**
  * Created by developer on 18/12/17.
@@ -681,9 +682,13 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
         final TextView tvLike = helper.getView(R.id.tvLikes);
         final CardView cardView = helper.getView(R.id.card_view);
         final SimpleExoPlayerView playerView = helper.getView(R.id.exoPlayer);
+        final EditText edComment = helper.getView(R.id.tvAddComment);
+        final TextView tvTotalComments = helper.getView(R.id.tvCommentCount);
+        final CircleImageView ivUserCommentProfile = helper.getView(R.id.ivUserComment);
        // final ImageView imagePlayPause = helper.getView(R.id.imgPlayPause);
 
         tvUserName.setText(modelItem.ownerName);
+        tvTotalComments.setText("View all 250 comments");
         if(modelItem.ownerProfileUrl!=null &&!modelItem.ownerProfileUrl.equals(""))
         Picasso.with(mContext).load(modelItem.ownerProfileUrl).into(ivUserProfile);
         else

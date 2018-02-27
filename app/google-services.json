@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "399520639579-bceh4te1247kit9a537r7k6lt620h4km.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pasu.vaadivaasal.demo",
+            "certificate_hash": "9fa05d5206b890a990e1f155a912331d7894625c"
+          }
+        },
+        {
           "client_id": "399520639579-vsgkltdnnv6ctp4io84t55jb21uh6oll.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
