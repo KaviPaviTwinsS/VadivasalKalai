@@ -100,16 +100,16 @@ public class DashBoardData {
     }
 
     public String getVersionAlert() {
-        return VersionAlert;
+        return versionAlert;
     }
 
     public void setVersionAlert(String versionAlert) {
-        VersionAlert = versionAlert;
+        this.versionAlert = versionAlert;
     }
 
     int latestVerison;
     boolean forceUpdate;
-    String VersionAlert;
+    String versionAlert;
 
     public ArrayList<Media> getPhotos() {
       Media media=new Media();

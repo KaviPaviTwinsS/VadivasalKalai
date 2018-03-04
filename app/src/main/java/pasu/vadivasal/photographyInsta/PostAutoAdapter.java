@@ -14,6 +14,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.AudioManager;
+import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -29,6 +30,7 @@ import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Base64;
@@ -37,8 +39,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -77,11 +81,11 @@ import pasu.vadivasal.adapter.base.BaseViewHolder;
 import pasu.vadivasal.android.SessionSave;
 import pasu.vadivasal.android.Utils;
 import pasu.vadivasal.globalModle.Appconstants;
+import pasu.vadivasal.globalModle.Comments_Model;
 import pasu.vadivasal.model.PostModel;
 import pasu.vadivasal.regLogin.SignUpActivity;
 import pasu.vadivasal.regLogin.SocialLoginCustom;
 import pasu.vadivasal.view.CircleImageView;
-import pasu.vadivasal.view.EditText;
 
 /**
  * Created by developer on 18/12/17.
@@ -538,7 +542,7 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
     private static final DecelerateInterpolator DECCELERATE_INTERPOLATOR = new DecelerateInterpolator();
     private static final AccelerateInterpolator ACCELERATE_INTERPOLATOR = new AccelerateInterpolator();
     private static final OvershootInterpolator OVERSHOOT_INTERPOLATOR = new OvershootInterpolator(4);
-
+    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("comments");
 
     //    public ImageButton btnComments;
 //    public ImageButton btnLike;
@@ -682,13 +686,58 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
         final TextView tvLike = helper.getView(R.id.tvLikes);
         final CardView cardView = helper.getView(R.id.card_view);
         final SimpleExoPlayerView playerView = helper.getView(R.id.exoPlayer);
-        final EditText edComment = helper.getView(R.id.tvAddComment);
+        final EditText edComment = helper.getView(R.id.edAddComment);
+        final ImageView imgAddComment = helper.getView(R.id.imgPostComment);
         final TextView tvTotalComments = helper.getView(R.id.tvCommentCount);
-        final CircleImageView ivUserCommentProfile = helper.getView(R.id.ivUserComment);
        // final ImageView imagePlayPause = helper.getView(R.id.imgPlayPause);
 
+
+        tvTotalComments.setText("View all "+modelItem.commentsCount+" comments");
+        imgAddComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!TextUtils.isEmpty(edComment.getText().toString())) {
+                    String comment = edComment.getText().toString();
+
+                    if (FirebaseAuth.getInstance().getCurrentUser() != null ){
+                        String name = SessionSave.getSession(Appconstants.USER_PROFILE_NAME,context);
+                        String userId = SessionSave.getSession(Appconstants.USER_PROFILE_GOOGLE_ID,context);
+
+                        Comments_Model cModel = new Comments_Model(name, userId, comment, System.currentTimeMillis()/1000,SessionSave.getSession(Appconstants.USER_PROFILE_IMAGE,context));
+                        mDatabase.child(modelItem.postId).push().setValue(cModel, new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                if (databaseError != null) {
+                                    Toast.makeText(context, "Failed to Add Comment", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    Toast.makeText(context, "You Commented on this post", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
+                    }else {
+                        Toast.makeText(context, "Please Login to give comment", Toast.LENGTH_SHORT).show();
+                    }
+//            rvComments.smoothScrollBy(0, rvComments.getChildAt(0).getHeight() * commentsAdapter.getItemCount());
+
+                    edComment.setText(null);
+
+                }else {
+                    Toast.makeText(context, "Please Enter Comment", Toast.LENGTH_SHORT).show();
+                    imgAddComment.startAnimation(AnimationUtils.loadAnimation(context, R.anim.shake_error));
+                }
+            }
+        });
+
+        tvTotalComments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onFeedItemClickListener.onCommentsClick(v, helper.getAdapterPosition(), modelItem);
+            }
+        });
+
         tvUserName.setText(modelItem.ownerName);
-        tvTotalComments.setText("View all 250 comments");
+
         if(modelItem.ownerProfileUrl!=null &&!modelItem.ownerProfileUrl.equals(""))
         Picasso.with(mContext).load(modelItem.ownerProfileUrl).into(ivUserProfile);
         else

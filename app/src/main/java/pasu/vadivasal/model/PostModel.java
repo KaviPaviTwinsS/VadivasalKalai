@@ -14,6 +14,7 @@ public class PostModel {
     public String description;
     public String url;
     public int likesCount = 0;
+    public int commentsCount = 0;
     public String postId;
     public int typeOfPost;
     public String videoThumbnail;
