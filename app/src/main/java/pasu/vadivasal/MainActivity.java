@@ -255,6 +255,7 @@ public class MainActivity extends AppCompatActivity {
         },500);
     }
 
+
     private void confirmLogout() {
         final AlertDialog d = new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.logout))

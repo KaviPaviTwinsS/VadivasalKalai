@@ -863,6 +863,12 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 //        System.out.println("naganagnanganag"+FirebaseAuth.getInstance().getCurrentUser() +"___"+ SessionSave.getSessionInt(Appconstants.LOGIN_TYPE,getActivity()));
