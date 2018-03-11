@@ -545,6 +545,7 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
     private static final OvershootInterpolator OVERSHOOT_INTERPOLATOR = new OvershootInterpolator(4);
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("comments");
     private ArrayList<Integer> viewPosition = new ArrayList<>();
+    private HashMap<Integer,String> playedPosition = new HashMap<>();
     //    public ImageButton btnComments;
 //    public ImageButton btnLike;
 //    public ImageButton btnMore;
@@ -794,8 +795,16 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
 
         if (modelItem.typeOfPost == 1) {
 
-
-            viewPosition.add(helper.getAdapterPosition());
+            if (helper.getAdapterPosition() == 0){
+                viewPosition.clear();
+                viewPosition.add(0);
+            }else {
+                viewPosition.clear();
+                for (int i = 0; i <= helper.getAdapterPosition(); i++) {
+                    viewPosition.add(i);
+                }
+            }
+//            playedPosition.put(helper.getAdapterPosition(),"0");
 
 
 
@@ -816,13 +825,22 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
             MediaSource mediaSource = buildMediaSource(uri);
             player.prepare(mediaSource, true, false);
 
-            for (int i = 0; i<= viewPosition.size();i++){
+            for (int i = 0; i<= (viewPosition.size() -1);i++){
                 if (i== helper.getAdapterPosition()){
-                    System.out.println("cameeeeeeee "+"in true"+"___"+helper.getAdapterPosition());
+                    System.out.println("cameeeeeeee "+"in true"+"___"+i+"____"+helper.getAdapterPosition()+"____"+viewPosition.size());
                     player.setPlayWhenReady(true);
+                    if (playedPosition.get(i) != null &&!playedPosition.get(i).equals("0")){
+                        System.out.println("cameeeeeeee "+"in true"+"in played"+"___"+i+"____"+helper.getAdapterPosition());
+                        player.seekTo(Long.parseLong(playedPosition.get(i)));
+                    }
                 }else {
-                    System.out.println("cameeeeeeee "+"in false"+"___"+helper.getAdapterPosition());
-                    player.setPlayWhenReady(false);
+                    System.out.println("cameeeeeeee "+"in false"+"___"+i+"____"+helper.getAdapterPosition()+"____"+viewPosition.size());
+                    playedPosition.put(helper.getAdapterPosition(),String.valueOf(player.getCurrentPosition()));
+                    if (player.getPlayWhenReady()) {
+                        player.setPlayWhenReady(false);
+                    }
+
+
                 }
             }
 //            try {
