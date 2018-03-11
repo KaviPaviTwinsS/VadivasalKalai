@@ -282,21 +282,6 @@
             ]
         },
         {
-            "outputFile": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-v13_values-v13.arsc.flat",
-            "map": [
-                {
-                    "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\values-v13\\values-v13.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "58",
-                        "endOffsets": "109"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-large-v4_values-large-v4.arsc.flat",
             "map": [
                 {
@@ -307,6 +292,21 @@
                         "startOffsets": "55,114,185,256,326,396,464,532,636",
                         "endColumns": "58,70,70,69,69,67,67,103,115",
                         "endOffsets": "109,180,251,321,391,459,527,631,747"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-v13_values-v13.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\values-v13\\values-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "58",
+                        "endOffsets": "109"
                     }
                 }
             ]
@@ -433,6 +433,21 @@
             ]
         },
         {
+            "outputFile": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-v18_values-v18.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\values-v18\\values-v18.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "48",
+                        "endOffsets": "99"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-es_values-es.arsc.flat",
             "map": [
                 {
@@ -467,21 +482,6 @@
                         "startOffsets": "2022,2066,2106,2146,2187",
                         "endColumns": "43,39,39,40,45",
                         "endOffsets": "2061,2101,2141,2182,2228"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-v18_values-v18.arsc.flat",
-            "map": [
-                {
-                    "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\values-v18\\values-v18.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "48",
-                        "endOffsets": "99"
                     }
                 }
             ]

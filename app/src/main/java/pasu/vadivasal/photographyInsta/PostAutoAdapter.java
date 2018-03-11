@@ -69,6 +69,7 @@ import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -76,7 +77,6 @@ import pasu.vadivasal.MainActivity;
 import pasu.vadivasal.PhotoViewActivity;
 import pasu.vadivasal.Profile.UserProfileActivity;
 import pasu.vadivasal.R;
-import pasu.vadivasal.VideoFullScreenActivity;
 import pasu.vadivasal.adapter.base.BaseQuickAdapter;
 import pasu.vadivasal.adapter.base.BaseViewHolder;
 import pasu.vadivasal.android.SessionSave;
@@ -544,7 +544,7 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
     private static final AccelerateInterpolator ACCELERATE_INTERPOLATOR = new AccelerateInterpolator();
     private static final OvershootInterpolator OVERSHOOT_INTERPOLATOR = new OvershootInterpolator(4);
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("comments");
-
+    private ArrayList<Integer> viewPosition = new ArrayList<>();
     //    public ImageButton btnComments;
 //    public ImageButton btnLike;
 //    public ImageButton btnMore;
@@ -793,39 +793,38 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
 //        });
 
         if (modelItem.typeOfPost == 1) {
-            ivFeedLoading.setVisibility(View.VISIBLE);
-            ivFeedCenter.setVisibility(View.VISIBLE);
-            playerView.setVisibility(View.GONE);
-            try {
-                System.out.println("Drawable sss" + ivFeedCenter.getDrawable());
-                if (ivFeedCenter.getDrawable() == null) {
-                    byte[] encodeByte = Base64.decode(modelItem.videoThumbnail, Base64.DEFAULT);
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-//                ivFeedLoading.setVisibility(View.GONE);
-                    ivFeedLoading.setImageBitmap(bitmap);
+
+
+            viewPosition.add(helper.getAdapterPosition());
+
+
+
+            SimpleExoPlayer player;
+            ivFeedLoading.setVisibility(View.GONE);
+            ivFeedCenter.setVisibility(View.GONE);
+            playerView.setVisibility(View.VISIBLE);
+            player = ExoPlayerFactory.newSimpleInstance(
+                    new DefaultRenderersFactory(mContext),
+                    new DefaultTrackSelector(), new DefaultLoadControl());
+
+            playerView.setPlayer(player);
+
+//            player.setPlayWhenReady(true);
+//            player.seekTo(currentWindow, playbackPosition);
+
+            Uri uri = Uri.parse(modelItem.url);
+            MediaSource mediaSource = buildMediaSource(uri);
+            player.prepare(mediaSource, true, false);
+
+            for (int i = 0; i<= viewPosition.size();i++){
+                if (i== helper.getAdapterPosition()){
+                    System.out.println("cameeeeeeee "+"in true"+"___"+helper.getAdapterPosition());
+                    player.setPlayWhenReady(true);
+                }else {
+                    System.out.println("cameeeeeeee "+"in false"+"___"+helper.getAdapterPosition());
+                    player.setPlayWhenReady(false);
                 }
-            } catch (Exception e) {
-                System.out.println("imageLoadingError " + e.getMessage());
             }
-            Picasso.with(context)
-                    .load(modelItem.videoThumbnail)
-                    .into(ivFeedCenter);
-//            SimpleExoPlayer player;
-//            ivFeedLoading.setVisibility(View.GONE);
-//            ivFeedCenter.setVisibility(View.GONE);
-//            playerView.setVisibility(View.VISIBLE);
-//            player = ExoPlayerFactory.newSimpleInstance(
-//                    new DefaultRenderersFactory(mContext),
-//                    new DefaultTrackSelector(), new DefaultLoadControl());
-//
-//            playerView.setPlayer(player);
-//
-////            player.setPlayWhenReady(true);
-////            player.seekTo(currentWindow, playbackPosition);
-//
-//            Uri uri = Uri.parse(modelItem.url);
-//            MediaSource mediaSource = buildMediaSource(uri);
-//            player.prepare(mediaSource, true, false);
 //            try {
 //                byte[] encodeByte = Base64.decode(modelItem.thumbNail, Base64.DEFAULT);
 //                Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
@@ -885,15 +884,9 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
                     @Override
                     public void run() {
                         if (doubleClick) {
-                            if (modelItem.typeOfPost == 1) {
-                                Intent intent = new Intent(context, VideoFullScreenActivity.class);
-                                intent.putExtra("videos", modelItem.url);
-                                context.startActivity(intent);
-                            }else {
-                                Intent intent = new Intent(context, PhotoViewActivity.class);
-                                intent.putExtra("imageUrl", modelItem.url);
-                                context.startActivity(intent);
-                            }
+                            Intent intent = new Intent(context, PhotoViewActivity.class);
+                            intent.putExtra("imageUrl", modelItem.url);
+                            context.startActivity(intent);
                         }
                         doubleClick = false;
                     }

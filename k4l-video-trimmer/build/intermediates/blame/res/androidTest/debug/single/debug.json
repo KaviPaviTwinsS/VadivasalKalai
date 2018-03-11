@@ -8,12 +8,12 @@
         "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\drawable\\abc_dialog_material_background.xml"
     },
     {
-        "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldrtl-xxhdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
-        "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\drawable-ldrtl-xxhdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png"
-    },
-    {
         "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_scrubber_track_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\drawable-xxhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldrtl-xxhdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
+        "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\drawable-ldrtl-xxhdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
         "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_scrubber_control_off_mtrl_alpha.png.flat",
@@ -32,20 +32,20 @@
         "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\color-v11\\abc_background_cache_hint_selector_material_light.xml"
     },
     {
-        "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\color_abc_primary_text_material_light.xml.flat",
-        "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\color\\abc_primary_text_material_light.xml"
-    },
-    {
         "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_abc_btn_switch_to_on_mtrl_00012.9.png.flat",
         "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\drawable-xxxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
-        "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_switch_track_mtrl_alpha.9.png.flat",
-        "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\drawable-mdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
+        "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\color_abc_primary_text_material_light.xml.flat",
+        "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\color\\abc_primary_text_material_light.xml"
     },
     {
         "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_ic_star_black_16dp.png.flat",
         "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\drawable-xhdpi-v4\\abc_ic_star_black_16dp.png"
+    },
+    {
+        "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_switch_track_mtrl_alpha.9.png.flat",
+        "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\drawable-mdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
     },
     {
         "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21_abc_action_bar_item_background_material.xml.flat",
@@ -96,16 +96,16 @@
         "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\color-v23\\abc_tint_switch_track.xml"
     },
     {
-        "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_screen_toolbar.xml.flat",
-        "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\layout\\abc_screen_toolbar.xml"
+        "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_ab_share_pack_mtrl_alpha.9.png.flat",
+        "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\drawable-hdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
     },
     {
         "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_textfield_default_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\drawable-mdpi-v4\\abc_textfield_default_mtrl_alpha.9.png"
     },
     {
-        "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_ab_share_pack_mtrl_alpha.9.png.flat",
-        "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\drawable-hdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
+        "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_screen_toolbar.xml.flat",
+        "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\layout\\abc_screen_toolbar.xml"
     },
     {
         "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_btn_colored_material.xml.flat",
@@ -192,12 +192,12 @@
         "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\drawable-ldrtl-xxhdpi-v17\\abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
-        "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_list_longpressed_holo.9.png.flat",
-        "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\drawable-xxhdpi-v4\\abc_list_longpressed_holo.9.png"
-    },
-    {
         "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_select_dialog_material.xml.flat",
         "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\layout\\abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_list_longpressed_holo.9.png.flat",
+        "source": "C:\\Users\\Shakti Vasu\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-24.0.0.aar\\4e85572dd6c8c216a48159f3bf8c46fe\\res\\drawable-xxhdpi-v4\\abc_list_longpressed_holo.9.png"
     },
     {
         "merged": "F:\\Projects\\VadivasalKalai\\k4l-video-trimmer\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
