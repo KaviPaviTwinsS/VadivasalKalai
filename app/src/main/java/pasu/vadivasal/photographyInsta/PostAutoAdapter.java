@@ -76,6 +76,7 @@ import pasu.vadivasal.MainActivity;
 import pasu.vadivasal.PhotoViewActivity;
 import pasu.vadivasal.Profile.UserProfileActivity;
 import pasu.vadivasal.R;
+import pasu.vadivasal.VideoFullScreenActivity;
 import pasu.vadivasal.adapter.base.BaseQuickAdapter;
 import pasu.vadivasal.adapter.base.BaseViewHolder;
 import pasu.vadivasal.android.SessionSave;
@@ -792,22 +793,39 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
 //        });
 
         if (modelItem.typeOfPost == 1) {
-            SimpleExoPlayer player;
-            ivFeedLoading.setVisibility(View.GONE);
-            ivFeedCenter.setVisibility(View.GONE);
-            playerView.setVisibility(View.VISIBLE);
-            player = ExoPlayerFactory.newSimpleInstance(
-                    new DefaultRenderersFactory(mContext),
-                    new DefaultTrackSelector(), new DefaultLoadControl());
-
-            playerView.setPlayer(player);
-
-//            player.setPlayWhenReady(true);
-//            player.seekTo(currentWindow, playbackPosition);
-
-            Uri uri = Uri.parse(modelItem.url);
-            MediaSource mediaSource = buildMediaSource(uri);
-            player.prepare(mediaSource, true, false);
+            ivFeedLoading.setVisibility(View.VISIBLE);
+            ivFeedCenter.setVisibility(View.VISIBLE);
+            playerView.setVisibility(View.GONE);
+            try {
+                System.out.println("Drawable sss" + ivFeedCenter.getDrawable());
+                if (ivFeedCenter.getDrawable() == null) {
+                    byte[] encodeByte = Base64.decode(modelItem.videoThumbnail, Base64.DEFAULT);
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+//                ivFeedLoading.setVisibility(View.GONE);
+                    ivFeedLoading.setImageBitmap(bitmap);
+                }
+            } catch (Exception e) {
+                System.out.println("imageLoadingError " + e.getMessage());
+            }
+            Picasso.with(context)
+                    .load(modelItem.videoThumbnail)
+                    .into(ivFeedCenter);
+//            SimpleExoPlayer player;
+//            ivFeedLoading.setVisibility(View.GONE);
+//            ivFeedCenter.setVisibility(View.GONE);
+//            playerView.setVisibility(View.VISIBLE);
+//            player = ExoPlayerFactory.newSimpleInstance(
+//                    new DefaultRenderersFactory(mContext),
+//                    new DefaultTrackSelector(), new DefaultLoadControl());
+//
+//            playerView.setPlayer(player);
+//
+////            player.setPlayWhenReady(true);
+////            player.seekTo(currentWindow, playbackPosition);
+//
+//            Uri uri = Uri.parse(modelItem.url);
+//            MediaSource mediaSource = buildMediaSource(uri);
+//            player.prepare(mediaSource, true, false);
 //            try {
 //                byte[] encodeByte = Base64.decode(modelItem.thumbNail, Base64.DEFAULT);
 //                Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
@@ -867,9 +885,15 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
                     @Override
                     public void run() {
                         if (doubleClick) {
-                            Intent intent = new Intent(context, PhotoViewActivity.class);
-                            intent.putExtra("imageUrl", modelItem.url);
-                            context.startActivity(intent);
+                            if (modelItem.typeOfPost == 1) {
+                                Intent intent = new Intent(context, VideoFullScreenActivity.class);
+                                intent.putExtra("videos", modelItem.url);
+                                context.startActivity(intent);
+                            }else {
+                                Intent intent = new Intent(context, PhotoViewActivity.class);
+                                intent.putExtra("imageUrl", modelItem.url);
+                                context.startActivity(intent);
+                            }
                         }
                         doubleClick = false;
                     }

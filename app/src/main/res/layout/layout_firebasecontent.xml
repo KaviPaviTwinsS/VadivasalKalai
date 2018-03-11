@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                app:srcCompat="@drawable/ic_camera_rear_white_24dp" />
+                app:srcCompat="@drawable/ic_photo" />
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fabVideo"
                 android:layout_width="wrap_content"

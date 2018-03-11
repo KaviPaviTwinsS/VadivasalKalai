@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import pasu.vadivasal.MainActivity;
 import pasu.vadivasal.R;
 import pasu.vadivasal.matchList.view.MatchListPager;
 
@@ -28,6 +29,7 @@ public class MatchListMainFragment extends Fragment implements TabLayout.OnTabSe
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ((MainActivity) getActivity()).changeToolbarImage();
         View v = inflater.inflate(R.layout.match_detail_main, container, false);
         TabLayout tabLayout = (TabLayout) v.findViewById(R.id.tabLayout1);
         if (getArguments() != null)

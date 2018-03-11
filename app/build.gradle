@@ -95,7 +95,7 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics-ndk:1.1.6@aar') {
         transitive = true
     }
-    implementation project(':k4l-trimmer')
+    implementation project(':k4l-video-trimmer')
 }
 
 

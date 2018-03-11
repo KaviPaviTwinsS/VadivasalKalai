@@ -24,6 +24,7 @@ import org.w3c.dom.Text;
 
 import java.util.Locale;
 
+import pasu.vadivasal.MainActivity;
 import pasu.vadivasal.R;
 import pasu.vadivasal.android.SessionSave;
 import pasu.vadivasal.android.Utils;
@@ -46,6 +47,7 @@ public class MoreListFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ((MainActivity) getActivity()).changeToolbarImage();
         View v = inflater.inflate(R.layout.more_settings, container, false);
         rateApp = v.findViewById(R.id.rateApp);
         about_app=v.findViewById(R.id.about_app);

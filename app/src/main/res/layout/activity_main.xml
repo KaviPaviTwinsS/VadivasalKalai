@@ -55,8 +55,20 @@
                     android:layout_gravity="right"
                     android:padding="8dp"
                     android:layout_marginRight="3dp"
-                    app:srcCompat="@drawable/user" />
-
+                    app:srcCompat="@drawable/user"
+                    android:visibility="visible"/>
+                <pasu.vadivasal.view.TextView
+                    android:id="@+id/textAddImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:text="Add"
+                    android:padding="@dimen/pad_5dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/white"
+                    android:visibility="gone"
+                    android:background="@drawable/add_button_shape"/>
             </android.support.v7.widget.Toolbar>
             <View
                 android:layout_width="match_parent"

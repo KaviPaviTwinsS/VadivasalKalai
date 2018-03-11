@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -44,11 +45,10 @@ import pasu.vadivasal.view.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
+//    private TextView mTextMessage;
     private BottomNavigationView navigation;
     private AlertDialog UserRegisterAlert;
-
-
+    private Fragment currentFragment;
     @Override
     public void onBackPressed() {
        // super.onBackPressed();
@@ -141,7 +141,8 @@ public class MainActivity extends AppCompatActivity {
     };
     private RecyclerView rvDashboard;
     private DashboardAdapter dashboardAdapter;
-    CircleImageView toolbar_profile_image;
+    public CircleImageView toolbar_profile_image;
+    public pasu.vadivasal.view.TextView tvAddImage;
 
     private void showFragment(Fragment fragment, boolean allowStateLoss) {
         FragmentManager fm = getSupportFragmentManager();
@@ -181,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         getSupportFragmentManager().beginTransaction().add(R.id.main_frag, new DashboardMainFragment()).commit();
         toolbar_profile_image = (CircleImageView) findViewById(R.id.toolbar_profile_image);
+        tvAddImage = (pasu.vadivasal.view.TextView) findViewById(R.id.textAddImage);
      //   Picasso.with(this).load(SessionSave.getSession(Appconstants.USER_PROFILE_IMAGE,this)).error(R.drawable.user).into(toolbar_profile_image);
 //        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
 //            if (FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl() != null)
@@ -199,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(final View view) {
                 if(!SessionSave.getBooleanSession(Appconstants.FORCE_UPDATE,MainActivity.this)){
                 if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                    if (SessionSave.getSessionInt(Appconstants.LOGIN_TYPE, MainActivity.this) != 0) {
+                   if (SessionSave.getSessionInt(Appconstants.LOGIN_TYPE, MainActivity.this) != 0) {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -220,7 +222,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 } else {
                     MainActivity.this.startActivity(new Intent(MainActivity.this, SocialLoginCustom.class));
-                }}
+                }
+                }
             }
         });
 
@@ -240,19 +243,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         if(FirebaseInstanceId.getInstance()!=null){
         System.out.println("refreshed"+ FirebaseInstanceId.getInstance().getToken());}
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if(toolbar_profile_image!=null && MainActivity.this!=null && !SessionSave.getSession(Appconstants.USER_PROFILE_IMAGE,MainActivity.this).equals(""))
-                    Picasso.with(MainActivity.this)
-                            .load(SessionSave.getSession(Appconstants.USER_PROFILE_IMAGE,MainActivity.this))
-                            .placeholder(R.drawable.user)
-
-                            .error(R.drawable.user)
-                            // .transform(new CircleTransformation())
-                            .into(toolbar_profile_image);
-            }
-        },500);
+       changeToolbarImage();
     }
 
 
@@ -358,5 +349,29 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         if(UserRegisterAlert!=null && UserRegisterAlert.isShowing())
             UserRegisterAlert.dismiss();
+    }
+
+    public void changeToolbarImage(){
+        currentFragment = getSupportFragmentManager().findFragmentById(R.id.main_frag);
+        if (currentFragment instanceof AutoLoadingFragment) {
+            tvAddImage.setVisibility(View.VISIBLE);
+            toolbar_profile_image.setVisibility(View.GONE);
+        } else{
+            tvAddImage.setVisibility(View.GONE);
+            toolbar_profile_image.setVisibility(View.VISIBLE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if(toolbar_profile_image!=null && MainActivity.this!=null && !SessionSave.getSession(Appconstants.USER_PROFILE_IMAGE,MainActivity.this).equals(""))
+                        Picasso.with(MainActivity.this)
+                                .load(SessionSave.getSession(Appconstants.USER_PROFILE_IMAGE,MainActivity.this))
+                                .placeholder(R.drawable.user)
+
+                                .error(R.drawable.user)
+                                // .transform(new CircleTransformation())
+                                .into(toolbar_profile_image);
+                }
+            },500);
+        }
     }
 }

@@ -27,6 +27,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+import pasu.vadivasal.MainActivity;
 import pasu.vadivasal.R;
 import pasu.vadivasal.adapter.base.BaseQuickAdapter;
 import pasu.vadivasal.adapter.base.entity.MultiItemEntity;
@@ -46,6 +47,7 @@ public static boolean versionAlertShown;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ((MainActivity) getActivity()).changeToolbarImage();
         View v = inflater.inflate(R.layout.temp_lay, container, false);
         rvDashboard = v.findViewById(R.id.rvDashboard);
         progressBar = v.findViewById(R.id.progressBar);

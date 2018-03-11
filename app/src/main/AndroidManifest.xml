@@ -78,6 +78,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.TransparentActivity" />
         <activity
+            android:name=".videopackage.TrimmerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.TransparentActivity" />
+        <activity
             android:name=".Profile.UserProfileActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"

@@ -49,7 +49,6 @@ import pasu.vadivasal.R;
 import pasu.vadivasal.android.SessionSave;
 import pasu.vadivasal.globalModle.Appconstants;
 import pasu.vadivasal.model.PostModel;
-import pasu.vadivasal.model.Upload;
 
 //public class AddtoFirebaseActivity extends AppCompatActivity {
 //    private ImageView imageView;
@@ -62,7 +61,7 @@ import pasu.vadivasal.model.Upload;
 //    private DatabaseReference mDatabase;
 //    private int flag;
 //    private String description;
-//    private String videoThumb = "";
+//    private String thumbNail = "";
 //   // private CircleProgressBar progressBar;
 //
 //    @Override
@@ -74,7 +73,7 @@ import pasu.vadivasal.model.Upload;
 //            if (getIntent().getIntExtra("flag", 0) == 1) {
 //                textTitle.setText("Selected Video Thumbnail");
 //                imageUri = Uri.fromFile(new File(getIntent().getStringExtra("imagePath")));
-//                videoThumb = getVideoThumb(getIntent().getStringExtra("imagePath"));
+//                thumbNail = getVideoThumb(getIntent().getStringExtra("imagePath"));
 //            } else {
 //                textTitle.setText("Selected Image");
 //                imageUri = Uri.parse(getIntent().getStringExtra("imagePath"));
@@ -166,7 +165,7 @@ import pasu.vadivasal.model.Upload;
 //                                    String uploadId = mDatabase.push().getKey();
 //                                    Upload upload = new Upload(SessionSave.getSession(Appconstants.USER_PROFILE_GOOGLE_ID,AddtoFirebaseActivity.this),
 //                                            description, taskSnapshot.getDownloadUrl().toString(),
-//                                            uploadId, System.currentTimeMillis()/1000, flag, videoThumb);
+//                                            uploadId, System.currentTimeMillis()/1000, flag, thumbNail);
 //                                    mDatabase.child(uploadId).setValue(upload, new DatabaseReference.CompletionListener() {
 //                                        @Override
 //                                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
@@ -215,40 +214,8 @@ import pasu.vadivasal.model.Upload;
 //    }
 //}
 
-import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.media.ThumbnailUtils;
-import android.net.Uri;
-import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.util.Base64;
-import android.util.Log;
-import android.view.View;
-import android.webkit.MimeTypeMap;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -264,7 +231,7 @@ public class AddtoFirebaseActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private int flag;
     private String description;
-    private String videoThumb = "";
+    private String thumbNail = "";
     private ProgressDialog mProgressDialog;
 //    private CircleProgressBar progressBar;
 
@@ -277,12 +244,12 @@ public class AddtoFirebaseActivity extends AppCompatActivity {
             if (getIntent().getIntExtra("flag", 0) == 1) {
                 textTitle.setText("Selected Video Thumbnail");
                 imageUri = Uri.fromFile(new File(getIntent().getStringExtra("imagePath")));
-                videoThumb = getVideoThumb(getIntent().getStringExtra("imagePath"));
+                thumbNail = getVideoThumb(getIntent().getStringExtra("imagePath"));
             } else {
                 textTitle.setText("Selected Image");
                 imageUri = Uri.parse(getIntent().getStringExtra("imagePath"));
                 Log.d("path", getIntent().getStringExtra("imagePath"));
-                videoThumb = getImageThumb(imageUri);
+                thumbNail = getImageThumb(imageUri);
             }
             flag = getIntent().getIntExtra("flag", 0);
 
@@ -333,14 +300,19 @@ public class AddtoFirebaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         imageView.setVisibility(View.VISIBLE);
-//        if (getIntent().getIntExtra("flag", 0) == 1) {
-//            Bitmap bitmap = ThumbnailUtils.createVideoThumbnail(String.valueOf(imageUri), MediaStore.Images.Thumbnails.FULL_SCREEN_KIND);
-//            imageView.setImageBitmap(bitmap);
-//        }else {
+        if (getIntent().getIntExtra("flag", 0) == 1) {
+            Bitmap bitmap = ThumbnailUtils.createVideoThumbnail(getRealPathFromURI(imageUri.toString()), MediaStore.Images.Thumbnails.FULL_SCREEN_KIND);
+            if (bitmap != null) {
+                imageView.setImageBitmap(bitmap);
+            }else {
+                Toast.makeText(this,"Unable to create video thumnail",Toast.LENGTH_SHORT).show();
+            }
+
+        }else {
         Picasso.with(AddtoFirebaseActivity.this)
                 .load(imageUri)
                 .into(imageView);
-//        }
+        }
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -551,13 +523,17 @@ public class AddtoFirebaseActivity extends AppCompatActivity {
 
     private void uploadFile() {
         //checking if file is available
-        String compressedImage = "";
         if (imageUri != null) {
             showProgressDialog();
-            try {
-                compressedImage = compressImage(imageUri.toString());
-            } catch (Exception e) {
-                e.printStackTrace();
+            Uri fileUri = null;
+            if (getIntent().getIntExtra("flag", 0) == 1){
+                fileUri = imageUri;
+            }else {
+                try {
+                    fileUri = Uri.fromFile(new File(compressImage(imageUri.toString())));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             String child="Posts/MyUploads/"+SessionSave.getSession(Appconstants.USER_PROFILE_GOOGLE_ID,AddtoFirebaseActivity.this) + System.currentTimeMillis() + "." + getFileExtension(imageUri);
             StorageReference sRef = storageReference.child(child);
@@ -565,7 +541,8 @@ public class AddtoFirebaseActivity extends AppCompatActivity {
             Log.d("Generated Uri", child);
 
             //adding the file to reference
-            sRef.putFile(Uri.fromFile(new File(compressedImage)))
+//            Uri.fromFile(new File(imageUri.toString()))
+            sRef.putFile(fileUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -581,7 +558,7 @@ public class AddtoFirebaseActivity extends AppCompatActivity {
                                     String uploadId = mDatabase.push().getKey();
                                     PostModel upload = new PostModel(SessionSave.getSession(Appconstants.USER_PROFILE_GOOGLE_ID,AddtoFirebaseActivity.this),
                                             description, taskSnapshot.getDownloadUrl().toString(),
-                                            uploadId, System.currentTimeMillis() / 1000, flag, videoThumb, SessionSave.getSession(Appconstants.USER_PROFILE_NAME, AddtoFirebaseActivity.this), SessionSave.getSession(Appconstants.USER_PROFILE_IMAGE, AddtoFirebaseActivity.this));
+                                            uploadId, System.currentTimeMillis() / 1000, flag, thumbNail, SessionSave.getSession(Appconstants.USER_PROFILE_NAME, AddtoFirebaseActivity.this), SessionSave.getSession(Appconstants.USER_PROFILE_IMAGE, AddtoFirebaseActivity.this));
                                     mDatabase.child(uploadId).setValue(upload, new DatabaseReference.CompletionListener() {
                                         @Override
                                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {

@@ -26,6 +26,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import pasu.vadivasal.MainActivity;
 import pasu.vadivasal.R;
 import pasu.vadivasal.adapter.base.BaseQuickAdapter;
 import pasu.vadivasal.globalModle.News;
@@ -65,6 +66,7 @@ public class NewsListFragment extends Fragment implements BaseQuickAdapter.Reque
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ((MainActivity) getActivity()).changeToolbarImage();
         View rootView = inflater.inflate(R.layout.commentary_layout, container, false);
       // this.TOUR_ID = getActivity().getIntent().getStringExtra(Appconstants.TourID);
         progressBar = rootView.findViewById(R.id.progressBar);

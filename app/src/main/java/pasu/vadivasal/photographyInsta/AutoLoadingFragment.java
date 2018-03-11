@@ -719,6 +719,7 @@ package pasu.vadivasal.photographyInsta;
 //}
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -726,7 +727,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
@@ -746,7 +746,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -771,11 +770,15 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import life.knowledge4.videotrimmer.utils.FileUtils;
+import pasu.vadivasal.MainActivity;
 import pasu.vadivasal.R;
 import pasu.vadivasal.adapter.base.BaseQuickAdapter;
 import pasu.vadivasal.android.SessionSave;
 import pasu.vadivasal.globalModle.Appconstants;
 import pasu.vadivasal.model.PostModel;
+import pasu.vadivasal.regLogin.SocialLoginCustom;
+import pasu.vadivasal.videopackage.TrimmerActivity;
 import pasu.vadivasal.view.FeedContextMenu;
 import pasu.vadivasal.view.FeedContextMenuManager;
 
@@ -814,7 +817,7 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
     private LinearLayoutManager layoutManager;
     private View progressBar;
     private ProgressDialog mProgressDialog;
-
+    private android.support.v7.app.AlertDialog UserRegisterAlert;
     public static AutoLoadingFragment newInstance(String Title) {
         AutoLoadingFragment fragmentAction = new AutoLoadingFragment();
         Bundle args = new Bundle();
@@ -825,6 +828,24 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getActivity().setTitle("Firebase Newsfeed");
+        ((MainActivity) getActivity()).changeToolbarImage();
+        ((MainActivity) getActivity()).tvAddImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!SessionSave.getBooleanSession(Appconstants.FORCE_UPDATE,getActivity())){
+                    if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                        if (SessionSave.getSessionInt(Appconstants.LOGIN_TYPE, getActivity()) != 0) {
+                            showPhotoVideoAlert();
+                        } else {
+                            ((MainActivity) getActivity()).showUserAlert();
+                        }
+                    } else {
+                        getActivity().startActivity(new Intent(getActivity(), SocialLoginCustom.class));
+                    }
+                }
+            }
+        });
+
         View rootView = inflater.inflate(R.layout.layout_firebasecontent, container, false);
 //        this.TOUR_ID = getActivity().getIntent().getStringExtra(Appconstants.TourID);
         progressBar = rootView.findViewById(R.id.progressBar);
@@ -862,18 +883,13 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
         this.itemArrayList = new ArrayList();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 //        System.out.println("naganagnanganag"+FirebaseAuth.getInstance().getCurrentUser() +"___"+ SessionSave.getSessionInt(Appconstants.LOGIN_TYPE,getActivity()));
         if (FirebaseAuth.getInstance().getCurrentUser() != null && SessionSave.getSessionInt(Appconstants.LOGIN_TYPE, getActivity()) != 0)
-            fabImage.setVisibility(View.VISIBLE);
+            fabImage.setVisibility(View.GONE);
         fabImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -1090,9 +1106,9 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
 
     private void startTrimActivity(@NonNull Uri uri) {
 
-//        Intent intent = new Intent(getActivity(), TrimmerActivity.class);
-//        intent.putExtra(EXTRA_VIDEO_PATH, FileUtils.getPath(getActivity(), uri));
-//        startActivity(intent);
+        Intent intent = new Intent(getActivity(), TrimmerActivity.class);
+        intent.putExtra(EXTRA_VIDEO_PATH, FileUtils.getPath(getActivity(), uri));
+        startActivity(intent);
     }
 
     public void setData() {
@@ -1112,7 +1128,9 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
     public void onStop() {
 //        ApiCallManager.cancelCall("get_bat_leader_board");
 //        ApiCallManager.cancelCall("get_bowl_leader_board");
-hideProgressDialog();
+        hideProgressDialog();
+        if(UserRegisterAlert!=null && UserRegisterAlert.isShowing())
+            UserRegisterAlert.dismiss();
         super.onStop();
 
     }
@@ -1510,5 +1528,41 @@ hideProgressDialog();
                 }
             }
         };
+    }
+
+    public void showPhotoVideoAlert() {
+        Context context = getContext();
+
+        if (!((Activity) context).isFinishing()) {
+            try {
+                final android.support.v7.app.AlertDialog.Builder ab = new android.support.v7.app.AlertDialog.Builder(context, R.style.CustomAlertDialogStyle);
+                View dialogView = ((Activity) context).getLayoutInflater().inflate(R.layout.image_or_video, null);
+                ab.setView(dialogView);
+                ab.setCancelable(true);
+                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+
+
+                    dialogView.findViewById(R.id.camera_lay).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            choosePhotoFromGallary();
+                            UserRegisterAlert.dismiss();
+                        }
+                    });
+                    dialogView.findViewById(R.id.video_lay).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            pickFromGallery();
+                            UserRegisterAlert.dismiss();
+                        }
+                    });
+
+                    UserRegisterAlert = ab.create();
+                    UserRegisterAlert.show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
