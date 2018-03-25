@@ -96,6 +96,9 @@ dependencies {
         transitive = true
     }
     implementation project(':k4l-video-trimmer')
+    compile('com.github.worker8:tourguide:1.0.17-SNAPSHOT@aar') {
+        transitive = true
+    }
 }
 
 

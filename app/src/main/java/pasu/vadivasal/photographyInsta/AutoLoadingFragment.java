@@ -728,6 +728,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -745,10 +746,14 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -773,6 +778,7 @@ import java.util.List;
 import life.knowledge4.videotrimmer.utils.FileUtils;
 import pasu.vadivasal.MainActivity;
 import pasu.vadivasal.R;
+import pasu.vadivasal.VideoMessenger;
 import pasu.vadivasal.adapter.base.BaseQuickAdapter;
 import pasu.vadivasal.android.SessionSave;
 import pasu.vadivasal.globalModle.Appconstants;
@@ -781,6 +787,12 @@ import pasu.vadivasal.regLogin.SocialLoginCustom;
 import pasu.vadivasal.videopackage.TrimmerActivity;
 import pasu.vadivasal.view.FeedContextMenu;
 import pasu.vadivasal.view.FeedContextMenuManager;
+import tourguide.tourguide.ChainTourGuide;
+import tourguide.tourguide.Overlay;
+import tourguide.tourguide.Pointer;
+import tourguide.tourguide.Sequence;
+import tourguide.tourguide.ToolTip;
+import tourguide.tourguide.TourGuide;
 
 
 public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.RequestLoadMoreListener, AdapterView.OnItemSelectedListener,
@@ -792,6 +804,7 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
     private static final int REQUEST_CAMARA_ACCESS_PERMISSION = 102;
     private static final int REQUEST_VIDEO_TRIMMER = 10;
     int ballType = -1;
+    private ViewGroup viewContent,viewToolTip;
     private ArcMenu arcMenu;
     private BottomNavigationView bottomNavigationView;
     private FloatingActionButton fabImage;
@@ -818,6 +831,16 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
     private View progressBar;
     private ProgressDialog mProgressDialog;
     private android.support.v7.app.AlertDialog UserRegisterAlert;
+    private int currentplaying = -9;
+    private int positiveScroll, negativeScroll;
+    private Animation mEnterAnimation, mExitAnimation;
+
+    public static final int OVERLAY_METHOD = 1;
+    public static final int OVERLAY_LISTENER_METHOD = 2;
+
+    public static final String CONTINUE_METHOD = "continue_method";
+    public ChainTourGuide mTourGuideHandler;
+
     public static AutoLoadingFragment newInstance(String Title) {
         AutoLoadingFragment fragmentAction = new AutoLoadingFragment();
         Bundle args = new Bundle();
@@ -826,13 +849,27 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
         return fragmentAction;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+            /* setup enter and exit animation */
+        mEnterAnimation = new AlphaAnimation(0f, 1f);
+        mEnterAnimation.setDuration(600);
+        mEnterAnimation.setFillAfter(true);
+
+        mExitAnimation = new AlphaAnimation(1f, 0f);
+        mExitAnimation.setDuration(600);
+        mExitAnimation.setFillAfter(true);
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getActivity().setTitle("Firebase Newsfeed");
+        SessionSave.saveSession("showToolTip", true, getContext());
         ((MainActivity) getActivity()).changeToolbarImage();
         ((MainActivity) getActivity()).tvAddImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!SessionSave.getBooleanSession(Appconstants.FORCE_UPDATE,getActivity())){
+                if (!SessionSave.getBooleanSession(Appconstants.FORCE_UPDATE, getActivity())) {
                     if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                         if (SessionSave.getSessionInt(Appconstants.LOGIN_TYPE, getActivity()) != 0) {
                             showPhotoVideoAlert();
@@ -847,6 +884,18 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
         });
 
         View rootView = inflater.inflate(R.layout.layout_firebasecontent, container, false);
+        viewContent = rootView.findViewById(R.id.content);
+        if (SessionSave.getBooleanSession("showToolTip",getContext())) {
+            viewToolTip = rootView.findViewById(R.id.tooltiplay);
+            viewToolTip.setVisibility(View.VISIBLE);
+            viewContent.setVisibility(View.GONE);
+            ImageButton btnComments = rootView.findViewById(R.id.btnComments);
+            ImageButton btnLike = rootView.findViewById(R.id.btnLike);
+
+//            runOverlay_ContinueMethod(btnLike, btnComments);
+            runOverlayListener_ContinueMethod(btnLike, btnComments);
+        }
+
 //        this.TOUR_ID = getActivity().getIntent().getStringExtra(Appconstants.TourID);
         progressBar = rootView.findViewById(R.id.progressBar);
 //        viewEmpty = rootView.findViewById(R.id.viewEmpty);
@@ -866,17 +915,47 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
         setData();
 
         this.rvMatches.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            int scrollDy = 0;
+
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (FeedContextMenuManager.getInstance().contextMenuView != null) {
                     FeedContextMenuManager.getInstance().hideContextMenuWithoutAnim();
                 }
+
+                System.out.println("Cureeeeeeeeeeeeee" + layoutManager.findLastCompletelyVisibleItemPosition() +
+                        "__" + layoutManager.findFirstVisibleItemPosition() + "__" + dy + "__" + positiveScroll);
+
+                if (dy > 0) {
+                    positiveScroll += dy;
+                    if (positiveScroll > 30 && layoutManager.findLastCompletelyVisibleItemPosition() != currentplaying && layoutManager.findLastCompletelyVisibleItemPosition() != -1) {
+//                        View firstItemView = mLayoutManager.findViewByPosition(mLayoutManager.findFirstVisibleItemPosition());
+//                        System.out.println("need to play jjjjj" + Math.abs(firstItemView.getY()) / firstItemView.getHeight() + "__" + mLayoutManager.findFirstVisibleItemPosition());
+//                        if ((Math.abs(firstItemView.getY()) / firstItemView.getHeight()) > 0.50) {
+                        currentplaying = layoutManager.findLastCompletelyVisibleItemPosition();
+                        System.out.println("need to play " + currentplaying);
+                        ((VideoMessenger) recyclerView.getAdapter()).videoToPlay(currentplaying);
+                        positiveScroll = 0;
+//                        }
+                    }
+                } else {
+                    negativeScroll += dy;
+                    if (negativeScroll < -200 && layoutManager.findFirstVisibleItemPosition() != currentplaying && layoutManager.findFirstVisibleItemPosition() != -1) {
+//                        View firstItemView = mLayoutManager.findViewByPosition(mLayoutManager.findFirstVisibleItemPosition());
+//                        System.out.println("need to play jjjjj" + Math.abs(firstItemView.getY()) / firstItemView.getHeight());
+//                        if ((Math.abs(firstItemView.getY()) / firstItemView.getHeight()) > 0.50) {
+                        currentplaying = layoutManager.findFirstVisibleItemPosition();
+                        System.out.println("need to play " + currentplaying);
+                        ((VideoMessenger) recyclerView.getAdapter()).videoToPlay(currentplaying);
+//                        }
+                    }
+                }
             }
         });
-
         return rootView;
     }
+
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -899,12 +978,11 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
         fabVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isStoragePermissionGranted())
-                pickFromGallery();
+                if (isStoragePermissionGranted())
+                    pickFromGallery();
 
             }
         });
-
     }
 
     @Override
@@ -925,6 +1003,170 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
             intent.addCategory(Intent.CATEGORY_OPENABLE);
             startActivityForResult(Intent.createChooser(intent, getString(R.string.label_select_video)), REQUEST_VIDEO_TRIMMER);
         }
+    }
+
+    private void runOverlay_ContinueMethod(ImageButton btnLike, ImageButton btnComments) {
+        // the return handler is used to manipulate the cleanup of all the tutorial elements
+        ChainTourGuide tourGuide3 = ChainTourGuide.init(getActivity())
+                .setToolTip(new ToolTip()
+                        .setTitle("Welcome!")
+                        .setDescription("Add Image or Video")
+                        .setGravity(Gravity.RIGHT)
+                )
+                .setOverlay(new Overlay()
+                        .setBackgroundColor(Color.parseColor("#EE2c3e50"))
+                        .setEnterAnimation(mEnterAnimation)
+                        .setExitAnimation(mExitAnimation)
+                )
+                // note that there is no Overlay here, so the default one will be used
+                .playLater(((MainActivity) getActivity()).tvAddImage);
+
+        ChainTourGuide tourGuide1 = ChainTourGuide.init(getActivity())
+                .setToolTip(new ToolTip()
+                        .setTitle("Like")
+                        .setDescription("Give Your Likes By Clicking Button")
+                        .setGravity(Gravity.RIGHT | Gravity.TOP)
+                )
+                .setOverlay(new Overlay()
+                        .setBackgroundColor(Color.parseColor("#EE2c3e50"))
+                        .setEnterAnimation(mEnterAnimation)
+                        .setExitAnimation(mExitAnimation)
+                )
+                // note that there is no Overlay here, so the default one will be used
+                .playLater(btnLike);
+
+        final ChainTourGuide tourGuide2 = ChainTourGuide.init(getActivity())
+                .setToolTip(new ToolTip()
+                                .setTitle("Comment")
+                                .setDescription("See Comments of the post by clicking this button")
+                                .setGravity(Gravity.RIGHT | Gravity.TOP)
+//                        .setBackgroundColor(Color.parseColor("#c0392b"))
+                )
+                .setOverlay(new Overlay()
+                        .setBackgroundColor(Color.parseColor("#EE2c3e50"))
+                        .setEnterAnimation(mEnterAnimation)
+                        .setExitAnimation(mExitAnimation)
+                        .setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                System.out.println("calleddddd "+"sssssssss");
+                            }
+                        })
+                )
+                .playLater(btnComments);
+
+        /*Overlay overlay = new Overlay()
+                .setBackgroundColor(Color.parseColor("#AAFF0000"))
+                // Note: disable click has no effect when setOnClickListener is used, this is here for demo purpose
+                // if setOnClickListener is not used, disableClick() will take effect
+                .disableClick(false)
+                .disableClickThroughHole(false)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mTutorialHandler.cleanUp();
+                    }
+                });
+*/
+
+        final Sequence sequence = new Sequence.SequenceBuilder()
+                .add(tourGuide3, tourGuide1, tourGuide2)
+                .setDefaultPointer(null)
+                .setContinueMethod(Sequence.ContinueMethod.Overlay)
+                .build();
+
+        ChainTourGuide.init(getActivity()).playInSequence(sequence);
+
+//        final ChainTourGuide[] array = sequence.getTourGuideArray();
+//        tourGuides.setOverlay(new Overlay()
+//                .setBackgroundColor(Color.parseColor("#EE2c3e50"))
+//                .setEnterAnimation(mEnterAnimation)
+//                .setExitAnimation(mExitAnimation)
+//                .setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        SessionSave.saveSession("showToolTip", false, getActivity());
+//                        System.out.println("calleddddd "+"sssssssss");
+//                        viewToolTip.setVisibility(View.GONE);
+////                        viewContent.setVisibility(View.VISIBLE);
+//                        tourGuides.cleanUp();
+//                    }
+//                }));
+
+    }
+
+    private void runOverlayListener_ContinueMethod(ImageButton btnLike, ImageButton btnComments) {
+        // the return handler is used to manipulate the cleanup of all the tutorial elements
+        ChainTourGuide tourGuide1 = ChainTourGuide.init(getActivity())
+                .setToolTip(new ToolTip()
+                        .setTitle("Welcome!")
+                        .setDescription("Add Image or Video")
+                        .setGravity(Gravity.BOTTOM)
+                )
+                .setOverlay(new Overlay()
+                        .setBackgroundColor(Color.parseColor("#EE2c3e50"))
+                        .setEnterAnimation(mEnterAnimation)
+                        .setExitAnimation(mExitAnimation)
+                        .setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mTourGuideHandler.next();
+                            }
+                        })
+                )
+                // note that there is no Overlay here, so the default one will be used
+                .playLater(((MainActivity) getActivity()).tvAddImage);
+
+        ChainTourGuide tourGuide2 = ChainTourGuide.init(getActivity())
+                .setToolTip(new ToolTip()
+                        .setTitle("Like")
+                        .setDescription("Give Your Likes By Clicking Button")
+                        .setGravity(Gravity.TOP | Gravity.RIGHT)
+                )
+                .setOverlay(new Overlay()
+                        .setBackgroundColor(Color.parseColor("#EE2c3e50"))
+                        .setEnterAnimation(mEnterAnimation)
+                        .setExitAnimation(mExitAnimation)
+                        .setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mTourGuideHandler.next();
+                            }
+                        })
+                )
+                .playLater(btnLike);
+
+        ChainTourGuide tourGuide3 = ChainTourGuide.init(getActivity())
+                .setToolTip(new ToolTip()
+                        .setTitle("Comment")
+                        .setDescription("See Comments of the post by clicking this button")
+                        .setGravity(Gravity.TOP |Gravity.RIGHT)
+                )
+                // note that there is not Overlay here, so the default one will be used
+                .playLater(btnComments);
+
+        Sequence sequence = new Sequence.SequenceBuilder()
+                .add(tourGuide1, tourGuide2, tourGuide3)
+                .setDefaultOverlay(new Overlay()
+                        .setEnterAnimation(mEnterAnimation)
+                        .setExitAnimation(mExitAnimation)
+                        .setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(getActivity(), "default Overlay clicked", Toast.LENGTH_SHORT).show();
+                                SessionSave.saveSession("showToolTip", false, getActivity());
+                        System.out.println("calleddddd "+"sssssssss");
+                        viewToolTip.setVisibility(View.GONE);
+                        viewContent.setVisibility(View.VISIBLE);
+                                mTourGuideHandler.next();
+                            }
+                        })
+                )
+                .setDefaultPointer(null)
+                .setContinueMethod(Sequence.ContinueMethod.OverlayListener)
+                .build();
+
+        mTourGuideHandler = ChainTourGuide.init(getActivity()).playInSequence(sequence);
     }
 
     private void showPictureDialog() {
@@ -1028,7 +1270,7 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
         switch (requestCode) {
             case REQUEST_STORAGE_READ_ACCESS_PERMISSION:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                   // pickFromGallery();
+                    // pickFromGallery();
                     isStoragePermissionGranted();
                 }
                 break;
@@ -1042,7 +1284,7 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
 //                    DownloadFileFromURL.execute();
                     if (bitmapImage != null) {
                         pickFromGallery();
-                       // addWaterMark(bitmapImage, urlImage, postModel);
+                        // addWaterMark(bitmapImage, urlImage, postModel);
                     }
 
                 }
@@ -1129,7 +1371,7 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
 //        ApiCallManager.cancelCall("get_bat_leader_board");
 //        ApiCallManager.cancelCall("get_bowl_leader_board");
         hideProgressDialog();
-        if(UserRegisterAlert!=null && UserRegisterAlert.isShowing())
+        if (UserRegisterAlert != null && UserRegisterAlert.isShowing())
             UserRegisterAlert.dismiss();
         super.onStop();
 

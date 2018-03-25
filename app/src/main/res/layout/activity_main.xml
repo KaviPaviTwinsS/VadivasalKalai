@@ -12,7 +12,6 @@
         android:layout_height="match_parent">
 
         <android.support.design.widget.AppBarLayout
-            android:id="@+id/myAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:descendantFocusability="beforeDescendants"
@@ -61,7 +60,7 @@
                     android:id="@+id/textAddImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="right|center_vertical"
                     android:gravity="center"
                     android:text="Add"
                     android:padding="@dimen/pad_5dp"

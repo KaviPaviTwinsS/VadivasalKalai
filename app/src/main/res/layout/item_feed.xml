@@ -73,12 +73,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:minHeight="200dp"
-                    app:resize_mode="fixed_height"
+                    app:resize_mode="fill"
                     app:surface_type="texture_view"
                     app:use_controller="true"
-                    android:padding="10dp"
                     android:visibility="gone"
-                    android:soundEffectsEnabled="false">
+                    android:soundEffectsEnabled="true"
+                    app:controller_layout_id="@layout/video_controller">
                 </com.google.android.exoplayer2.ui.SimpleExoPlayerView>
             </FrameLayout>
 

@@ -13,8 +13,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.media.AudioManager;
-import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -23,7 +21,6 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Html;
@@ -36,7 +33,6 @@ import android.text.style.ClickableSpan;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AnimationUtils;
@@ -50,15 +46,18 @@ import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.exoplayer2.DefaultLoadControl;
-import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
+import com.google.android.exoplayer2.extractor.ExtractorsFactory;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.google.android.exoplayer2.upstream.BandwidthMeter;
+import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -69,14 +68,13 @@ import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import pasu.vadivasal.MainActivity;
 import pasu.vadivasal.PhotoViewActivity;
 import pasu.vadivasal.Profile.UserProfileActivity;
 import pasu.vadivasal.R;
+import pasu.vadivasal.VideoMessenger;
 import pasu.vadivasal.adapter.base.BaseQuickAdapter;
 import pasu.vadivasal.adapter.base.BaseViewHolder;
 import pasu.vadivasal.android.SessionSave;
@@ -84,7 +82,6 @@ import pasu.vadivasal.android.Utils;
 import pasu.vadivasal.globalModle.Appconstants;
 import pasu.vadivasal.globalModle.Comments_Model;
 import pasu.vadivasal.model.PostModel;
-import pasu.vadivasal.regLogin.SignUpActivity;
 import pasu.vadivasal.regLogin.SocialLoginCustom;
 import pasu.vadivasal.view.CircleImageView;
 
@@ -536,7 +533,7 @@ import pasu.vadivasal.view.CircleImageView;
 //        }
 //    }
 //}
-public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder> {
+public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder> implements VideoMessenger {
     public static final int VIEW_TYPE_DEFAULT = 1;
     public static final String ACTION_LIKE_BUTTON_CLICKED = "action_like_button_button";
     public static final String ACTION_LIKE_IMAGE_CLICKED = "action_like_image_button";
@@ -544,8 +541,7 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
     private static final AccelerateInterpolator ACCELERATE_INTERPOLATOR = new AccelerateInterpolator();
     private static final OvershootInterpolator OVERSHOOT_INTERPOLATOR = new OvershootInterpolator(4);
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("comments");
-    private ArrayList<Integer> viewPosition = new ArrayList<>();
-    private HashMap<Integer,String> playedPosition = new HashMap<>();
+
     //    public ImageButton btnComments;
 //    public ImageButton btnLike;
 //    public ImageButton btnMore;
@@ -562,7 +558,12 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
     private String uName = "";
     private String uEmail = "";
     private OnFeedItemClickListener onFeedItemClickListener;
-    private int currentPosition;
+    int toPlay;
+    private int currentPlayingPosition = -1;
+    private SimpleExoPlayerView currentPlayer;
+    private SimpleExoPlayer exoPlayer;
+
+    Activity activity;
     //
 //    public PostAutoAdapter(FragmentActivity activity, int item_feed, List<PostModel> mList, LinearLayoutManager layoutManager) {
 //        super(item_feed, mList);
@@ -573,12 +574,13 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
     public PostAutoAdapter(FragmentActivity activity, int item_feed, List<PostModel> mList) {
         super(item_feed, mList);
         context = activity;
+        this.activity = (Activity)activity;
         this.mList = mList;
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             uName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
             uEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         }
-        //  this.layoutManager = layoutManager;
+
     }
 
     public static void makeTextViewResizable(final TextView tv, final int maxLine, final String expandText, final boolean viewMore) {
@@ -656,18 +658,18 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
 
     }
 
-    public void pauseOther(BaseViewHolder helper) {
-        for (int i = 0; i < mList.size(); i++) {
-            if (i != currentPosition) {
-                ViewGroup viewGroup = (ViewGroup) layoutManager.findViewByPosition(i);
-                SimpleExoPlayerView playerView = helper.getView(R.id.exoPlayer);
-                if (playerView.getPlayer().getPlayWhenReady())
-                    playerView.getPlayer().stop();
-            }
-
-        }
-
-    }
+//    public void pauseOther(BaseViewHolder helper) {
+//        for (int i = 0; i < mList.size(); i++) {
+//            if (i != currentPosition) {
+//                ViewGroup viewGroup = (ViewGroup) layoutManager.findViewByPosition(i);
+//                SimpleExoPlayerView playerView = helper.getView(R.id.exoPlayer);
+//                if (playerView.getPlayer().getPlayWhenReady())
+//                    playerView.getPlayer().stop();
+//            }
+//
+//        }
+//
+//    }
 
     @Override
     protected void convert(final BaseViewHolder helper, final PostModel modelItem) {
@@ -691,8 +693,9 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
         final EditText edComment = helper.getView(R.id.edAddComment);
         final ImageView imgAddComment = helper.getView(R.id.imgPostComment);
         final TextView tvTotalComments = helper.getView(R.id.tvCommentCount);
-       // final ImageView imagePlayPause = helper.getView(R.id.imgPlayPause);
-
+        final ImageView imagePlay = helper.getView(R.id.img_play);
+        final ImageView imagePause = helper.getView(R.id.img_pause);
+        final ImageView imageFullScreen = helper.getView(R.id.img_fullScreen);
 
         tvTotalComments.setText("View all "+modelItem.commentsCount+" comments");
         imgAddComment.setOnClickListener(new View.OnClickListener() {
@@ -795,54 +798,62 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
 
         if (modelItem.typeOfPost == 1) {
 
-            if (helper.getAdapterPosition() == 0){
-                viewPosition.clear();
-                viewPosition.add(0);
-            }else {
-                viewPosition.clear();
-                for (int i = 0; i <= helper.getAdapterPosition(); i++) {
-                    viewPosition.add(i);
-                }
-            }
 //            playedPosition.put(helper.getAdapterPosition(),"0");
 
 
 
-            SimpleExoPlayer player;
             ivFeedLoading.setVisibility(View.GONE);
             ivFeedCenter.setVisibility(View.GONE);
             playerView.setVisibility(View.VISIBLE);
-            player = ExoPlayerFactory.newSimpleInstance(
-                    new DefaultRenderersFactory(mContext),
-                    new DefaultTrackSelector(), new DefaultLoadControl());
 
-            playerView.setPlayer(player);
+            BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
+            TrackSelector trackSelector = new DefaultTrackSelector(new AdaptiveTrackSelection.Factory(bandwidthMeter));
 
-//            player.setPlayWhenReady(true);
-//            player.seekTo(currentWindow, playbackPosition);
+            exoPlayer = ExoPlayerFactory.newSimpleInstance(mContext, trackSelector);
 
-            Uri uri = Uri.parse(modelItem.url);
-            MediaSource mediaSource = buildMediaSource(uri);
-            player.prepare(mediaSource, true, false);
-
-            for (int i = 0; i<= (viewPosition.size() -1);i++){
-                if (i== helper.getAdapterPosition()){
-                    System.out.println("cameeeeeeee "+"in true"+"___"+i+"____"+helper.getAdapterPosition()+"____"+viewPosition.size());
-                    player.setPlayWhenReady(true);
-                    if (playedPosition.get(i) != null &&!playedPosition.get(i).equals("0")){
-                        System.out.println("cameeeeeeee "+"in true"+"in played"+"___"+i+"____"+helper.getAdapterPosition());
-                        player.seekTo(Long.parseLong(playedPosition.get(i)));
-                    }
-                }else {
-                    System.out.println("cameeeeeeee "+"in false"+"___"+i+"____"+helper.getAdapterPosition()+"____"+viewPosition.size());
-                    playedPosition.put(helper.getAdapterPosition(),String.valueOf(player.getCurrentPosition()));
-                    if (player.getPlayWhenReady()) {
-                        player.setPlayWhenReady(false);
-                    }
-
-
+            if (toPlay == helper.getAdapterPosition() && helper.getAdapterPosition() != currentPlayingPosition) {
+                Uri videoURI = Uri.parse("https://firebasestorage.googleapis.com/v0/b/fir-imagevideo.appspot.com/o/MyUploads1511879312867.mp4?alt=media&token=a3568c16-74b8-4cba-b307-481093c3d2a2");
+                currentPlayingPosition = helper.getAdapterPosition();
+                DefaultHttpDataSourceFactory dataSourceFactory = new DefaultHttpDataSourceFactory("exoplayer_video");
+                ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
+                final MediaSource mediaSource = new ExtractorMediaSource(videoURI, dataSourceFactory, extractorsFactory, null, null);
+                if (currentPlayer != null && currentPlayer.getPlayer() != null) {
+                    currentPlayer.getPlayer().stop();
+                    currentPlayer.getPlayer().release();
+                    currentPlayer = null;
                 }
+                currentPlayer = playerView;
+                currentPlayer.setPlayer(exoPlayer);
+                exoPlayer.prepare(mediaSource);
+                exoPlayer.setPlayWhenReady(true);
+                imagePause.setVisibility(View.VISIBLE);
             }
+
+
+            imagePlay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    playerView.getPlayer().setPlayWhenReady(true);
+                    imagePause.setVisibility(View.VISIBLE);
+                    imagePlay.setVisibility(View.GONE);
+                }
+            });
+            imagePause.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    playerView.getPlayer().setPlayWhenReady(false);
+                    imagePlay.setVisibility(View.VISIBLE);
+                    imagePause.setVisibility(View.GONE);
+                }
+            });
+            imageFullScreen.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, PhotoViewActivity.class);
+                    intent.putExtra("videos", modelItem.url);
+                    context.startActivity(intent);
+                }
+            });
 //            try {
 //                byte[] encodeByte = Base64.decode(modelItem.thumbNail, Base64.DEFAULT);
 //                Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
@@ -944,6 +955,7 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
         btnLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (isOnline()) {
                     if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                         animateHeartphoto(helper);
@@ -1213,6 +1225,13 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
         }
 
     }
+
+    @Override
+    public void videoToPlay(int pos) {
+        toPlay = pos;
+        notifyDataSetChanged();
+    }
+
 
     public interface OnFeedItemClickListener {
         void onCommentsClick(View v, int position, PostModel postModel);
