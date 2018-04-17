@@ -30,6 +30,7 @@ android {
         applicationId "pasu.vaadivaasal.demo"
         minSdkVersion 16
         targetSdkVersion 27
+        multiDexEnabled true
         versionCode 9
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -99,6 +100,7 @@ dependencies {
     compile('com.github.worker8:tourguide:1.0.17-SNAPSHOT@aar') {
         transitive = true
     }
+    compile 'com.android.support:multidex:1.0.1'
 }
 
 

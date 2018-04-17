@@ -887,11 +887,12 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
         if (FirebaseAuth.getInstance().getCurrentUser()!=null && modelItem.stars.containsKey(FirebaseAuth.getInstance().getCurrentUser().getUid()) | modelItem.localLike == 1) {
             btnLike.setImageResource(R.drawable.ic_heart_red);
         } else {
-            btnLike.setImageResource(R.drawable.ic_heart_outline_grey);
+            btnLike.setImageResource(R.drawable.ic_heart);
         }
         if (modelItem.description.length() > 100) {
             tvFeedDescription.setText(modelItem.description);
-            makeTextViewResizable(tvFeedDescription, 3, "See More", true);
+            makeTextViewResizable(tvFeedDescription, 3, "See more", true);
+
         } else {
             tvFeedDescription.setText(modelItem.description);
         }
@@ -1080,7 +1081,7 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
                             btnLike.setImageResource(R.drawable.ic_heart_red);
                             showsnackbar("Liked");
                         } else {
-                            btnLike.setImageResource(R.drawable.ic_heart_outline_grey);
+                            btnLike.setImageResource(R.drawable.ic_heart);
                             showsnackbar("Un Liked");
                         }
                     }else{
@@ -1183,7 +1184,7 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
                 if (pModel.stars.containsKey(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                     btnLike.setImageResource(R.drawable.ic_heart_red);
                 } else {
-                    btnLike.setImageResource(R.drawable.ic_heart_outline_grey);
+                    btnLike.setImageResource(R.drawable.ic_heart);
                 }
 
             }

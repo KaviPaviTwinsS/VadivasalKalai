@@ -1153,7 +1153,6 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
                         .setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(getActivity(), "default Overlay clicked", Toast.LENGTH_SHORT).show();
                                 SessionSave.saveSession("showToolTip", false, getActivity());
                         System.out.println("calleddddd "+"sssssssss");
                         viewToolTip.setVisibility(View.GONE);

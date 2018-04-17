@@ -96,7 +96,92 @@
                 android:scaleType="center"
                 app:srcCompat="@drawable/ic_heart_outline_white"
                 android:visibility="invisible" />
+               <FrameLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="bottom"
+                   android:background="#55000000">
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:paddingLeft="8dp"
+                       android:paddingRight="8dp">
 
+                       <ImageButton
+                           android:id="@+id/btnLike"
+                           android:layout_width="48dp"
+                           android:layout_height="48dp"
+                           android:background="@android:color/transparent"
+                           app:srcCompat="@drawable/ic_heart" />
+
+                       <ImageButton
+                           android:id="@+id/btnComments"
+                           android:layout_width="48dp"
+                           android:layout_height="48dp"
+                           android:background="@drawable/btn_feed_action"
+                           app:srcCompat="@drawable/ic_comment" />
+
+                       <ImageButton
+                           android:id="@+id/btnMore"
+                           android:layout_width="48dp"
+                           android:layout_height="48dp"
+                           android:visibility="gone"
+                           android:background="@drawable/btn_feed_action"
+                           app:srcCompat="@drawable/ic_more_grey" />
+                       <android.support.v7.widget.AppCompatImageButton
+                           android:id="@+id/btnShare"
+                           android:layout_width="48dp"
+                           android:layout_height="48dp"
+                           android:background="@drawable/btn_feed_action"
+                           app:srcCompat="@drawable/ic_share_black_24dp" />
+
+                       <LinearLayout
+                           android:layout_width="0dp"
+                           android:layout_height="match_parent"
+                           android:layout_weight="1"
+                           android:gravity="center_vertical|right">
+
+                           <android.support.v7.widget.AppCompatImageView
+                               android:layout_width="14dp"
+                               android:layout_height="14dp"
+                               app:srcCompat="@drawable/ic_heart" />
+
+                           <TextView
+                               android:id="@+id/tvLikes"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_marginLeft="8dp"
+                               android:layout_marginRight="8dp"
+                               android:inAnimation="@anim/slide_in_likes_counter"
+                               android:outAnimation="@anim/slide_out_likes_counter"
+                               android:text="0 Likes"
+                               android:visibility="gone" />
+
+                           <TextSwitcher
+                               android:id="@+id/tsLikesCounter"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_marginLeft="8dp"
+                               android:layout_marginRight="8dp"
+                               android:inAnimation="@anim/slide_in_likes_counter"
+                               android:outAnimation="@anim/slide_out_likes_counter"
+                               android:visibility="visible">
+
+                               <TextView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:text="123 likes"
+                                   android:textColor="@color/white" />
+
+                               <TextView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:textColor="@color/white" />
+                           </TextSwitcher>
+                       </LinearLayout>
+
+                   </LinearLayout>
+               </FrameLayout>
         </pasu.vadivasal.view.SquaredFrameLayout>
         <TextView
             android:id="@+id/tvFeedBottom"
@@ -105,86 +190,7 @@
             android:padding="8dp"
              />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp">
 
-            <ImageButton
-                android:id="@+id/btnLike"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/ic_heart_outline_grey" />
-
-            <ImageButton
-                android:id="@+id/btnComments"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/btn_feed_action"
-                app:srcCompat="@drawable/ic_comment_outline_grey" />
-
-            <ImageButton
-                android:id="@+id/btnMore"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:visibility="gone"
-                android:background="@drawable/btn_feed_action"
-                app:srcCompat="@drawable/ic_more_grey" />
-            <android.support.v7.widget.AppCompatImageButton
-                android:id="@+id/btnShare"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/btn_feed_action"
-                app:srcCompat="@drawable/ic_share_black_24dp" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical|right">
-
-                <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_heart_small_blue" />
-
-                <TextView
-                    android:id="@+id/tvLikes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:inAnimation="@anim/slide_in_likes_counter"
-                    android:outAnimation="@anim/slide_out_likes_counter"
-                    android:text="0 Likes"
-                    android:visibility="gone" />
-
-                <TextSwitcher
-                    android:id="@+id/tsLikesCounter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:inAnimation="@anim/slide_in_likes_counter"
-                    android:outAnimation="@anim/slide_out_likes_counter"
-                    android:visibility="visible">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="123 likes"
-                        android:textColor="@color/text_like_counter" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/text_like_counter" />
-                </TextSwitcher>
-            </LinearLayout>
-
-        </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
