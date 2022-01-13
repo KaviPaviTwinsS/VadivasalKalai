@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tool="http://schemas.android.com/tools"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
@@ -13,10 +12,10 @@
         android:layout_height="wrap_content"
         android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/dp_5"
         android:paddingLeft="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_5"
         android:paddingRight="@dimen/dp_10"
-        android:paddingTop="@dimen/dp_5">
+        android:paddingBottom="@dimen/dp_5">
 
         <pasu.vadivasal.view.TextView
             android:id="@+id/toast_image"
@@ -38,4 +37,4 @@
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16" />
     </LinearLayout>
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>

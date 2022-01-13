@@ -2,12 +2,11 @@ package pasu.vadivasal;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import pasu.vadivasal.News.NewsDetailActivity;
 import pasu.vadivasal.globalModle.Appconstants;
-import pasu.vadivasal.globalModle.News;
 import pasu.vadivasal.tournament.TournamentMatchesActivity;
 import pasu.vadivasal.videopackage.VideoActivityMain;
 

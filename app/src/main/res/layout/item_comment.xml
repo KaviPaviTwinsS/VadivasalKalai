@@ -7,30 +7,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp">
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
         <ImageView
             android:id="@+id/ivUserAvatar"
             android:layout_width="@dimen/comment_avatar_size"
             android:layout_height="@dimen/comment_avatar_size"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_gravity="center"
-             />
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp" />
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tvUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:padding="@dimen/dp_10"
-                android:textColor="@android:color/black"
-                android:text="Lorem ipsum dolor sit amet" />
+                android:text="Lorem ipsum dolor sit amet"
+                android:textColor="@android:color/black" />
+
             <TextView
                 android:id="@+id/tvComment"
                 android:layout_width="match_parent"

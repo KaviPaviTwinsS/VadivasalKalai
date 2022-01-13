@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:descendantFocusability="beforeDescendants"
-            android:focusableInTouchMode="true"
             android:background="@drawable/gradient_drawable"
+            android:descendantFocusability="beforeDescendants"
             android:elevation="@dimen/dp_10"
+            android:focusableInTouchMode="true"
             app:elevation="0dp">
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
-                android:gravity="center"
                 android:elevation="@dimen/dp_10"
+                android:gravity="center"
                 app:contentInsetStart="0dp"
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:padding="10dp"
@@ -38,44 +37,45 @@
                     app:srcCompat="@mipmap/ic_launcher" />
 
                 <pasu.vadivasal.view.TextView
-                    app:asset_font_file_name="@string/font_sourcesans_pro_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="@string/app_name"
                     android:padding="@dimen/dp_10"
+                    android:text="@string/app_name"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/dp_20" />
+                    android:textSize="@dimen/dp_20"
+                    app:asset_font_file_name="@string/font_sourcesans_pro_regular" />
 
                 <pasu.vadivasal.view.CircleImageView
                     android:id="@+id/toolbar_profile_image"
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:layout_gravity="right"
-                    android:padding="8dp"
                     android:layout_marginRight="3dp"
-                    app:srcCompat="@drawable/user"
-                    android:visibility="visible"/>
+                    android:padding="8dp"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/user" />
+
                 <pasu.vadivasal.view.TextView
                     android:id="@+id/textAddImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center_vertical"
-                    android:gravity="center"
-                    android:text="Add"
-                    android:padding="@dimen/pad_5dp"
                     android:layout_marginRight="10dp"
+                    android:background="@drawable/add_button_shape"
+                    android:gravity="center"
+                    android:padding="@dimen/pad_5dp"
+                    android:text="Add"
                     android:textColor="@color/white"
-                    android:visibility="gone"
-                    android:background="@drawable/add_button_shape"/>
-            </android.support.v7.widget.Toolbar>
+                    android:visibility="gone" />
+            </androidx.appcompat.widget.Toolbar>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_3"
-                android:visibility="gone"
                 android:background="@drawable/gradient_drawable"
-                />
-        </android.support.design.widget.AppBarLayout>
+                android:visibility="gone" />
+        </com.google.android.material.appbar.AppBarLayout>
 
         <!---your recycler view Container Layout-->
         <FrameLayout
@@ -90,13 +90,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:background="@color/background_color_overall"
             app:itemIconTint="@drawable/navi_selector"
             app:itemTextColor="@drawable/navi_selector"
+            app:menu="@menu/navigation"
+            app:itemHorizontalTranslationEnabled="false"
+            app:labelVisibilityMode="labeled"/>
 
-            android:background="@color/background_color_overall"
-            app:menu="@menu/navigation" />
-
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <!---NavigationView-->
-</android.support.v4.widget.DrawerLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

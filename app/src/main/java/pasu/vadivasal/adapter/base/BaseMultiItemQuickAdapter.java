@@ -1,7 +1,7 @@
 package pasu.vadivasal.adapter.base;
 
-import android.support.annotation.LayoutRes;
-import android.util.SparseArray;
+import androidx.annotation.LayoutRes;
+
 import android.util.SparseIntArray;
 import android.view.ViewGroup;
 

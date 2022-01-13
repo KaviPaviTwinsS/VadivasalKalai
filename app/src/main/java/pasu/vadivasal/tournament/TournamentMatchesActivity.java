@@ -1,6 +1,5 @@
 package pasu.vadivasal.tournament;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,25 +15,23 @@ import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.AppBarLayout.OnOffsetChangedListener;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
-import android.support.design.widget.TabLayout.OnTabSelectedListener;
-import android.support.design.widget.TabLayout.Tab;
-import android.support.design.widget.TabLayout.TabLayoutOnPageChangeListener;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
-import android.text.Html;
+import androidx.annotation.Nullable;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener;
+import com.google.android.material.tabs.TabLayout.Tab;
+import com.google.android.material.tabs.TabLayout.TabLayoutOnPageChangeListener;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.cardview.widget.CardView;
+import androidx.appcompat.widget.Toolbar;
+
 import android.text.SpannableString;
-import android.text.TextUtils;
 import android.text.style.TypefaceSpan;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,20 +46,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.gson.JsonObject;
 
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.Target;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
 import java.io.FileOutputStream;
 
-import io.fabric.sdk.android.services.settings.SettingsJsonConstants;
 import pasu.vadivasal.BaseActivity;
 import pasu.vadivasal.MainActivity;
 import pasu.vadivasal.R;
@@ -71,8 +62,6 @@ import pasu.vadivasal.android.BlurTransformation;
 import pasu.vadivasal.android.Utils;
 import pasu.vadivasal.globalModle.Appconstants;
 import pasu.vadivasal.model.TournamentData;
-import pasu.vadivasal.view.CircleImageView;
-import pasu.vadivasal.view.TextView;
 
 
 public class TournamentMatchesActivity extends BaseActivity implements OnTabSelectedListener, OnClickListener {
@@ -92,9 +81,9 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
     String aboutData;
 
 
-    android.support.design.widget.AppBarLayout
+    AppBarLayout
             app_bar_layout;
-    android.support.design.widget.CollapsingToolbarLayout
+    CollapsingToolbarLayout
             collapsing_toolbar;
     RelativeLayout
             layoutcollapse, container;
@@ -105,21 +94,21 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
             layCenter;
     pasu.vadivasal.view.CircleImageView
             imgPlayer;
-    android.support.v7.widget.AppCompatImageView
+    androidx.appcompat.widget.AppCompatImageView
             imgPremiumIcon, ivInfo;
     pasu.vadivasal.view.TextView
             tvPlayerName, tvdetail, txt_date, txtChallange, btnFollow, tvViewer, txt_error;
-    android.support.v7.widget.CardView
+    CardView
             card_challange, card_Follow;
     pasu.vadivasal.view.LikeButton
             ivFav;
-    android.support.v7.widget.Toolbar
+    androidx.appcompat.widget.Toolbar
             toolbar;
-    android.support.design.widget.TabLayout
+    TabLayout
             tabLayoutScoreCard;
-    android.support.v4.view.ViewPager
+    ViewPager
             viewPager;
-    android.support.design.widget.FloatingActionButton
+    FloatingActionButton
             fabFollow, fabShare;
     pasu.vadivasal.view.Button
             btnLeaveTeam;
@@ -310,9 +299,9 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
             e.printStackTrace();
         }
         System.out.println("tournamentID__" + tournamentId);
-        app_bar_layout = (android.support.design.widget.AppBarLayout
+        app_bar_layout = (AppBarLayout
                 ) findViewById(R.id.app_bar_layout);
-        collapsing_toolbar = (android.support.design.widget.CollapsingToolbarLayout
+        collapsing_toolbar = (CollapsingToolbarLayout
                 ) findViewById(R.id.collapsing_toolbar);
         layoutcollapse = (RelativeLayout
                 ) findViewById(R.id.layoutcollapse);
@@ -325,7 +314,7 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
                 ) findViewById(R.id.layCenter);
         imgPlayer = (pasu.vadivasal.view.CircleImageView
                 ) findViewById(R.id.imgPlayer);
-        imgPremiumIcon = (android.support.v7.widget.AppCompatImageView
+        imgPremiumIcon = (androidx.appcompat.widget.AppCompatImageView
                 ) findViewById(R.id.imgPremiumIcon);
         tvPlayerName = (pasu.vadivasal.view.TextView
                 ) findViewById(R.id.tvPlayerName);
@@ -333,11 +322,11 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
                 ) findViewById(R.id.tvdetail);
         txt_date = (pasu.vadivasal.view.TextView
                 ) findViewById(R.id.txt_date);
-        card_challange = (android.support.v7.widget.CardView
+        card_challange = (CardView
                 ) findViewById(R.id.card_challange);
         txtChallange = (pasu.vadivasal.view.TextView
                 ) findViewById(R.id.txtChallange);
-        card_Follow = (android.support.v7.widget.CardView
+        card_Follow = (CardView
                 ) findViewById(R.id.card_Follow);
         btnFollow = (pasu.vadivasal.view.TextView
                 ) findViewById(R.id.btnFollow);
@@ -345,20 +334,20 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
                 ) findViewById(R.id.tvViewer);
         ivFav = (pasu.vadivasal.view.LikeButton
                 ) findViewById(R.id.ivFav);
-        ivInfo = (android.support.v7.widget.AppCompatImageView
+        ivInfo = (androidx.appcompat.widget.AppCompatImageView
                 ) findViewById(R.id.ivInfo);
-        toolbar = (android.support.v7.widget.Toolbar
+        toolbar = (androidx.appcompat.widget.Toolbar
                 ) findViewById(R.id.toolbar);
-        tabLayoutScoreCard = (android.support.design.widget.TabLayout
+        tabLayoutScoreCard = (TabLayout
                 ) findViewById(R.id.tabLayoutPlayer);
         vHide = findViewById(R.id.viewDivider);
         container = (RelativeLayout
                 ) findViewById(R.id.container);
-        viewPager = (android.support.v4.view.ViewPager
+        viewPager = (ViewPager
                 ) findViewById(R.id.pagerPlayer);
-        fabFollow = (android.support.design.widget.FloatingActionButton
+        fabFollow = (FloatingActionButton
                 ) findViewById(R.id.fabFollow);
-        fabShare = (android.support.design.widget.FloatingActionButton
+        fabShare = (FloatingActionButton
                 ) findViewById(R.id.fabShare);
         txt_error = (pasu.vadivasal.view.TextView
                 ) findViewById(R.id.txt_error);
@@ -465,7 +454,7 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
 //        this.tabLayoutScoreCard.addTab(this.tabLayoutScoreCard.newTab().setText((int) R.string.tab_title_standings));
 
         this.tabLayoutScoreCard.setTabGravity(0);
-        this.tabLayoutScoreCard.setTabMode(0);
+        this.tabLayoutScoreCard.setTabMode(TabLayout.MODE_SCROLLABLE);
 //         this.vHide.setVisibility(View.GONE);
 //        this.card_Follow.setVisibility(View.GONE);
 //        this.fabShare.setVisibility(View.GONE);
@@ -502,7 +491,7 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
             Picasso.with(this).load(this.logoUrl + AppConstants.THUMB_IMAGE).placeholder((int) R.drawable.ic_bull_logo).error((int) R.drawable.ic_bull_logo).into(this.target);
         }
         if (Utils.isEmptyString(this.coverPicUrl)) {
-            Picasso.with(this).load((int) R.drawable.ic_bull_logo).resize(SettingsJsonConstants.ANALYTICS_FLUSH_INTERVAL_SECS_DEFAULT, 200).transform(new BlurTransformation(this)).into(this.imgBlurBackground);
+            Picasso.with(this).load((int) R.drawable.ic_bull_logo)/*.resize(SettingsJsonConstants.ANALYTICS_FLUSH_INTERVAL_SECS_DEFAULT, 200)*/.transform(new BlurTransformation(this)).into(this.imgBlurBackground);
         } else {
             Picasso.with(this).load(this.coverPicUrl + AppConstants.THUMB_IMAGE).placeholder((int) R.drawable.ic_bull_logo).into(this.target1);
         }
@@ -747,7 +736,7 @@ public class TournamentMatchesActivity extends BaseActivity implements OnTabSele
             intent.setType("image/*");
             intent.putExtra("android.intent.extra.STREAM", Uri.fromFile(file));
             intent.putExtra("android.intent.extra.TEXT", "Leader board of team " + this.title);
-            intent.addFlags(1);
+//            intent.addFlags(1);
             startActivity(Intent.createChooser(intent, "Share via"));
         } catch (Exception e) {
             e.printStackTrace();

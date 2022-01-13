@@ -1,6 +1,6 @@
 package pasu.vadivasal.adapter.base.recycler;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 public abstract class Paginate {

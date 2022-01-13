@@ -3,18 +3,17 @@ package pasu.vadivasal.regLogin;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.AppCompatSpinner;
+
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.AppCompatSpinner;
 import android.text.InputFilter;
 import android.text.InputFilter.LengthFilter;
 import android.text.TextUtils;
@@ -29,20 +28,14 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView.OnEditorActionListener;
 
-import com.google.firebase.FirebaseException;
-import com.google.firebase.FirebaseTooManyRequestsException;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
-import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,7 +45,6 @@ import pasu.vadivasal.R;
 import pasu.vadivasal.android.AppConstants;
 import pasu.vadivasal.android.SessionSave;
 import pasu.vadivasal.android.Utils;
-import pasu.vadivasal.android.logger.Logger;
 import pasu.vadivasal.globalAdapter.SpinnerAdapter;
 import pasu.vadivasal.globalModle.Appconstants;
 import pasu.vadivasal.globalModle.Country;

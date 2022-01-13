@@ -4,5 +4,5 @@
     <item name="BaseQuickAdapter_swiping_support" type="id"/>
     <item name="BaseQuickAdapter_dragging_support" type="id"/>
     <item name="BaseQuickAdapter_databinding_support" type="id"/>
-    <item name="hi" type="id">Hai</item>
+<!--    <item name="hi" type="id">Hai</item>-->
 </resources>

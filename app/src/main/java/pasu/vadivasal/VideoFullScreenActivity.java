@@ -2,17 +2,18 @@ package pasu.vadivasal;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.Surface;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.google.android.exoplayer2.DefaultLoadControl;
+/*import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -38,10 +39,9 @@ import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
-import com.google.android.exoplayer2.video.VideoRendererEventListener;
+import com.google.android.exoplayer2.video.VideoRendererEventListener;*/
 
 import pasu.vadivasal.android.Utils;
-import pasu.vadivasal.globalModle.Media;
 import pasu.vadivasal.videopackage.VideoAdapter;
 
 /**
@@ -52,8 +52,15 @@ import pasu.vadivasal.videopackage.VideoAdapter;
  * Created by developer on 26/9/17.
  */
 
+public class VideoFullScreenActivity extends AppCompatActivity{
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.video_fullview);
+    }
+}
 
-public class VideoFullScreenActivity extends AppCompatActivity implements VideoRendererEventListener, VideoAdapter.VideoInterface {
+/*public class VideoFullScreenActivity extends AppCompatActivity implements VideoRendererEventListener, VideoAdapter.VideoInterface {
 
 
     private static final String TAG = "VideoFullScreenActivity";
@@ -298,4 +305,4 @@ public class VideoFullScreenActivity extends AppCompatActivity implements VideoR
         player.setVideoDebugListener(this); //for listening to resolution change and  outputing the resolution
 
     }
-}
+}*/

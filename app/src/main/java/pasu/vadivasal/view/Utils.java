@@ -6,21 +6,16 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
-import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.graphics.drawable.VectorDrawable;
-import android.support.graphics.drawable.VectorDrawableCompat;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import android.util.TypedValue;
-import android.view.Display;
-import android.view.WindowManager;
 
 
 import java.util.ArrayList;
 import java.util.List;
-
-import pasu.vadivasal.R;
 
 public class Utils {
     public static double mapValueFromRangeToRange(double value, double fromLow, double fromHigh, double toLow, double toHigh) {

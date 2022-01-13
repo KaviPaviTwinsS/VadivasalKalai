@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
     android:background="@color/white"
+    android:fillViewport="true"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -16,14 +16,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/card_top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginRight="30dp"
                 android:visibility="gone"
                 app:cardBackgroundColor="@color/dark_gray"
                 app:cardCornerRadius="3dp"
@@ -63,7 +63,7 @@
                         android:textSize="@dimen/sp_18"
                         app:asset_font_file_name="@string/font_sourcesans_pro_semibold" />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <Spinner
                 android:id="@+id/spinnerFilter"
@@ -78,20 +78,20 @@
                 android:spinnerMode="dropdown"
                 android:visibility="gone" />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvMatches"
 
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/spinnerFilter"
                 android:clipToPadding="false"
-                android:paddingBottom="@dimen/dp_5"
                 android:paddingLeft="@dimen/dp_5"
-                android:paddingRight="@dimen/dp_5"
                 android:paddingTop="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_5"
+                android:paddingBottom="@dimen/dp_5"
                 android:visibility="visible" />
 
-            <android.support.v4.view.ViewPager
+            <androidx.viewpager.widget.ViewPager
                 android:id="@+id/leader_pager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -116,8 +116,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="70dp"
             android:gravity="center"
-            android:padding="10dp"
             android:indeterminateDrawable="@drawable/progressbar_custom"
+            android:padding="10dp"
             android:text="@string/msg_under_development"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/sp_20"

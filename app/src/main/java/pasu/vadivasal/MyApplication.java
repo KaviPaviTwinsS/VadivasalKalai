@@ -1,7 +1,7 @@
 package pasu.vadivasal;
 
 import android.app.Application;
-import android.support.v7.app.AppCompatDelegate;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 

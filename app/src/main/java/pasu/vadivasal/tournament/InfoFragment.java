@@ -1,29 +1,16 @@
 package pasu.vadivasal.tournament;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.List;
 
 import pasu.vadivasal.R;
 import pasu.vadivasal.android.Utils;
-import pasu.vadivasal.globalModle.Appconstants;
-import pasu.vadivasal.globalModle.Media;
 import pasu.vadivasal.model.TournamentData;
-import pasu.vadivasal.videopackage.VideoActivityMain;
-import pasu.vadivasal.videopackage.VideoAdapter;
 
 
 /**

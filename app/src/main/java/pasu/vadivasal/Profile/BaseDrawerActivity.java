@@ -1,15 +1,13 @@
 package pasu.vadivasal.Profile;
 
 import android.os.Handler;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
+
+import androidx.drawerlayout.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
-import com.squareup.picasso.Picasso;
 
 import butterknife.BindDimen;
 import butterknife.BindString;

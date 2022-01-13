@@ -9,15 +9,17 @@
 
         android:id="@+id/raw_su"
         layout="@layout/raw_signup" />
-<android.support.v7.widget.AppCompatImageView
-    android:id="@+id/info"
-    android:padding="@dimen/dp_10"
-    android:visibility="gone"
-    android:layout_alignParentRight="true"
-    android:layout_below="@+id/raw_su"
-    app:srcCompat="@drawable/ic_info_outline_black_24dp"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/raw_su"
+        android:layout_alignParentRight="true"
+        android:padding="@dimen/dp_10"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_info_outline_black_24dp" />
+
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
@@ -34,19 +36,19 @@
             android:layout_height="55dp"
             android:layout_gravity="left"
             android:checked="true"
-            android:visibility="gone"
             android:text="@string/j_fan"
-            android:textSize="18dp" />
+            android:textSize="18dp"
+            android:visibility="gone" />
 
         <RadioButton
             android:id="@+id/radioButton2"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
-            android:visibility="gone"
             android:layout_gravity="left"
             android:checked="false"
             android:text="@string/Tamper_or_bullowner"
-            android:textSize="18dp" />
+            android:textSize="18dp"
+            android:visibility="gone" />
 
         <RadioButton
             android:id="@+id/radioButton3"
@@ -54,21 +56,23 @@
             android:layout_height="55dp"
             android:layout_gravity="left"
             android:checked="false"
-            android:visibility="gone"
             android:text="@string/jallikattu_photographer"
-            android:textSize="18dp" />
+            android:textSize="18dp"
+            android:visibility="gone" />
     </RadioGroup>
-<pasu.vadivasal.view.TextView
-    android:id="@+id/intro_about_app"
-    android:layout_width="match_parent"
-    android:gravity="center"
-    android:layout_margin="24dp"
-    android:layout_centerVertical="true"
-    android:textSize="@dimen/sp_18"
-    app:asset_font_file_name="@string/font_roboto_slab_bold"
-    android:layout_height="wrap_content"
-    android:textColor="@color/dark_gray"
-    android:text="@string/about_app_intro"/>
+
+    <pasu.vadivasal.view.TextView
+        android:id="@+id/intro_about_app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="24dp"
+        android:gravity="center"
+        android:text="@string/about_app_intro"
+        android:textColor="@color/dark_gray"
+        android:textSize="@dimen/sp_18"
+        app:asset_font_file_name="@string/font_roboto_slab_bold" />
+
     <Button
         android:id="@+id/google_signup"
         android:layout_width="wrap_content"

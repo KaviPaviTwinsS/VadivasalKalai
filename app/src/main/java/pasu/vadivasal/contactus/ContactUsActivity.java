@@ -3,13 +3,20 @@ package pasu.vadivasal.contactus;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout.OnTabSelectedListener;
-import android.support.design.widget.TabLayout.Tab;
-import android.support.design.widget.TabLayout.TabLayoutOnPageChangeListener;
+
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener;
+import com.google.android.material.tabs.TabLayout.Tab;
+import com.google.android.material.tabs.TabLayout.TabLayoutOnPageChangeListener;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
+import androidx.viewpager.widget.ViewPager;
 
 import pasu.vadivasal.BaseActivity;
 import pasu.vadivasal.R;
@@ -21,19 +28,19 @@ public class ContactUsActivity extends BaseActivity implements OnTabSelectedList
     //    FloatingActionButton fabStartMatch;
     LinearLayout layoutNoInternet;
     // TabLayout tabLayoutMatches;
-    android.support.design.widget.AppBarLayout
+    AppBarLayout
             app_bar_layout;
-    android.support.design.widget.CollapsingToolbarLayout
+    CollapsingToolbarLayout
             collapsing_toolbar;
-    android.support.v7.widget.Toolbar
+    androidx.appcompat.widget.Toolbar
             toolbar;
-    android.support.design.widget.TabLayout
+    TabLayout
             tabLayoutMatches;
     RelativeLayout
             mainLayoutForTab;
-    android.support.v4.view.ViewPager
+    ViewPager
             viewPager;
-    android.support.design.widget.FloatingActionButton
+    FloatingActionButton
             fabStartMatch;
     pasu.vadivasal.view.Button
             btnApplyFilter;
@@ -41,7 +48,7 @@ public class ContactUsActivity extends BaseActivity implements OnTabSelectedList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contactus);
-        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(this.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(getString(R.string.title_contact));
@@ -52,18 +59,18 @@ public class ContactUsActivity extends BaseActivity implements OnTabSelectedList
 
         layoutNoInternet = (LinearLayout
                 ) findViewById(R.id.layoutNoInternet);
-        app_bar_layout = (android.support.design.widget.AppBarLayout
+        app_bar_layout = (AppBarLayout
                 ) findViewById(R.id.app_bar_layout);
-        collapsing_toolbar = (android.support.design.widget.CollapsingToolbarLayout
+        collapsing_toolbar = (CollapsingToolbarLayout
                 ) findViewById(R.id.collapsing_toolbar);
 
-        tabLayoutMatches = (android.support.design.widget.TabLayout
+        tabLayoutMatches = (TabLayout
                 ) findViewById(R.id.tabLayoutMatches);
         mainLayoutForTab = (RelativeLayout
                 ) findViewById(R.id.mainLayoutForTab);
-        viewPager = (android.support.v4.view.ViewPager
+        viewPager = (ViewPager
                 ) findViewById(R.id.pagerMatches);
-        fabStartMatch = (android.support.design.widget.FloatingActionButton
+        fabStartMatch = (FloatingActionButton
                 ) findViewById(R.id.fabStartMatch);
         btnApplyFilter = (pasu.vadivasal.view.Button) findViewById(R.id.btnApplyFilter);
 

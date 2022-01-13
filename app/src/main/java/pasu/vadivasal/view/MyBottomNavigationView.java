@@ -1,15 +1,14 @@
 package pasu.vadivasal.view;
 
 import android.content.Context;
-import android.support.design.internal.BottomNavigationItemView;
-import android.support.design.internal.BottomNavigationMenuView;
-import android.support.design.widget.BottomNavigationView;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
 import java.lang.reflect.Field;
 
@@ -23,9 +22,6 @@ import pasu.vadivasal.R;
 public class MyBottomNavigationView extends BottomNavigationView {
 
 
-
-
-
     public static void removeShiftMode(BottomNavigationView view) {
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
         try {
@@ -36,7 +32,7 @@ public class MyBottomNavigationView extends BottomNavigationView {
             for (int i = 0; i < menuView.getChildCount(); i++) {
                 BottomNavigationItemView item = (BottomNavigationItemView) menuView.getChildAt(i);
                 //noinspection RestrictedApi
-                item.setShiftingMode(false);
+//                item.setShiftingMode(false);
                 // set once again checked value, so view will be updated
                 //noinspection RestrictedApi
                 item.setChecked(item.getItemData().isChecked());
@@ -49,11 +45,10 @@ public class MyBottomNavigationView extends BottomNavigationView {
     }
 
 
-
     public MyBottomNavigationView(Context context, AttributeSet attrs) {
         super(context, attrs);
-      //  centerMenuIcon();
-    removeShiftMode(this);
+        //  centerMenuIcon();
+//        removeShiftMode(this);
     }
 
     private void centerMenuIcon() {
@@ -61,7 +56,7 @@ public class MyBottomNavigationView extends BottomNavigationView {
         if (menuView != null) {
             for (int i = 0; i < menuView.getChildCount(); i++) {
                 BottomNavigationItemView menuItemView = (BottomNavigationItemView) menuView.getChildAt(i);
-                android.widget.TextView smallText =  menuItemView.findViewById(R.id.largeLabel);
+                android.widget.TextView smallText = menuItemView.findViewById(R.id.large);
                 smallText.setVisibility(View.INVISIBLE);
                 //TextView largeText = (TextView) menuItemView.findViewById(R.id.largeLabel);
 //                ImageView icon = (ImageView) menuItemView.findViewById(R.id.icon);

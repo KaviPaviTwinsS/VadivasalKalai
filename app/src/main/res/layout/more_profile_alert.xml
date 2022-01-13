@@ -27,12 +27,14 @@
             android:textSize="@dimen/sp_20"
             app:asset_font_file_name="@string/font_roboto_slab_bold" />
     </LinearLayout>
-<View
-    android:layout_width="match_parent"
-    android:layout_height="1dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
-    android:background="@color/divider"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/divider" />
+
     <pasu.vadivasal.view.TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,13 +43,14 @@
         android:textColor="@color/gray_text"
         android:textSize="@dimen/sp_18"
         app:asset_font_file_name="@string/font_roboto_slab_bold" />
+
     <LinearLayout
         android:id="@+id/alert_register_bull_owner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
@@ -71,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -95,7 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -119,7 +122,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

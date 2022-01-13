@@ -1,19 +1,11 @@
 package pasu.vadivasal.dashboard;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
-import pasu.vadivasal.R;
 import pasu.vadivasal.adapter.base.BaseQuickAdapter;
 
 import java.util.ArrayList;
 
-import pasu.vadivasal.adapter.base.BaseViewHolder;
-import pasu.vadivasal.globalModle.Player;
 import pasu.vadivasal.model.PlayerDash;
 
 /**

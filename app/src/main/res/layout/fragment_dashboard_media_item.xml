@@ -1,77 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tool="http://schemas.android.com/tools"
-    app:cardUseCompatPadding="true"
-    android:clickable="true"
     android:id="@+id/main_card"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_width="match_parent">
+    android:clickable="true"
+    app:cardUseCompatPadding="true">
 
     <RelativeLayout
-        android:layout_height="170dp"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="170dp">
 
         <ImageView
             android:id="@+id/imgMedia"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent" />
-
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/image_logo"
-            android:layout_height="match_parent"
             android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_logo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/images" />
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivPlay"
-            android:layout_centerInParent="true"
-            android:layout_height="50dp"
             android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
             android:scaleType="centerInside"
-            app:srcCompat="@drawable/ic_play_circle_24dp"
-            android:visibility="visible" />
+            android:visibility="visible"
+            app:srcCompat="@drawable/ic_play_circle_24dp" />
 
         <ImageView
             android:id="@+id/ivShare"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_10"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/dp_10"
             android:padding="@dimen/dp_15"
             android:scaleType="centerInside"
             android:visibility="gone" />
 
         <pasu.vadivasal.view.TextView
-            android:ellipsize="end"
             android:id="@+id/tvTitle"
-            android:layout_above="@+id/lnrDescription"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/lnrDescription"
+            android:ellipsize="end"
             android:maxLines="1"
             android:paddingLeft="8dp"
-            android:paddingRight="8dp"
             android:paddingTop="4dp"
+            android:paddingRight="8dp"
             android:text="Stunning caught"
             android:textColor="@color/white"
             android:textSize="18sp" />
 
         <LinearLayout
             android:id="@+id/lnrDescription"
-            android:layout_alignParentBottom="true"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:orientation="vertical"
             android:paddingBottom="8dp">
 
             <pasu.vadivasal.view.TextView
-                android:ellipsize="end"
                 android:id="@+id/tvDescription"
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:maxLines="1"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
@@ -80,10 +78,10 @@
                 android:textSize="18sp" />
 
             <pasu.vadivasal.view.TextView
-                android:ellipsize="end"
                 android:id="@+id/tvZone"
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:maxLines="1"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
@@ -93,4 +91,4 @@
                 android:visibility="gone" />
         </LinearLayout>
     </RelativeLayout>
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>

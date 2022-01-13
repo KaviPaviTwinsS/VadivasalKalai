@@ -1,7 +1,7 @@
 package pasu.vadivasal.adapter.base.loadmore;
 
-import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
+import androidx.annotation.IdRes;
+import androidx.annotation.LayoutRes;
 
 import pasu.vadivasal.adapter.base.BaseQuickAdapter;
 import pasu.vadivasal.adapter.base.BaseViewHolder;

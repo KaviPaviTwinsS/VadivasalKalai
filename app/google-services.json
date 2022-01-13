@@ -1,60 +1,61 @@
 {
   "project_info": {
-    "project_number": "399520639579",
-    "firebase_url": "https://jalikattu-temp.firebaseio.com",
-    "project_id": "jalikattu-temp",
-    "storage_bucket": "jalikattu-temp.appspot.com"
+    "project_number": "548371928282",
+    "firebase_url": "https://jallikattu-1a841.firebaseio.com",
+    "project_id": "jallikattu-1a841",
+    "storage_bucket": "jallikattu-1a841.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:399520639579:android:337068ca26500d6f",
+        "mobilesdk_app_id": "1:548371928282:android:899dacd199605129",
         "android_client_info": {
-          "package_name": "pasu.vaadivaasal.demo"
+          "package_name": "pasu.vaadivaasal"
         }
       },
       "oauth_client": [
         {
-          "client_id": "399520639579-bceh4te1247kit9a537r7k6lt620h4km.apps.googleusercontent.com",
+          "client_id": "548371928282-12bgdk9b5rjv86joa353bfqglpnnchcb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "pasu.vaadivaasal.demo",
-            "certificate_hash": "9fa05d5206b890a990e1f155a912331d7894625c"
-          }
-        },
-        {
-          "client_id": "399520639579-vsgkltdnnv6ctp4io84t55jb21uh6oll.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "pasu.vaadivaasal.demo",
+            "package_name": "pasu.vaadivaasal",
             "certificate_hash": "ac3d59cc51a4e7cbcc234c5135f8c09721d51ed2"
           }
         },
         {
-          "client_id": "399520639579-9kkpcdptqudchmt20qqld8u3u2pn5fc1.apps.googleusercontent.com",
+          "client_id": "548371928282-3vivqv4b4olmkn3v60kho3p5qu7mbche.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pasu.vaadivaasal",
+            "certificate_hash": "18b1bb0a576987ec85bbeeac8284c41478bc213f"
+          }
+        },
+        {
+          "client_id": "548371928282-7k1412jbgf78uf07761filtp3s9sb0g3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pasu.vaadivaasal",
+            "certificate_hash": "045cf4da82b68a9b5ebb1a46a35964b6ea250bcc"
+          }
+        },
+        {
+          "client_id": "548371928282-jaou4c9d333cgtg6j1nq79es3iebj3ap.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC7g6uOmQzl0VTzvufRW00vbml74oq8vhw"
+          "current_key": "AIzaSyD947aPQQkUYbras5SCHfQCPWHMHZSLPZg"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "399520639579-9kkpcdptqudchmt20qqld8u3u2pn5fc1.apps.googleusercontent.com",
+              "client_id": "548371928282-jaou4c9d333cgtg6j1nq79es3iebj3ap.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
