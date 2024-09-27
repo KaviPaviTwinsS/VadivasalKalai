@@ -4,39 +4,29 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.view.GravityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.core.view.GravityCompat;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.rubensousa.gravitysnaphelper.GravityPagerSnapHelper;
 
-import org.json.JSONArray;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import pasu.vadivasal.Profile.BaseDrawerActivity;
-import pasu.vadivasal.Profile.MaterialUpConceptActivity;
 import pasu.vadivasal.Profile.UserProfileActivity;
 import pasu.vadivasal.R;
 import pasu.vadivasal.ShareAct;
 import pasu.vadivasal.adapter.base.BaseMultiItemQuickAdapter;
 import pasu.vadivasal.adapter.base.BaseQuickAdapter;
 import pasu.vadivasal.adapter.base.BaseViewHolder;
-import pasu.vadivasal.adapter.base.listener.OnItemClickListener;
 import pasu.vadivasal.globalModle.Media;
 import pasu.vadivasal.matchList.MatchListMainFragment;
 import pasu.vadivasal.model.PlayerDash;
-import pasu.vadivasal.model.Video;
 import pasu.vadivasal.videopackage.VideoActivityMain;
-import pasu.vadivasal.view.GravitySnapHelper;
-import pasu.vadivasal.view.Utils;
 
 
 /**

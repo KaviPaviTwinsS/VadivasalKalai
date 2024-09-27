@@ -2,15 +2,14 @@ package pasu.vadivasal.signup;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import pasu.vadivasal.MainActivity;
 import pasu.vadivasal.R;
 import pasu.vadivasal.android.SessionSave;
 import pasu.vadivasal.globalModle.Appconstants;
-import pasu.vadivasal.regLogin.VerificationActivity;
 
 /**
  * Created by Admin on 16-11-2017.

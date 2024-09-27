@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
     android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
     android:orientation="vertical">
 
     <TextView
@@ -31,31 +31,31 @@
         android:layout_height="wrap_content"
         android:background="@color/white">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_like"
+            srcCompact="@drawable/ic_favorite_border_black_24dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:padding="10dp"
-            srcCompact="@drawable/ic_favorite_border_black_24dp" />
+            android:padding="10dp" />
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_share"
+            srcCompact="@drawable/ic_share_black_24dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/image_like"
             android:background="@color/white"
-            android:padding="10dp"
-            srcCompact="@drawable/ic_share_black_24dp" />
+            android:padding="10dp" />
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_delete"
+            srcCompact="@drawable/ic_delete_black_24dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@color/white"
             android:padding="10dp"
-            srcCompact="@drawable/ic_delete_black_24dp"
             android:visibility="visible" />
 
     </RelativeLayout>
@@ -72,9 +72,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
+        android:paddingBottom="10dp"
         android:text="29 SEPTEMBER 1993"
         android:textColor="@color/header_color"
         android:textSize="10sp" />

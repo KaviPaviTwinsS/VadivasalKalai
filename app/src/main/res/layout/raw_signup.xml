@@ -18,7 +18,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/images" />
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_ball"
         android:layout_centerHorizontal="true"
         android:layout_height="50dp"
@@ -93,7 +93,7 @@
             android:textSize="@dimen/sp_16" />
     </LinearLayout>
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivBack"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"

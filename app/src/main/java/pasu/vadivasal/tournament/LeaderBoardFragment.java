@@ -5,9 +5,12 @@ import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,15 +29,15 @@ public class LeaderBoardFragment extends Fragment implements OnClickListener {
     View rootView;
     int tournamentId;
 
-    android.support.v7.widget.CardView
+    CardView
             card_top;
     pasu.vadivasal.view.TextView
             txt_fielder1, txt_fielder2, txt_error;
     Spinner
             spinnerFilter;
-    android.support.v7.widget.RecyclerView
+    RecyclerView
             rvMatches;
-    android.support.v4.view.ViewPager
+    ViewPager
             leader_pager;
     ProgressBar
             progressBar;
@@ -67,7 +70,7 @@ public class LeaderBoardFragment extends Fragment implements OnClickListener {
         this.rootView = inflater.inflate(R.layout.fragment_player_matches, container, false);
         //ButterKnife.bind((Object) this, this.rootView);
         this.tournamentId = getActivity().getIntent().getIntExtra(AppConstants.EXTRA_TOURNAMENTID, 0);
-        card_top = (android.support.v7.widget.CardView
+        card_top = (CardView
                 ) rootView.findViewById(R.id.card_top);
         txt_fielder1 = (pasu.vadivasal.view.TextView
                 ) rootView.findViewById(R.id.txt_fielder1);
@@ -75,9 +78,9 @@ public class LeaderBoardFragment extends Fragment implements OnClickListener {
                 ) rootView.findViewById(R.id.txt_fielder2);
         spinnerFilter = (Spinner
                 ) rootView.findViewById(R.id.spinnerFilter);
-        rvMatches = (android.support.v7.widget.RecyclerView
+        rvMatches = (RecyclerView
                 ) rootView.findViewById(R.id.rvMatches);
-        leader_pager = (android.support.v4.view.ViewPager
+        leader_pager = (ViewPager
                 ) rootView.findViewById(R.id.leader_pager);
         txt_error = (pasu.vadivasal.view.TextView
                 ) rootView.findViewById(R.id.txt_error);

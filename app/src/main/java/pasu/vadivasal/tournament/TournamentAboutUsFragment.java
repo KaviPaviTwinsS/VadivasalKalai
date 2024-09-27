@@ -1,7 +1,9 @@
 package pasu.vadivasal.tournament;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,15 +12,9 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import pasu.vadivasal.R;
-import pasu.vadivasal.android.Utils;
 import pasu.vadivasal.view.TextView;
 
 /**
@@ -52,7 +48,7 @@ public class TournamentAboutUsFragment extends Fragment {
 
     LinearLayout
             layOrganizer, layOrganizerDetail, layTournament, layTournamentDetail, layAssociations;
-    android.support.v7.widget.CardView
+    CardView
             cardAssociation;
     WebView
             tvAboutUs;
@@ -77,7 +73,7 @@ public class TournamentAboutUsFragment extends Fragment {
                 ) rootView.findViewById(R.id.layTournamentDetail);
         ivImage = (ImageView
                 ) rootView.findViewById(R.id.ivImage);
-        cardAssociation = (android.support.v7.widget.CardView
+        cardAssociation = (CardView
                 ) rootView.findViewById(R.id.cardAssociation);
         layAssociations = (LinearLayout
                 ) rootView.findViewById(R.id.layAssociations);

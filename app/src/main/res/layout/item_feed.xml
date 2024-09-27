@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!-- item_feed.xml -->
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
@@ -12,27 +12,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <FrameLayout
             android:layout_width="match_parent"
 
             android:layout_height="50dp">
+
             <pasu.vadivasal.view.CircleImageView
                 android:id="@+id/ivUserProfile"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:padding="5dp"
-                android:layout_marginLeft="3dp"
                 android:layout_gravity="left|center"
+                android:layout_marginLeft="3dp"
+                android:padding="5dp"
                 android:visibility="visible" />
+
             <TextView
                 android:id="@+id/tvUserName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center|left"
-                android:gravity="left|center"
-                android:paddingLeft="3dp"
                 android:layout_marginLeft="51dp"
-                />
+                android:gravity="left|center"
+                android:paddingLeft="3dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -52,34 +54,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivFeedLoading"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"/>
-                <android.support.v7.widget.AppCompatImageView
+                    android:layout_gravity="center" />
+
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivFeedThumb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/loading_shape"
-                    android:layout_gravity="center"/>
-                <android.support.v7.widget.AppCompatImageView
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/loading_shape" />
+
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivFeedCenter"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop" />
-                <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+
+                <com.google.android.exoplayer2.ui.PlayerView
                     android:id="@+id/exoPlayer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:minHeight="200dp"
+                    android:soundEffectsEnabled="true"
+                    android:visibility="gone"
+                    app:controller_layout_id="@layout/video_controller"
                     app:resize_mode="fill"
                     app:surface_type="texture_view"
-                    app:use_controller="true"
-                    android:visibility="gone"
-                    android:soundEffectsEnabled="true"
-                    app:controller_layout_id="@layout/video_controller">
-                </com.google.android.exoplayer2.ui.SimpleExoPlayerView>
+                    app:use_controller="true" />
             </FrameLayout>
 
             <View
@@ -89,162 +93,169 @@
                 android:background="@drawable/bg_like_circle_background"
                 android:visibility="invisible" />
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivLike"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="center"
-                app:srcCompat="@drawable/ic_heart_outline_white"
-                android:visibility="invisible" />
-               <FrameLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_gravity="bottom"
-                   android:background="#55000000">
-                   <LinearLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:paddingLeft="8dp"
-                       android:paddingRight="8dp">
+                android:visibility="invisible"
+                app:srcCompat="@drawable/ic_heart_outline_white" />
 
-                       <ImageButton
-                           android:id="@+id/btnLike"
-                           android:layout_width="48dp"
-                           android:layout_height="48dp"
-                           android:background="@android:color/transparent"
-                           app:srcCompat="@drawable/ic_heart" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="#55000000">
 
-                       <ImageButton
-                           android:id="@+id/btnComments"
-                           android:layout_width="48dp"
-                           android:layout_height="48dp"
-                           android:background="@drawable/btn_feed_action"
-                           app:srcCompat="@drawable/ic_comment" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp">
 
-                       <ImageButton
-                           android:id="@+id/btnMore"
-                           android:layout_width="48dp"
-                           android:layout_height="48dp"
-                           android:visibility="gone"
-                           android:background="@drawable/btn_feed_action"
-                           app:srcCompat="@drawable/ic_more_grey" />
-                       <android.support.v7.widget.AppCompatImageButton
-                           android:id="@+id/btnShare"
-                           android:layout_width="48dp"
-                           android:layout_height="48dp"
-                           android:background="@drawable/btn_feed_action"
-                           app:srcCompat="@drawable/ic_share_black_24dp" />
+                    <ImageButton
+                        android:id="@+id/btnLike"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/ic_heart" />
 
-                       <LinearLayout
-                           android:layout_width="0dp"
-                           android:layout_height="match_parent"
-                           android:layout_weight="1"
-                           android:gravity="center_vertical|right">
+                    <ImageButton
+                        android:id="@+id/btnComments"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/btn_feed_action"
+                        app:srcCompat="@drawable/ic_comment" />
 
-                           <android.support.v7.widget.AppCompatImageView
-                               android:layout_width="14dp"
-                               android:layout_height="14dp"
-                               app:srcCompat="@drawable/ic_heart" />
+                    <ImageButton
+                        android:id="@+id/btnMore"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/btn_feed_action"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_more_grey" />
 
-                           <TextView
-                               android:id="@+id/tvLikes"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
-                               android:layout_marginLeft="8dp"
-                               android:layout_marginRight="8dp"
-                               android:inAnimation="@anim/slide_in_likes_counter"
-                               android:outAnimation="@anim/slide_out_likes_counter"
-                               android:text="0 Likes"
-                               android:visibility="gone" />
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/btnShare"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/btn_feed_action"
+                        app:srcCompat="@drawable/ic_share_black_24dp" />
 
-                           <TextSwitcher
-                               android:id="@+id/tsLikesCounter"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
-                               android:layout_marginLeft="8dp"
-                               android:layout_marginRight="8dp"
-                               android:inAnimation="@anim/slide_in_likes_counter"
-                               android:outAnimation="@anim/slide_out_likes_counter"
-                               android:visibility="visible">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|right">
 
-                               <TextView
-                                   android:layout_width="wrap_content"
-                                   android:layout_height="wrap_content"
-                                   android:text="123 likes"
-                                   android:textColor="@color/white" />
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            app:srcCompat="@drawable/ic_heart" />
 
-                               <TextView
-                                   android:layout_width="wrap_content"
-                                   android:layout_height="wrap_content"
-                                   android:textColor="@color/white" />
-                           </TextSwitcher>
-                       </LinearLayout>
+                        <TextView
+                            android:id="@+id/tvLikes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:inAnimation="@anim/slide_in_likes_counter"
+                            android:outAnimation="@anim/slide_out_likes_counter"
+                            android:text="0 Likes"
+                            android:visibility="gone" />
 
-                   </LinearLayout>
-               </FrameLayout>
+                        <TextSwitcher
+                            android:id="@+id/tsLikesCounter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:inAnimation="@anim/slide_in_likes_counter"
+                            android:outAnimation="@anim/slide_out_likes_counter"
+                            android:visibility="visible">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="123 likes"
+                                android:textColor="@color/white" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white" />
+                        </TextSwitcher>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </FrameLayout>
         </pasu.vadivasal.view.SquaredFrameLayout>
+
         <TextView
             android:id="@+id/tvFeedBottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-             />
+            android:padding="8dp" />
 
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/transparent_divider"
             android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"/>
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@color/transparent_divider" />
+
         <TextView
             android:id="@+id/tvCommentCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="View all 1250 comments"
             android:layout_marginLeft="@dimen/dp_10"
-            android:padding="5dp"
-            />
-          <LinearLayout
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="horizontal"
-              android:weightSum="3"
-              android:gravity="center_vertical|center">
+            android:hint="View all 1250 comments"
+            android:padding="5dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|left"
-                android:gravity="left"
                 android:layout_marginLeft="@dimen/dp_10"
-                android:layout_marginBottom="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_weight="2.5"
                 android:background="@drawable/comment_lay_shape"
-                android:layout_weight="2.5">
-            <EditText
-                android:id="@+id/edAddComment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/pad_10dp"
-                android:paddingBottom="@dimen/pad_10dp"
-                android:paddingLeft="@dimen/pad_15dp"
-                android:hint="Add a comment"
-                android:layout_gravity="left|center_vertical"
-                android:gravity="center_vertical"
-                android:maxLines="5"
-                android:inputType="textCapSentences|textMultiLine"
-                android:background="@android:color/transparent"
-                android:textCursorDrawable="@android:color/transparent" />
+                android:gravity="left">
+
+                <EditText
+                    android:id="@+id/edAddComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:gravity="center_vertical"
+                    android:hint="Add a comment"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:maxLines="5"
+                    android:paddingLeft="@dimen/pad_15dp"
+                    android:paddingTop="@dimen/pad_10dp"
+                    android:paddingBottom="@dimen/pad_10dp"
+                    android:textCursorDrawable="@android:color/transparent" />
             </LinearLayout>
-              <ImageView
-                  android:id="@+id/imgPostComment"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:src="@drawable/ic_navigation_black_24dp"
-                  android:layout_weight="0.5"
-                  android:rotation="90"
-                  android:layout_gravity="center|center_vertical"
-                  android:padding="@dimen/pad_10dp"/>
-          </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imgPostComment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_vertical"
+                android:layout_weight="0.5"
+                android:padding="@dimen/pad_10dp"
+                android:rotation="90"
+                android:src="@drawable/ic_navigation_black_24dp" />
+        </LinearLayout>
     </LinearLayout>
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>

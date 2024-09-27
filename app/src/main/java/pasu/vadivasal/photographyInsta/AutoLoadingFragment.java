@@ -736,15 +736,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.FileProvider;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -756,6 +747,16 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -789,10 +790,8 @@ import pasu.vadivasal.view.FeedContextMenu;
 import pasu.vadivasal.view.FeedContextMenuManager;
 import tourguide.tourguide.ChainTourGuide;
 import tourguide.tourguide.Overlay;
-import tourguide.tourguide.Pointer;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.ToolTip;
-import tourguide.tourguide.TourGuide;
 
 
 public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.RequestLoadMoreListener, AdapterView.OnItemSelectedListener,
@@ -804,7 +803,7 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
     private static final int REQUEST_CAMARA_ACCESS_PERMISSION = 102;
     private static final int REQUEST_VIDEO_TRIMMER = 10;
     int ballType = -1;
-    private ViewGroup viewContent,viewToolTip;
+    private ViewGroup viewContent, viewToolTip;
     private ArcMenu arcMenu;
     private BottomNavigationView bottomNavigationView;
     private FloatingActionButton fabImage;
@@ -830,7 +829,7 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
     private LinearLayoutManager layoutManager;
     private View progressBar;
     private ProgressDialog mProgressDialog;
-    private android.support.v7.app.AlertDialog UserRegisterAlert;
+    private androidx.appcompat.app.AlertDialog UserRegisterAlert;
     private int currentplaying = -9;
     private int positiveScroll, negativeScroll;
     private Animation mEnterAnimation, mExitAnimation;
@@ -852,7 +851,7 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-            /* setup enter and exit animation */
+        /* setup enter and exit animation */
         mEnterAnimation = new AlphaAnimation(0f, 1f);
         mEnterAnimation.setDuration(600);
         mEnterAnimation.setFillAfter(true);
@@ -885,7 +884,7 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
 
         View rootView = inflater.inflate(R.layout.layout_firebasecontent, container, false);
         viewContent = rootView.findViewById(R.id.content);
-        if (SessionSave.getBooleanSession("showToolTip",getContext())) {
+        if (SessionSave.getBooleanSession("showToolTip", getContext())) {
             viewToolTip = rootView.findViewById(R.id.tooltiplay);
             viewToolTip.setVisibility(View.VISIBLE);
             viewContent.setVisibility(View.GONE);
@@ -1049,7 +1048,7 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
                         .setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                System.out.println("calleddddd "+"sssssssss");
+                                System.out.println("calleddddd " + "sssssssss");
                             }
                         })
                 )
@@ -1140,7 +1139,7 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
                 .setToolTip(new ToolTip()
                         .setTitle("Comment")
                         .setDescription("See Comments of the post by clicking this button")
-                        .setGravity(Gravity.TOP |Gravity.RIGHT)
+                        .setGravity(Gravity.TOP | Gravity.RIGHT)
                 )
                 // note that there is not Overlay here, so the default one will be used
                 .playLater(btnComments);
@@ -1154,9 +1153,9 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
                             @Override
                             public void onClick(View v) {
                                 SessionSave.saveSession("showToolTip", false, getActivity());
-                        System.out.println("calleddddd "+"sssssssss");
-                        viewToolTip.setVisibility(View.GONE);
-                        viewContent.setVisibility(View.VISIBLE);
+                                System.out.println("calleddddd " + "sssssssss");
+                                viewToolTip.setVisibility(View.GONE);
+                                viewContent.setVisibility(View.VISIBLE);
                                 mTourGuideHandler.next();
                             }
                         })
@@ -1245,7 +1244,7 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
 
     private void requestPermission(final String permission, String rationale, final int requestCode) {
         if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)) {
-            android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getActivity());
+            androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
             builder.setTitle(getString(R.string.permission_title_rationale));
             builder.setMessage(rationale);
             builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
@@ -1449,6 +1448,7 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
                             System.out.println("NEW ADAPTER SETbat");
                             //AutoLoadingFragment .this.itemArrayList.addAll(arrayList);
                             AutoLoadingFragment.this.adapter = new PostAutoAdapter(AutoLoadingFragment.this.getActivity(), R.layout.item_feed, AutoLoadingFragment.this.itemArrayList);
+//                            adapter.setHasStableIds(true);
                             AutoLoadingFragment.this.adapter.setEnableLoadMore(true);
                             AutoLoadingFragment.this.rvMatches.setAdapter(AutoLoadingFragment.this.adapter);
 //                        AutoLoadingFragment.this.adapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
@@ -1776,7 +1776,7 @@ public class AutoLoadingFragment extends Fragment implements BaseQuickAdapter.Re
 
         if (!((Activity) context).isFinishing()) {
             try {
-                final android.support.v7.app.AlertDialog.Builder ab = new android.support.v7.app.AlertDialog.Builder(context, R.style.CustomAlertDialogStyle);
+                final androidx.appcompat.app.AlertDialog.Builder ab = new androidx.appcompat.app.AlertDialog.Builder(context, R.style.CustomAlertDialogStyle);
                 View dialogView = ((Activity) context).getLayoutInflater().inflate(R.layout.image_or_video, null);
                 ab.setView(dialogView);
                 ab.setCancelable(true);

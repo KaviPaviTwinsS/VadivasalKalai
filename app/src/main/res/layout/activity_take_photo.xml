@@ -113,11 +113,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.commonsware.cwac.camera.CameraView
+            <!--<com.commonsware.cwac.camera.CameraView
                 android:id="@+id/cameraView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical" />-->
 
             <ImageButton
                 android:id="@+id/ivTakenPhoto"
@@ -188,7 +188,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvFilters"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

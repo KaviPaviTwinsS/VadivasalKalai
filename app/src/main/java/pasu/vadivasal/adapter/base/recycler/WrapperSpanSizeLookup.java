@@ -1,6 +1,6 @@
 package pasu.vadivasal.adapter.base.recycler;
 
-import android.support.v7.widget.GridLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 class WrapperSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
 

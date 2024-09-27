@@ -4,8 +4,8 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +25,6 @@ import java.util.Date;
 
 import pasu.vadivasal.MainActivity;
 import pasu.vadivasal.R;
-import pasu.vadivasal.android.AppConstants;
 import pasu.vadivasal.android.Utils;
 import pasu.vadivasal.globalModle.ContactUsRequest;
 
@@ -38,7 +38,7 @@ public class ContactWriteFragment extends Fragment {
     private String type;
 
 
-    android.support.design.widget.TextInputLayout
+    TextInputLayout
             ilName;
     pasu.vadivasal.view.EditText
             edt_name, edt_mobile, edt_comment;
@@ -83,7 +83,7 @@ public class ContactWriteFragment extends Fragment {
         //   ButterKnife.bind((Object) this, rootView);
 
 
-        ilName = (android.support.design.widget.TextInputLayout
+        ilName = (TextInputLayout
                 ) rootView.findViewById(R.id.ilName);
         edt_name = (pasu.vadivasal.view.EditText
                 ) rootView.findViewById(R.id.edt_name);

@@ -1,30 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/ic_info_outline_black_24dp.xml" value="0.20677083333333332" />
+        <entry key="app/src/main/res/drawable/ic_share_black_24dp.xml" value="0.20677083333333332" />
+        <entry key="app/src/main/res/layout-land/video_fullview.xml" value="0.10572916666666667" />
+        <entry key="app/src/main/res/layout/activity_addto_firebase.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/activity_auto_complete.xml" value="0.1537037037037037" />
+        <entry key="app/src/main/res/layout/activity_comments.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/activity_comments_auto.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/activity_contactus.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/activity_drawer.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.190625" />
+        <entry key="app/src/main/res/layout/activity_news_listing.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/activity_open_share_content.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/activity_photo_gallery.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/activity_photo_view.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/activity_publish.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/activity_share.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/activity_sign_in_pin.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.1537037037037037" />
+        <entry key="app/src/main/res/layout/activity_take_photo.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/activity_trimmer.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/activity_verification.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/commentary_layout.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/commentary_video.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/commentay_text.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/custom_controls.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/custom_loading_list_item.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/custome_progress_dialog.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/dialog_confirm_contact.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/filter_layout.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/fragment_about_us.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/fragment_dashboard_media_item.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/fragment_dummy.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/fragment_my_player.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/fragment_news_detail.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/fragment_page.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/fragment_player_matches.xml" value="0.1537037037037037" />
+        <entry key="app/src/main/res/layout/gallery_image_item.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/gallery_layout.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/image_or_video.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/item_comment.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/item_feed.xml" value="0.190625" />
+        <entry key="app/src/main/res/layout/item_feed_loader.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/item_image_view.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/item_img_text_view.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/item_photo.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/item_photo_filter.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/item_text_view.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/languagedialog.xml" value="0.1537037037037037" />
+        <entry key="app/src/main/res/layout/layout_firebasecontent.xml" value="0.190625" />
+        <entry key="app/src/main/res/layout/list_item_card.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/login_lay.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/match_detail_main.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/match_info_layout.xml" value="0.1537037037037037" />
+        <entry key="app/src/main/res/layout/menu_header.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/menu_item_view.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/more_profile_alert.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/more_settings.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/naga.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/news_item.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/newsfeed_activity.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/no_data.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/player_list_view.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/profile.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/quick_view_load_more.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/raw_alert_dialog_custom.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/raw_dashboard_match.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/raw_dashboard_match_item.xml" value="0.1537037037037037" />
+        <entry key="app/src/main/res/layout/raw_dashboard_media.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/raw_dashboard_other.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/raw_dashboard_player_and_team_item.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/raw_edit_profile.xml" value="0.15384615384615385" />
+        <entry key="app/src/main/res/layout/raw_empty_view.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/raw_leaderboard.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/raw_my_profile_info.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/raw_news_image.xml" value="0.1537037037037037" />
+        <entry key="app/src/main/res/layout/raw_no_internet_connection.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/raw_no_player_found.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/raw_pin_view.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/raw_player_leaderboard.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/raw_player_profile_info.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/raw_signup.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/raw_team_player_grid_activity.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/signup_chosser_lay.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/signup_lay.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/simple_image_view.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/simple_listview.xml" value="0.1537037037037037" />
+        <entry key="app/src/main/res/layout/social_login.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/speak_screen.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/statistics_item_lay.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/statistics_list.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/temp_lay.xml" value="0.1537037037037037" />
+        <entry key="app/src/main/res/layout/toast_layout.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/toolbar_spinner_item_dropdown.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/tournament_activity.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/tournament_gallery_list.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/video_activity_main.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/video_controller.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/video_list_item.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/view_context_menu.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/view_feed_toolbar.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/view_global_menu_header.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/view_send_comment_button.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/layout/write_screen.xml" value="0.18769230769230769" />
+        <entry key="app/src/main/res/menu/navigation.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="android.support.annotation.Nullable" />
     <option name="myDefaultNotNull" value="android.support.annotation.NonNull" />
     <option name="myNullables">
       <value>
-        <list size="4">
+        <list size="14">
           <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
           <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
           <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />
           <item index="3" class="java.lang.String" itemvalue="android.support.annotation.Nullable" />
+          <item index="4" class="java.lang.String" itemvalue="androidx.annotation.Nullable" />
+          <item index="5" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNullable" />
+          <item index="6" class="java.lang.String" itemvalue="com.android.annotations.Nullable" />
+          <item index="7" class="java.lang.String" itemvalue="javax.annotation.CheckForNull" />
+          <item index="8" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.Nullable" />
+          <item index="9" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableDecl" />
+          <item index="10" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableType" />
+          <item index="11" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.Nullable" />
+          <item index="12" class="java.lang.String" itemvalue="io.reactivex.annotations.Nullable" />
+          <item index="13" class="java.lang.String" itemvalue="io.reactivex.rxjava3.annotations.Nullable" />
         </list>
       </value>
     </option>
     <option name="myNotNulls">
       <value>
-        <list size="4">
+        <list size="14">
           <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
           <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
           <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
           <item index="3" class="java.lang.String" itemvalue="android.support.annotation.NonNull" />
+          <item index="4" class="java.lang.String" itemvalue="androidx.annotation.NonNull" />
+          <item index="5" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNonNull" />
+          <item index="6" class="java.lang.String" itemvalue="com.android.annotations.NonNull" />
+          <item index="7" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.NonNull" />
+          <item index="8" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullDecl" />
+          <item index="9" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullType" />
+          <item index="10" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.NonNull" />
+          <item index="11" class="java.lang.String" itemvalue="io.reactivex.annotations.NonNull" />
+          <item index="12" class="java.lang.String" itemvalue="io.reactivex.rxjava3.annotations.NonNull" />
+          <item index="13" class="java.lang.String" itemvalue="lombok.NonNull" />
         </list>
       </value>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -2,7 +2,7 @@ package pasu.vadivasal.Profile;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.widget.CardView;
+import androidx.cardview.widget.CardView;
 import android.view.View;
 
 import pasu.vadivasal.adapter.base.BaseQuickAdapter;

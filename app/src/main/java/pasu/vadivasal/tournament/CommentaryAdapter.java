@@ -1,10 +1,10 @@
 package pasu.vadivasal.tournament;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.v4.view.GravityCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.core.view.GravityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +12,12 @@ import android.widget.ImageView;
 
 import java.util.List;
 
-import pasu.vadivasal.Profile.MaterialUpConceptActivity;
 import pasu.vadivasal.R;
 import pasu.vadivasal.adapter.base.BaseMultiItemQuickAdapter;
 import pasu.vadivasal.adapter.base.BaseQuickAdapter;
 import pasu.vadivasal.adapter.base.BaseViewHolder;
 import pasu.vadivasal.dashboard.BaseDashboardMultiItem;
 import pasu.vadivasal.dashboard.MultipleItem;
-import pasu.vadivasal.model.PlayerDash;
-import pasu.vadivasal.videopackage.VideoActivityMain;
-import pasu.vadivasal.view.GravitySnapHelper;
 
 
 /**

@@ -4,16 +4,17 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Surface;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -36,7 +37,7 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
-import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
@@ -47,18 +48,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-
 import pasu.vadivasal.MainActivity;
 import pasu.vadivasal.R;
 import pasu.vadivasal.VideoFullScreenActivity;
 import pasu.vadivasal.android.Utils;
 import pasu.vadivasal.globalModle.Media;
-import pasu.vadivasal.globalModle.News;
-import pasu.vadivasal.model.Video;
 
 /**
  * Created by developer on 26/9/17.
@@ -69,7 +63,7 @@ public class VideoActivityMain extends AppCompatActivity implements VideoRendere
 
 
     private static final String TAG = "VideoActivityMain";
-    private SimpleExoPlayerView simpleExoPlayerView;
+    private PlayerView simpleExoPlayerView;
     private SimpleExoPlayer player;
     private ProgressBar exo_progressbar_custom;
     private ImageView exo_back;
@@ -94,10 +88,11 @@ public class VideoActivityMain extends AppCompatActivity implements VideoRendere
             //  Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
         }
     }
+
     public void onBackPressed() {
 
 
-        if(isfromNotificaiton){
+        if (isfromNotificaiton) {
             final Intent intent = new Intent(getBaseContext(), MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
@@ -105,6 +100,7 @@ public class VideoActivityMain extends AppCompatActivity implements VideoRendere
         }
         Utils.finishActivitySlide(this);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,7 +121,7 @@ public class VideoActivityMain extends AppCompatActivity implements VideoRendere
 
 // 1. Create a default TrackSelector
         BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
-        TrackSelection.Factory videoTrackSelectionFactory = new AdaptiveTrackSelection.Factory(bandwidthMeter);
+        TrackSelection.Factory videoTrackSelectionFactory = new AdaptiveTrackSelection.Factory();
         TrackSelector trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
 
 // 2. Create a default LoadControl
@@ -133,8 +129,8 @@ public class VideoActivityMain extends AppCompatActivity implements VideoRendere
 
 // 3. Create the player
         player = ExoPlayerFactory.newSimpleInstance(this, trackSelector);
-        simpleExoPlayerView = new SimpleExoPlayerView(this);
-        simpleExoPlayerView = (SimpleExoPlayerView) findViewById(R.id.player_view);
+        simpleExoPlayerView = new PlayerView(this);
+        simpleExoPlayerView = (PlayerView) findViewById(R.id.player_view);
 
 //Set media controller
         simpleExoPlayerView.setUseController(true);
@@ -161,34 +157,34 @@ public class VideoActivityMain extends AppCompatActivity implements VideoRendere
                     videoSelected(toplay);
                     video_desc.setText(videos[toplay].getDescription());
                 }
-            }else{
-                isfromNotificaiton=true;
-                System.out.println("video Actvity"+getIntent().getStringExtra("id"));
-                if(getIntent().getStringExtra("id")!=null && !getIntent().getStringExtra("id").equals(""))
-                FirebaseDatabase.getInstance().getReference( getIntent().getStringExtra("id")).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                       Media video = dataSnapshot.getValue(Media.class);
-                       videos=new Media[1];
-                       videos[0]=video;
+            } else {
+                isfromNotificaiton = true;
+                System.out.println("video Actvity" + getIntent().getStringExtra("id"));
+                if (getIntent().getStringExtra("id") != null && !getIntent().getStringExtra("id").equals(""))
+                    FirebaseDatabase.getInstance().getReference(getIntent().getStringExtra("id")).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Media video = dataSnapshot.getValue(Media.class);
+                            videos = new Media[1];
+                            videos[0] = video;
 
-                        try {
-                            if (videos != null) {
-                                recyclerview.setAdapter(new VideoAdapter(VideoActivityMain.this, videos, toplay, VideoActivityMain.this));
-                                //  ((VideoAdapter)recyclerview.getAdapter()).setSelection(0);
-                                videoSelected(toplay);
-                                video_desc.setText(videos[toplay].getDescription());
+                            try {
+                                if (videos != null) {
+                                    recyclerview.setAdapter(new VideoAdapter(VideoActivityMain.this, videos, toplay, VideoActivityMain.this));
+                                    //  ((VideoAdapter)recyclerview.getAdapter()).setSelection(0);
+                                    videoSelected(toplay);
+                                    video_desc.setText(videos[toplay].getDescription());
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                });
+                        }
+                    });
             }
 
         }
@@ -314,9 +310,9 @@ public class VideoActivityMain extends AppCompatActivity implements VideoRendere
         player.prepare(loopingSource);
 
         player.addListener(new ExoPlayer.EventListener() {
+
             @Override
-            public void onTimelineChanged(Timeline timeline, Object manifest) {
-                Log.v(TAG, "Listener-onTimelineChanged...");
+            public void onTimelineChanged(Timeline timeline, int reason) {
 
             }
 
@@ -356,9 +352,10 @@ public class VideoActivityMain extends AppCompatActivity implements VideoRendere
                 player.setPlayWhenReady(true);
             }
 
+
             @Override
-            public void onPositionDiscontinuity() {
-                Log.v(TAG, "Listener-onPositionDiscontinuity...");
+            public void onPositionDiscontinuity(int reason) {
+
             }
 
             @Override

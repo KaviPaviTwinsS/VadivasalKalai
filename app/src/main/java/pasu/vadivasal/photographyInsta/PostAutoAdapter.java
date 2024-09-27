@@ -19,10 +19,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.FragmentActivity;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -55,7 +55,7 @@ import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
-import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
@@ -560,7 +560,7 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
     private OnFeedItemClickListener onFeedItemClickListener;
     int toPlay;
     private int currentPlayingPosition = -1;
-    private SimpleExoPlayerView currentPlayer;
+    private PlayerView currentPlayer;
     private SimpleExoPlayer exoPlayer;
 
     Activity activity;
@@ -689,7 +689,7 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
         final FrameLayout vImageRoot = helper.getView(R.id.vImageRoot);
         final TextView tvLike = helper.getView(R.id.tvLikes);
         final CardView cardView = helper.getView(R.id.card_view);
-        final SimpleExoPlayerView playerView = helper.getView(R.id.exoPlayer);
+        final PlayerView playerView = helper.getView(R.id.exoPlayer);
         final EditText edComment = helper.getView(R.id.edAddComment);
         final ImageView imgAddComment = helper.getView(R.id.imgPostComment);
         final TextView tvTotalComments = helper.getView(R.id.tvCommentCount);
@@ -807,7 +807,7 @@ public class PostAutoAdapter extends BaseQuickAdapter<PostModel, BaseViewHolder>
             playerView.setVisibility(View.VISIBLE);
 
             BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
-            TrackSelector trackSelector = new DefaultTrackSelector(new AdaptiveTrackSelection.Factory(bandwidthMeter));
+            TrackSelector trackSelector = new DefaultTrackSelector(new AdaptiveTrackSelection.Factory());
 
             exoPlayer = ExoPlayerFactory.newSimpleInstance(mContext, trackSelector);
 

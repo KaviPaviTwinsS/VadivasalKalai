@@ -1,6 +1,5 @@
 package pasu.vadivasal;
 
-import android.*;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,28 +12,23 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
-import java.util.ArrayList;
-
 import pasu.vadivasal.android.Utils;
 import pasu.vadivasal.globalModle.Media;
-import pasu.vadivasal.model.PostModel;
 import pasu.vadivasal.view.CustomViewPager;
 
 public class ShareAct extends AppCompatActivity {

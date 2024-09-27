@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    android:id="@+id/card_view"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:layout_gravity="center"
@@ -24,20 +23,18 @@
             android:id="@+id/tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="திருக்குறள்"
             android:textColor="@android:color/black"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:text="திருக்குறள்"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@android:color/black"
-            android:textSize="15sp"
             android:text="If you would hit the mark, you must aim a little above it. Every arrow that flies feels the attraction of earth. －Henry Wadsworth Longfellow."
-            />
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
     </LinearLayout>
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>

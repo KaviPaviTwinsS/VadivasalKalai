@@ -9,15 +9,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        android:paddingTop="56dp">
+        android:paddingTop="56dp"
+        android:paddingRight="24dp">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
+            srcCompact="@drawable/images"
             android:layout_width="wrap_content"
             android:layout_height="72dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"
-            srcCompact="@drawable/images"
             android:visibility="visible" />
 
         <!--  Name Label -->
@@ -26,28 +26,28 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="24dp"
-            android:textColor="@color/white"
             android:background="#d34836"
-            android:text="@string/join_with_google" />
+            android:text="@string/join_with_google"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/facebook_signup"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/com_facebook_blue"
             android:layout_marginTop="24dp"
-            android:textColor="@color/white"
-            android:text="@string/join_with_facebook" />
+            android:background="@color/com_facebook_blue"
+            android:text="@string/join_with_facebook"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/email_signup"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginBottom="24dp"
             android:layout_marginTop="24dp"
-            android:textColor="@color/white"
+            android:layout_marginBottom="24dp"
             android:background="@color/colorPrimary"
-            android:text="@string/sign_with_email" />
+            android:text="@string/sign_with_email"
+            android:textColor="@color/white" />
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/button_facebook_login"
@@ -57,7 +57,7 @@
             android:visibility="gone" />
 
         <!-- Signup Button -->
-        <android.support.v7.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_signup"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

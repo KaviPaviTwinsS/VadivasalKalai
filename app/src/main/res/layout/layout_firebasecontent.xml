@@ -11,7 +11,7 @@
         layout="@layout/item_feed"
         android:visibility="gone" />
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,15 +19,14 @@
         android:orientation="vertical"
         android:paddingBottom="@dimen/dp_navi_frag_bottom">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFeed"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="none"
-
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,20 +43,20 @@
             android:visibility="gone"
             app:menu_open="arc_left">
 
-            <android.support.design.widget.FloatingActionButton
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
                 app:srcCompat="@drawable/ic_photo" />
 
-            <android.support.design.widget.FloatingActionButton
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabVideo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@android:drawable/presence_video_away" />
         </com.sa90.materialarcmenu.ArcMenu>
 
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"

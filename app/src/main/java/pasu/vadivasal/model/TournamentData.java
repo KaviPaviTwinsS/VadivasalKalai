@@ -4,19 +4,19 @@ package pasu.vadivasal.model;
  * Created by developer on 18/9/17.
  */
 
-public class TournamentData  {
+public class TournamentData {
 
 
-    int playerwon,bullwon;
-    int totalPlayer,totalBull;
-    int type;
+    int playerwon, bullwon;
+    int totalPlayer, totalBull;
+    String type;
     String venue;
     int status;
     String key;
     String tournamentCoverPhoto;
     String name;
     long date;
-    long toDate=0;
+    long toDate = 0;
     String viewers;
     String about;
 
@@ -69,11 +69,11 @@ public class TournamentData  {
         this.totalBull = totalBull;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -84,7 +84,6 @@ public class TournamentData  {
     public void setVenue(String venue) {
         this.venue = venue;
     }
-
 
 
     public long getToDate() {
@@ -102,7 +101,6 @@ public class TournamentData  {
     public void setViewers(String viewers) {
         this.viewers = viewers;
     }
-
 
 
     public String getTournamentCoverPhoto() {

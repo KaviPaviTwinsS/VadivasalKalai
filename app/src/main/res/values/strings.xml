@@ -7,7 +7,7 @@
     </plurals>
     <string name="user_profile_photo">http://igcdn-photos-f-a.akamaihd.net/hphotos-ak-xpa1/t51.2885-19/929118_455075441302693_1605108410_a.jpg</string>
     <string name="facebook_app_id"></string>
-    <string name="app_name">ILJ Demo</string>
+    <string name="app_name">ILJ</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -17,7 +17,7 @@
     <string name="tap_to_check">Tap here to know more</string>
     <string name="btn_more">MORE</string>
     <string name="thirukural_head">Thirukural</string>
-    <string name="appbar_scrolling_view_behavior">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="appbar_scrolling_view_behavior">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
     <string name="tournament">Events</string>
     <string name="super_cric_heroes">Players around you</string>
     <string name="heroes_msg">Tap to check their profile</string>

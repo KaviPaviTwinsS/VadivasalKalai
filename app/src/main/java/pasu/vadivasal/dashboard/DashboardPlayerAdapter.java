@@ -1,7 +1,7 @@
 package pasu.vadivasal.dashboard;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
+import androidx.cardview.widget.CardView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,7 +13,6 @@ import pasu.vadivasal.adapter.base.BaseViewHolder;
 import java.util.List;
 
 import pasu.vadivasal.R;
-import pasu.vadivasal.globalModle.Player;
 import pasu.vadivasal.model.PlayerDash;
 
 public class DashboardPlayerAdapter extends BaseQuickAdapter<PlayerDash, BaseViewHolder> {

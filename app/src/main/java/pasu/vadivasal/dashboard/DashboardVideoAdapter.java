@@ -1,7 +1,7 @@
 package pasu.vadivasal.dashboard;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
+import androidx.cardview.widget.CardView;
 import android.util.DisplayMetrics;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
@@ -15,7 +15,6 @@ import java.util.List;
 
 import pasu.vadivasal.R;
 import pasu.vadivasal.globalModle.Media;
-import pasu.vadivasal.model.Video;
 
 
 public class DashboardVideoAdapter extends BaseQuickAdapter<Media, BaseViewHolder> {

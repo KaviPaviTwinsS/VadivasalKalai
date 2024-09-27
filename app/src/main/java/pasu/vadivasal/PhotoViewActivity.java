@@ -2,9 +2,8 @@ package pasu.vadivasal;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import me.relex.photodraweeview.OnPhotoTapListener;
 import me.relex.photodraweeview.OnViewTapListener;
